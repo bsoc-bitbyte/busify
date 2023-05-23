@@ -1,0 +1,16 @@
+name: Welcome New Contributors
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Welcome to ${{ github.repository }}! 😄 Thank you for reporting your first issue. We truly appreciate your contribution. 🙌\n\nPlease check out our [contributors guide](../blob/main/README.md) to get started. It provides detailed instructions on how to contribute to the Busify project.\n\nIn addition, we recommend going through the guide for a basic setup that will be useful when opening a pull request. This setup will ensure a smooth contribution process.\n\nIf you have any questions or need further assistance, feel free to ask in this issue. Our community is here to help you succeed! 💪"
+        pr-message: "Welcome to the Busify project! 🎉 We're excited to see your first pull request. It's a significant step toward making a positive impact on our project. 😊\n\nPlease follow the guidelines mentioned in our [contributors guide](README.md) for opening a pull request. It contains important information about our development workflow and best practices.\n\nRemember, you're not alone on this journey. If you have any questions or need guidance, don't hesitate to ask. We have a supportive community eager to help you thrive. Happy contributing! 🚀"
