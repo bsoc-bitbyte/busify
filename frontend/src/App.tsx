@@ -1,8 +1,12 @@
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import Theme from "./Theme";
+
 function App() {
   return (
-    <>
-      <h1>init</h1>
-    </>
+    <ThemeProvider theme={Theme}>
+      <CssBaseline />
+      <h1>Busify</h1>
+    </ThemeProvider>
   );
 }
 
