@@ -1,5 +1,3 @@
-<p align-self="center"><img src="./assets/images/Logo.gif" alt="Alt Text"></p>
-
 # Busify-Ticket Booking System
 
 A centralised bus ticket booking system that will allow the students to book tickets in advance through an online website, saving time and effort. Students will no longer need to physically stand in long queues to purchase tickets.
@@ -27,20 +25,26 @@ In summary, the plan involves developing a user-friendly bus ticket booking syst
 
 ## Screenshots
 
-<p align-self="center"><img src="./assets/images/Home.png" alt="Alt Text" justify-content="auto" width="560" height="600"></p>
+<img src="./assets/images/Home.png" alt="Alt Text" justify-content="auto" width="200" height="200"></img>
+<img src="./assets/images/Feed.png" alt="Alt Text" justify-content="auto" width="200" height="200"></img>
 
 # Tech Stack
 
 ## Frontend
 
 - ReactJS
-- TypeScript :)
-- React Router Dom v6
+- TypeScript
 - MUI
+
+## Backend
+
+- NestJS
+- Postgres
+- Redis
 
 # Run Locally
 
-[Contribution Guidance](Contributing.md)
+The [Contributing.md](Contributing.md) contains the step-by-step procedure for contributing to this project.
 
 # License
 
