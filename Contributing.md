@@ -1,5 +1,7 @@
 # Contribution Guide
 
+We recommend you to do local setup in a Linux environment. We will soon update the readme for Windows setup.
+
 If you're reading this, you're probably creating a Pull Request or planning to do so and that's great!🥳
 
 # How to Contribute
@@ -9,7 +11,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 2. Clone the forked repository.
 
    ```bash
-   git clone 'https://github.com/bsoc-bitbyte/busify.git'
+   git clone https://github.com/<your_username>/busify.git
    ```
 
 3. Navigate to the project directory.
@@ -18,27 +20,102 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    cd busify
    ```
 
-4. Make changes in source code.
+4. Run the Postgres docker container with the command (make sure you have docker installed before running this)
 
-5. Stage your changes and commit
+   ```bash
+   docker compose up
+   ```
 
-6. git add .
+5. In new terminal type
 
-7. git commit -m "<your_commit_message>"
+   ```bash
+   cd backend
+   npm install
+   npm run start:dev
+   ```
 
-8. Push your local commits to the remote repo.
+   This will start the backend server.
 
-9. git push
+6. Open another new terminal and type
 
-10. Create a PR to develop repository.
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
 
-## Conventional Commit Messages
+   This will start the frontend server.
+
+7. Make changes in source code.
+
+8. Stage your changes and commit
+
+   ```bash
+   git add .
+   ```
+
+9. Commit your changes
+
+   ```bash
+   git commit -m "<type>(optional_scope): <your_commit_message>"
+   ```
+
+10. Push your local commits to the remote repo.
+
+11. git push
+
+12. Create a PR to develop repository.
+
+# For Creating a New PUll Request
+
+1. Navigate to the repository's directory:
+
+   ```bash
+   cd <repository-directory>
+   ```
+
+2. Ensure you are on the branch you want to use as the base branch:
+
+   ```bash
+   git checkout <base-branch>
+   ```
+
+3. Create a new branch for your pull request:
+
+   ```bash
+   git branch <new-branch-name>
+   ```
+
+4. To Switch to New created branch
+   ```bash
+   git checkout -b <new-branch-name>
+   ```
+5. Stage and commit your changes:
+
+   ```bash
+   git add .
+   git commit -m "Your commit message here"
+   ```
+
+6. Replace "Your commit message here" with a descriptive message that summarizes the changes you made.
+
+7. Push the new branch to the remote repository:
+   ```bash
+   git push origin <new-branch-name>
+   ```
+   This command pushes the new branch to the remote repository, making it available for others to see and review.
+
+- On GitHub navigate to the repository and locate the "New Pull Request" button.
+
+# Conventional Commit Messages
 
 In our project, we follow the convention of using conventional commit messages for all commits. Conventional commit messages provide a standardized format for commit messages, making it easier to understand and track changes in our codebase.
 
 A conventional commit message consists of a concise and structured format:
 
-<type>: <description>
+```bash
+<type>(optional_scope): <your_commit_message>
+```
 
 The message includes a type and a description, separated by a colon. Here's a breakdown of each component:
 
@@ -57,36 +134,5 @@ Description: The description provides a brief summary of the changes made in the
 Examples:-
 
 ```bash
-feat: Add search functionality for bus routes
+feat(backend): Add search feature....
 ```
-
-# Here are the steps to follow when writing a commit message:
-
-- Start with a verb: Begin the commit message with an imperative verb in the present tense, such as "Add," "Update," "Fix," or "Remove." This sets a clear action-oriented tone for the commit message.
-
-- Keep it concise: Write a brief summary of the changes in the commit. The ideal commit message should be no longer than 50 characters. If more information is needed, provide additional details in the body of the message.
-
-- Provide context and details: After the summary, include a more detailed explanation of the changes made. Describe what was done, why it was done, and any relevant information or considerations.
-
-- Wrap lines at 72 characters: If the commit message exceeds 72 characters, wrap the text to the next line. This helps maintain readability and ensures that the commit message is displayed properly in various tools and interfaces.
-
-- Use proper formatting: Use bullet points or other formatting techniques to structure the commit message, making it easier to read and understand. You can use Markdown or plain text formatting depending on the platform or tools you are using.
-
-- Be consistent: Maintain a consistent style and tone throughout your commit messages. This helps with readability and understanding when reviewing commit history.
-
-- Reference relevant issues or tickets: If your commit is related to a specific issue, bug report, or feature request, include a reference to it in the commit message. This helps with tracking and cross-referencing.
-
-Example:-
-
-```bash
-Add user registration form validation
-
-- Implement client-side form validation using JavaScript
-- Ensure all required fields are filled out before submission
-- Display error messages for invalid input
-- Improve accessibility with ARIA attributes
-
-Fixes #123
-```
-
-Remember, commit messages are important for maintaining a clear and understandable history of your project. By following these steps, you can ensure that your commit messages provide valuable information to other contributors and help with code review and project management.

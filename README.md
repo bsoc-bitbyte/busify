@@ -8,41 +8,16 @@ The ticket booking system will provide a user-friendly interface where passenger
 
 # Features
 
-The proposed plan is to develop a bus ticket booking system consisting of the
-
-- Client App
-- Main Server
-- Notification Microservice,
-- Admin Panel, and
-- Mobile App for Conductors.
-
-### The Client App allows users
+The proposed plan is to develop a bus ticket booking system consisting of the folowing:
 
 - to search for buses,
-- authenticate using college email IDs,
 - add tickets to their cart, make payments, and
-- receive a success message.
-
-### The Main Server handles
-
-- user requests,
-- manages communication with microservices and the mobile app,
 - provides authentication and payment services,
-- and offers admin and ticket management tools.
-
-### The Notification Microservice
-
-- generates QR codes for confirmed tickets,
-- extracts student information,
-- sends email notifications with QR codes.
-
-The Admin Panel enables bus agencies to update details and view booked tickets.
-
-### The Mobile App for Conductors includes
-
+- authenticate using college email IDs,
 - QR code scanner,
-- ticket validation, and
 - a list of booked tickets.
+- Generates QR codes for confirmed tickets,
+- sends email notifications with QR codes.
 
 In summary, the plan involves developing a user-friendly bus ticket booking system with a client app, centralized server, notification microservice, admin panel, and mobile app for conductors.
 
@@ -53,24 +28,6 @@ In summary, the plan involves developing a user-friendly bus ticket booking syst
 ## Screenshots
 
 <p align-self="center"><img src="./assets/images/Home.png" alt="Alt Text" justify-content="auto" width="560" height="600"></p>
-
-# Roadmap
-
-- Visits the Web App
-
-- Login with institute Email
-
-- Search for the Bus
-
-- Select the Bus
-
-- Add Tickects(Max. 4)
-
-- Notification of successful Booking
-
-- Payment Conformation
-
-- Book The Tickects
 
 # Tech Stack
 
@@ -83,29 +40,7 @@ In summary, the plan involves developing a user-friendly bus ticket booking syst
 
 # Run Locally
 
-Clone the project
-
-```bash
-  git clone https://github.com/bsoc-bitbyte/busify.git
-```
-
-Go to the project directory
-
-```bash
-  cd Busify.git
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
+[Contribution Guidance](Contributing.md)
 
 # License
 
