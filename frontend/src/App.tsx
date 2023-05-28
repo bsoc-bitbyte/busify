@@ -1,11 +1,15 @@
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import Theme from "./Theme";
+import {ThemeProvider, CssBaseline} from '@mui/material';
+import theme from './theme';
+import {Route, Routes} from 'react-router-dom';
+import Home from './pages/home';
 
 function App() {
   return (
-    <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <h1>Busify</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </ThemeProvider>
   );
 }

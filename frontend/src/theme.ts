@@ -1,9 +1,9 @@
-import { createTheme } from "@mui/material";
+import {createTheme} from '@mui/material';
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#FBBC05', 
+      main: '#FBBC05',
     },
     secondary: {
       main: '#4b5563',
@@ -29,7 +29,7 @@ const Theme = createTheme({
     },
     h4: {
       fontSize: '1.5rem',
-    },  
+    },
   },
 });
 
