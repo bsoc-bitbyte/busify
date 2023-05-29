@@ -1,4 +1,4 @@
-# Contribution Guide
+# Contribution Guide 💻
 
 We recommend you to do local setup in a Linux environment. We will soon update the readme for Windows setup.
 
@@ -20,7 +20,13 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    cd busify
    ```
 
-4. Run the Postgres docker container with the command (make sure you have docker installed before running this)
+4. Run the docker container with the command (make sure you have docker installed before running this).
+
+   To Install Docker in Linux
+
+   [Guide](https://youtu.be/KCckWweNSrM)
+
+   [Install](https://docs.docker.com/engine/install/)
 
    ```bash
    docker compose up
@@ -51,7 +57,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 8. Stage your changes and commit
 
    ```bash
-   git add .
+   git add <filename>
    ```
 
 9. Commit your changes
@@ -66,7 +72,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 12. Create a PR to develop repository.
 
-# For Creating a New PUll Request
+# For Creating a New PUll Request 💡💻
 
 1. Navigate to the repository's directory:
 
