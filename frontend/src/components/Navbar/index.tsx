@@ -1,6 +1,7 @@
-import {Typography, Box} from '@mui/material';
+import {Typography, Box, Button} from '@mui/material';
 import {useTheme} from '@mui/material';
 import styles from './navbar.module.scss';
+import getGoogleOAuthURL from '../../utils/getOAuthRedirectUrl';
 
 export default function Navbar() {
   const theme = useTheme();
@@ -10,6 +11,9 @@ export default function Navbar() {
         Busify
       </Typography>
       <Typography>A centrailed bus ticket booking system</Typography>
+      <Button variant="contained" color="primary" href={getGoogleOAuthURL()}>
+        Login with Google
+      </Button>
     </Box>
   );
 }
