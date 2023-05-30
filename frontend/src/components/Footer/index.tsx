@@ -1,6 +1,7 @@
 import {Typography, useTheme, Grid} from '@mui/material';
+import Logo from '../../images/iiitdmj-logo.jpg';
 
-export default function Footer(props: {Logo: string | undefined}) {
+export default function Footer() {
   const theme = useTheme();
 
   return (
@@ -15,7 +16,7 @@ export default function Footer(props: {Logo: string | undefined}) {
     >
       <Grid item p={0.8}>
         <img
-          src={props.Logo}
+          src={Logo}
           alt="College-logo"
           style={{height: 'calc(8px + 1vw)'}}
         ></img>
