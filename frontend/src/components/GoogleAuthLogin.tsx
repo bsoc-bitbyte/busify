@@ -22,7 +22,6 @@ const GoogleAuthLogin = () => {
   }, [searchParams]);
 
   return (
-    // container center mui
     <Box
       sx={{
         display: 'flex',
