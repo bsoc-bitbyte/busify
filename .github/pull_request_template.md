@@ -1,6 +1,3 @@
-### WHAT
-copilot:summary
-
 ## Proposed Changes
 
 - Fixes #issue?
