@@ -1,5 +1,5 @@
 {
-  "name": "business-backend",
+  "name": "busify-backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -13,6 +13,8 @@
     "format": "prettier --write src test",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "migrate:dev": "prisma migrate dev --name init",
+    "seed": "node ./prisma/seed.mjs",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,libs,test}/**/*.ts\"",
