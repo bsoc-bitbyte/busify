@@ -3,6 +3,7 @@ import {TooltipProps} from '@mui/material/Tooltip';
 
 export interface CustomButtonProps extends Omit<TooltipProps, 'children'> {
   label: string;
+  loading?: boolean;
   variant?: 'contained' | 'outlined' | 'text';
   icon?: React.ReactNode;
   disabled?: boolean;
