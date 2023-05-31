@@ -1,0 +1,55 @@
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Users {
+    id        String   @id
+    email     String   @unique
+    name      String
+    picture   String
+    createdAt DateTime @default(now())
+}
+
+model Bus {
+    number       String     @id
+    capacity     Int
+    contractor   Contractor @relation(fields: [contractorId], references: [id])
+    contractorId String
+    conductor    Conductor  @relation(fields: [conductorId], references: [id])
+    conductorId  String
+    Schedule     Schedule[]
+}
+
+model Schedule {
+    id            String   @id
+    busNumber     String
+    bus           Bus      @relation(fields: [busNumber], references: [number])
+    checkpoints   String[]
+    from          String
+    to            String
+    departureTime String
+    days          String[]
+    ticketPrice   Int
+}
+
+model Conductor {
+    id    String @id
+    name  String
+    phone String
+    Bus   Bus[]
+}
+
+model Contractor {
+    id      String @id
+    name    String
+    email   String @unique
+    phone   String
+    address String
+    Bus     Bus[]
+}

@@ -1,0 +1,42 @@
+{
+  "env": {
+    "node": true,
+    "jest": true,
+    "es2020": true,
+    "browser": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "extraFileExtensions": [
+      ".json"
+    ]
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "./node_modules/gts/"
+  ],
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "coverage/",
+    "scripts/",
+    "src/generated/",
+    "src/migrations/",
+    "src/seeds/",
+    "src/types/",
+    "src/utils/",
+    "src/validations/"
+  ],
+  "rules": {
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": "warn"
+  }
+}
