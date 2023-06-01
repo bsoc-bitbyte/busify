@@ -3,10 +3,12 @@ import theme from './theme';
 import {Route, Routes} from 'react-router-dom';
 import Home from './pages/home';
 import GoogleAuthLogin from './components/GoogleAuthLogin';
+import ValidateAuth from './components/ValidateAuth';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <ValidateAuth />
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Home />} />

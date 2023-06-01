@@ -15,3 +15,41 @@ model Users {
     picture   String
     createdAt DateTime @default(now())
 }
+
+model Bus {
+    number       String     @id
+    capacity     Int
+    contractor   Contractor @relation(fields: [contractorId], references: [id])
+    contractorId String
+    conductor    Conductor  @relation(fields: [conductorId], references: [id])
+    conductorId  String
+    Schedule     Schedule[]
+}
+
+model Schedule {
+    id            String   @id
+    busNumber     String
+    bus           Bus      @relation(fields: [busNumber], references: [number])
+    checkpoints   String[]
+    from          String
+    to            String
+    departureTime String
+    days          String[]
+    ticketPrice   Int
+}
+
+model Conductor {
+    id    String @id
+    name  String
+    phone String
+    Bus   Bus[]
+}
+
+model Contractor {
+    id      String @id
+    name    String
+    email   String @unique
+    phone   String
+    address String
+    Bus     Bus[]
+}
