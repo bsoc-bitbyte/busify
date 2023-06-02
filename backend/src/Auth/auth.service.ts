@@ -51,7 +51,7 @@ export class AuthService {
       .send(newUser);
   }
   // /me route handler
-  async getMe(req) {
+  async getCurrentUser(req) {
     if (!req.user) {
       throw new UnauthorizedException(
         'You are not logged in or there may be an error. Please log in again.'

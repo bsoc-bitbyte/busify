@@ -4,7 +4,7 @@ import {PrismaService} from 'src/Prisma/prisma.service';
 @Injectable()
 export class BusService {
   constructor(private readonly prismaService: PrismaService) {}
-  getSchedule() {
+  getBusSchedule() {
     return this.prismaService.schedule.findMany({});
   }
 }
