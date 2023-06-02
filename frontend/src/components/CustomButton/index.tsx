@@ -36,7 +36,7 @@ const CustomButton: React.FC<CustomButtonProps> = props => {
           {button_component}
         </Tooltip>
       ) : (
-        {button_component}
+        button_component
       )}
     </>
   );
