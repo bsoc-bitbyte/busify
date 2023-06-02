@@ -13,6 +13,7 @@ model Users {
     email     String   @unique
     name      String
     picture   String
+    role      String   @default("user")
     createdAt DateTime @default(now())
 }
 
