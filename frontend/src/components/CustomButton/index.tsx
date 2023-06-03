@@ -1,3 +1,4 @@
+// eslint-disable-next-line node/no-extraneous-import
 import PropTypes from 'prop-types';
 import {Button, IconButton, Tooltip} from '@mui/material';
 import {CustomButtonProps} from '../../types';
