@@ -2,19 +2,18 @@ import {createTheme} from '@mui/material';
 
 const Theme = createTheme({
   palette: {
+    common: {
+      black: 'rgba(0, 0, 0, 0.5)',
+    },
     primary: {
       main: '#FBBC05',
     },
     secondary: {
-      main: '#4b5563',
-    },
-    background: {
-      default: '#F5F5F5',
+      main: 'rgba(0, 0, 0, 0.7)',
     },
   },
   typography: {
     fontFamily: ['Inter', 'sans-serif'].join(','),
-    fontSize: 14,
     h1: {
       fontFamily: ['Roboto', 'sans-serif'].join(','),
       fontSize: '2.5rem',
@@ -29,6 +28,12 @@ const Theme = createTheme({
     },
     h4: {
       fontSize: '1.5rem',
+    },
+    h5: {
+      fontSize: '1.25rem',
+    },
+    h6: {
+      fontSize: '1rem',
     },
   },
 });

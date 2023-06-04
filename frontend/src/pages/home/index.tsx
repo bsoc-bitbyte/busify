@@ -1,10 +1,11 @@
-import {Box, Button, Grid, Typography, styled} from '@mui/material';
-import bus from '../../assets/bus.png';
+import {useTheme, Box, Button, Grid, Typography, styled} from '@mui/material';
 import bgimg from '../../assets/bgimg.png';
-import person from '../../assets/person.png';
-import ticket from '../../assets/ticket.png';
+import bus from '../../assets/busIcon.svg';
+import person from '../../assets/personIcon.svg';
+import ticket from '../../assets/ticketIcon.svg';
 
 const Home = () => {
+  const theme = useTheme();
   return (
     <Grid container direction="column" marginTop="2rem">
       <Grid item>
@@ -25,7 +26,8 @@ const Home = () => {
         </HeroContainer>
         <Box marginBottom="4rem">
           <Typography
-            variant="h3"
+            variant="h2"
+            color={theme.palette.secondary.main}
             fontWeight="700"
             margin="2rem 0"
             textAlign="center"
@@ -35,30 +37,45 @@ const Home = () => {
           <Grid container spacing={{xs: 4, md: 12}} padding={{md: '0 2rem'}}>
             <Grid item xs={12} md={4}>
               <Card>
-                <Box width="100px" height="100px">
-                  <img src={bus} alt="bus" />
-                </Box>
-                <Typography variant="h4" fontWeight="700" marginTop="1rem">
+                <img
+                  src={bus}
+                  alt="bus"
+                  style={{
+                    width: '132px',
+                    height: '132px',
+                  }}
+                />
+                <Typography variant="h4" fontWeight="600" marginTop="1rem">
                   Search for Bus
                 </Typography>
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
               <Card>
-                <Box width="100px" height="100px">
-                  <img src={ticket} alt="ticket" />
-                </Box>
-                <Typography variant="h4" fontWeight="700" marginTop="1rem">
+                <img
+                  src={ticket}
+                  alt="ticket"
+                  style={{
+                    width: '132px',
+                    height: '132px',
+                  }}
+                />
+                <Typography variant="h4" fontWeight="600" marginTop="1rem">
                   Add Tickets
                 </Typography>
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
               <Card>
-                <Box width="100px" height="100px">
-                  <img src={person} alt="payment" />
-                </Box>
-                <Typography variant="h4" fontWeight="700" marginTop="1rem">
+                <img
+                  src={person}
+                  alt="payment"
+                  style={{
+                    width: '132px',
+                    height: '132px',
+                  }}
+                />
+                <Typography variant="h4" fontWeight="600" marginTop="1rem">
                   Do Payment
                 </Typography>
               </Card>
@@ -83,6 +100,7 @@ const HeroContainer = styled(Box)({
   alignItems: 'center',
   borderRadius: 42,
   marginBottom: '4rem',
+  boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.2)',
 });
 
 const CTA = styled(Button)({
@@ -91,6 +109,10 @@ const CTA = styled(Button)({
   padding: '0.5rem 2.5rem',
   width: 'fit-content',
   fontSize: '1.2rem',
+
+  '&:hover': {
+    backgroundColor: '#FBBC05',
+  },
 });
 
 const Card = styled(Box)({
@@ -98,9 +120,9 @@ const Card = styled(Box)({
   flexDirection: 'column',
   backgroundColor: 'white',
   justifyContent: 'center',
-  gap: '2rem',
+  gap: '1.5rem',
   alignItems: 'center',
-  boxShadow: '6px 12px 12px rgba(0, 0, 0, 0.25)',
+  boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.2)',
   borderRadius: '15px',
   width: '100%',
   padding: '3rem 1rem',
