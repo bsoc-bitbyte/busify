@@ -14,7 +14,7 @@ export default function BusTicket({
       className="ticket--container"
       sx={{
         display: 'flex',
-        height: {xs: '29vw', md: '22vw'},
+        height: {xs: '39vw', sm: '33vw', md: '27vw', lg: '21vw'},
         justifyContent: 'center',
         alignItems: 'center',
       }}
@@ -24,14 +24,14 @@ export default function BusTicket({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          width: {xs: '90vw', md: '70vw'},
-          height: {xs: '26vw', md: '18vw'},
+          width: {xs: '85vw', md: '80vw', lg: '70vw'},
+          height: {xs: '35vw', sm: '30vw', md: '23vw', lg: '18vw'},
           borderRadius: '0.882vw',
           boxShadow: '0px 0.294vw 0.882vw rgba(0, 0, 0, 0.25)',
         }}
       >
         <Box
-          className="left--components"
+          className="left--side--components"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -69,6 +69,7 @@ export default function BusTicket({
             className="checkpoint--components"
             sx={{
               display: 'flex',
+              flexDirection: 'row',
               justifyContent: 'flex-start',
               fontWeight: '400',
               fontSize: {xs: '10px', sm: '12px', md: '15px'},
@@ -116,13 +117,14 @@ export default function BusTicket({
           </Box>
         </Box>
         <Box
-          className="right--components"
+          className="right--side--components"
           sx={{
+            // backgroundColor:{xs:'red', sm:'white', md:'green', lg:'blue'},
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: {xs: 'space-between', md: 'space-evenly'},
+            justifyContent: {xs: 'space-evenly', md: 'space-evenly'},
             width: '25vw',
-            height: {xs: '22vw', md: '18vw'},
+            height: {xs: '35vw', sm: '30vw', md: '23vw', lg: '18vw'},
             alignItems: 'flex-end',
             padding: '0vw 1.5vw',
           }}
@@ -151,7 +153,7 @@ export default function BusTicket({
             sx={{
               fontFamily: 'Roboto',
               fontWeight: '400',
-              fontSize: {xs: '12px', sm: '14px', md: '17px'},
+              fontSize: {xs: '11.5px', sm: '16px', md: '17px'},
               color: 'rgba(0, 0, 0, 0.7)',
             }}
           >
@@ -161,16 +163,16 @@ export default function BusTicket({
             variant="contained"
             className="booking--button"
             sx={{
-              width: {xs: '100px', sm: '160px', md: '170px', lg: '190px'},
-              height: {xs: '33px', sm: '33px', md: '35px'},
+              width: {xs: '75px', sm: '160px', md: '170px', lg: '190px'},
+              height: {xs: '33px', sm: '37px', md: '35px'},
               borderRadius: '0.588vw',
               backgroundColor: '#FBBC05',
             }}
           >
             <ConfirmationNumberIcon
               sx={{
-                width: {xs: '16px', md: '25px'},
-                height: {xs: '16px', md: '25px'},
+                width: {xs: '16px', sm: '22px', md: '25px'},
+                height: {xs: '16px', sm: '22px', md: '25px'},
                 marginRight: {xs: '5px', sm: '9px'},
               }}
             ></ConfirmationNumberIcon>
@@ -178,7 +180,7 @@ export default function BusTicket({
               sx={{
                 fontFamily: 'Roboto',
                 fontWeight: '400',
-                fontSize: {xs: '11px', sm: '13px', md: '15px', lg: '17px'},
+                fontSize: {xs: '10.5px', sm: '14px', md: '15px', lg: '17px'},
                 color: 'rgba(0, 0, 0, 0.9)',
               }}
             >
