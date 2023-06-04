@@ -3,8 +3,10 @@ import bgimg from '../../assets/bgimg.png';
 import bus from '../../assets/busIcon.svg';
 import person from '../../assets/personIcon.svg';
 import ticket from '../../assets/ticketIcon.svg';
+import {useNavigate} from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   return (
     <Grid container direction="column" marginTop="2rem">
@@ -20,7 +22,11 @@ const Home = () => {
           >
             Effortless transportation for students.
           </Typography>
-          <CTA variant="contained" color="primary">
+          <CTA
+            variant="contained"
+            color="primary"
+            onClick={() => navigate('/bus-schedule')}
+          >
             See Schedule
           </CTA>
         </HeroContainer>

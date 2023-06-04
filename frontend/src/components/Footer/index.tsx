@@ -9,6 +9,7 @@ export default function Footer() {
       padding={1}
       justifyContent="center"
       alignItems="center"
+      marginTop="2rem"
     >
       <Grid item padding={0}>
         <img src={Logo} alt="College-logo" width={45} />

@@ -11,7 +11,6 @@ export default function BusTicket({
 }: BusTicketData) {
   return (
     <Box
-      className="ticket--container"
       sx={{
         display: 'flex',
         height: {xs: '39vw', sm: '33vw', md: '27vw', lg: '21vw'},
@@ -20,18 +19,17 @@ export default function BusTicket({
       }}
     >
       <Box
-        className="ticket"
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
           width: {xs: '85vw', md: '80vw', lg: '70vw'},
           height: {xs: '35vw', sm: '30vw', md: '23vw', lg: '18vw'},
           borderRadius: '0.882vw',
-          boxShadow: '0px 0.294vw 0.882vw rgba(0, 0, 0, 0.25)',
+          border: '1px solid rgba(0, 0, 0, 0.2)',
+          boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Box
-          className="left--side--components"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -42,7 +40,6 @@ export default function BusTicket({
           }}
         >
           <Box
-            className="checkpoints"
             sx={{
               display: 'flex',
               justifyContent: 'space-evenly',
@@ -66,7 +63,6 @@ export default function BusTicket({
             </Typography>
           </Box>
           <Box
-            className="checkpoint--components"
             sx={{
               display: 'flex',
               flexDirection: 'row',
@@ -77,49 +73,32 @@ export default function BusTicket({
               width: {xs: '105%', sm: '105%'},
             }}
           >
-            <Box
-              className="locations"
-              sx={{
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                borderRadius: '1.7vw',
-                padding: '0.44vw 1.33vw',
-                marginRight: '7px',
-              }}
-            >
-              {checkpoints[0]}
-            </Box>
-            <Box
-              className="locations"
-              sx={{
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                borderRadius: '1.7vw',
-                padding: '0.44vw 1.33vw',
-                marginRight: '7px',
-              }}
-            >
-              {checkpoints[1]}
-            </Box>
-            <Box
-              className="locations"
-              sx={{
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                borderRadius: '1.7vw',
-                padding: '0.44vw 1.33vw',
-              }}
-            >
-              {checkpoints[2]}
-            </Box>
+            {checkpoints.map((checkpoint, index) => (
+              <Box
+                sx={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  borderRadius: '1.7vw',
+                  minWidth: 'fit-content',
+                  padding: '0.5vw 1vw',
+                  marginRight: '7px',
+                }}
+                key={index + checkpoint}
+              >
+                {checkpoint}
+              </Box>
+            ))}
           </Box>
           <Box className="time">
-            <Typography sx={{fontSize: '4.1vw', fontWeight: '400'}}>
+            <Typography
+              fontWeight={400}
+              fontSize={{xs: '1.5rem', sm: '2.5rem', md: '3rem'}}
+            >
               {time}
             </Typography>
           </Box>
         </Box>
         <Box
-          className="right--side--components"
           sx={{
-            // backgroundColor:{xs:'red', sm:'white', md:'green', lg:'blue'},
             display: 'flex',
             flexDirection: 'column',
             justifyContent: {xs: 'space-evenly', md: 'space-evenly'},
@@ -130,10 +109,7 @@ export default function BusTicket({
           }}
         >
           <Box className="Price" sx={{display: 'flex'}}>
-            <Typography
-              className="rupeeIcon"
-              sx={{fontSize: '2.0vw', marginTop: '1.4vw'}}
-            >
+            <Typography sx={{fontSize: '2.0vw', marginTop: '1.4vw'}}>
               &#x20B9;
             </Typography>
             <Typography
@@ -149,7 +125,6 @@ export default function BusTicket({
             </Typography>
           </Box>
           <Typography
-            className="seatsLeft"
             sx={{
               fontFamily: 'Roboto',
               fontWeight: '400',
@@ -161,31 +136,14 @@ export default function BusTicket({
           </Typography>
           <Button
             variant="contained"
-            className="booking--button"
+            startIcon={<ConfirmationNumberIcon />}
             sx={{
-              width: {xs: '75px', sm: '160px', md: '170px', lg: '190px'},
-              height: {xs: '33px', sm: '37px', md: '35px'},
-              borderRadius: '0.588vw',
-              backgroundColor: '#FBBC05',
+              padding: '0.5vw 1.2vw',
+              fontSize: {xs: '10px', sm: '12px', md: '15px'},
+              minWidth: 'max-content',
             }}
           >
-            <ConfirmationNumberIcon
-              sx={{
-                width: {xs: '16px', sm: '22px', md: '25px'},
-                height: {xs: '16px', sm: '22px', md: '25px'},
-                marginRight: {xs: '5px', sm: '9px'},
-              }}
-            ></ConfirmationNumberIcon>
-            <Typography
-              sx={{
-                fontFamily: 'Roboto',
-                fontWeight: '400',
-                fontSize: {xs: '10.5px', sm: '14px', md: '15px', lg: '17px'},
-                color: 'rgba(0, 0, 0, 0.9)',
-              }}
-            >
-              BOOK TICKETS
-            </Typography>
+            Book Ticket
           </Button>
         </Box>
       </Box>

@@ -1,6 +1,6 @@
 import {createTheme} from '@mui/material';
 
-const Theme = createTheme({
+const theme = createTheme({
   palette: {
     common: {
       black: 'rgba(0, 0, 0, 0.5)',
@@ -36,6 +36,15 @@ const Theme = createTheme({
       fontSize: '1rem',
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });
 
-export default Theme;
+export default theme;
