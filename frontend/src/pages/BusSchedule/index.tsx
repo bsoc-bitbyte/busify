@@ -3,8 +3,10 @@ import BusTicket from '../../components/BusTicket';
 import {TicketData} from '../../components/BusTicket/ticketData';
 import theme from '../../theme';
 import {useScreen} from '../../customHooks/useScreen';
+
 const BusSchedule = () => {
   const currentScreen = useScreen();
+
   return (
     <>
       <Grid container direction="column" alignItems="center">

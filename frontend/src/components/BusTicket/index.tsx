@@ -141,6 +141,9 @@ export default function BusTicket({
               padding: '0.5vw 1.2vw',
               fontSize: {xs: '10px', sm: '12px', md: '15px'},
               minWidth: 'max-content',
+              '&:hover': {
+                backgroundColor: '#FBBC05',
+              },
             }}
           >
             Book Ticket
