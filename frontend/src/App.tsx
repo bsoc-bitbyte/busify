@@ -7,6 +7,7 @@ import ValidateAuth from './components/ValidateAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
+import BusDetails from './pages/BusDetails';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/google" element={<GoogleAuthLogin />} />
           <Route path="/bus-schedule" element={<BusSchedule />} />
+          <Route path="/bus-details" element={<BusDetails />} />
         </Routes>
-        <Footer />d
+        <Footer />
       </Box>
     </ThemeProvider>
   );
