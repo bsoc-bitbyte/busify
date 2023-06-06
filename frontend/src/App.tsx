@@ -7,6 +7,7 @@ import ValidateAuth from './components/ValidateAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
+import './scroll.css';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/google" element={<GoogleAuthLogin />} />
           <Route path="/bus-schedule" element={<BusSchedule />} />
         </Routes>
-        <Footer />d
+        <Footer />
       </Box>
     </ThemeProvider>
   );
