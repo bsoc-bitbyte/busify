@@ -8,7 +8,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
 import BusDetails from './pages/BusDetails';
-import './scroll.css';
 
 function App() {
   return (
