@@ -4,4 +4,24 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+::-webkit-scrollbar-track {
+background: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: #FBBC05;
+border-radius: 25px;
+border: .1px solid rgb(135, 99, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #464646; 
 }
