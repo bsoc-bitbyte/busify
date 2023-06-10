@@ -91,7 +91,7 @@ const AddPassengerButton = styled(Button)`
 
 const BusDetails = () => {
   const theme = useTheme();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
 
@@ -137,53 +137,157 @@ const BusDetails = () => {
           sx: drawerstyle,
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            // justifyContent: 'space-around',
+            alignItems: 'left',
+            flexDirection: 'column',
+          }}
+        >
           <Typography variant="h2" color={theme.palette.secondary.main}>
             Bus Details
           </Typography>
-          <Details>
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={busIcon} alt="Bus Icon" />
-              <Box>
-                <Typography variant="h6" color={theme.palette.common.black}>
-                  From
-                </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
-                  Rewa Residency
-                </Typography>
-              </Box>
-            </Box>
-            <img src={arrorIcon} alt="Arrow Icon" />
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={busIcon} alt="Bus Icon" />
-              <Box>
-                <Typography variant="h6" color={theme.palette.common.black}>
-                  To
-                </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
-                  Sadar
-                </Typography>
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                width: '2px',
-                height: '5vh',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                margin: '0 2rem',
-              }}
-            />
-
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={scheduleIcon} alt="Schedule Icon" />
-              <Box>
-                <Typography variant="h6" color="text.primary">
-                  Date and Time
-                </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
-                  12th May, 3:30PM
-                </Typography>
+          <Details
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              flexDirection: '',
+              gap: '0px',
+              height: '20vh',
+              width: '100%',
+              minWidth: '589px',
+            }}
+          >
+            <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+              <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                <Box
+                  sx={{
+                    minWidth: '',
+                    bgcolor: '',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      alignItems: 'center',
+                      maxWidth: '600px',
+                      gap: '0px',
+                      margin: '0px',
+                      padding: '0px',
+                      bgcolor: '',
+                    }}
+                  >
+                    <img src={busIcon} alt="Bus Icon" />
+                    <Box
+                      sx={{
+                        overflow: 'hidden',
+                        gap: '0px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        marginLeft: '0px',
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        color={theme.palette.common.black}
+                      >
+                        From
+                      </Typography>
+                      <Typography
+                        variant="h5"
+                        color={theme.palette.secondary.main}
+                      >
+                        Rewa Residency
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      marginLeft: '0px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: '00px',
+                      paddingLeft: '0px',
+                    }}
+                  >
+                    <img src={arrorIcon} alt="Arrow Icon" />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      bgcolor: '',
+                    }}
+                  >
+                    <img src={busIcon} alt="Bus Icon" />
+                    <Box sx={{overflow: 'hidden'}}>
+                      <Typography
+                        variant="h6"
+                        color={theme.palette.common.black}
+                      >
+                        To
+                      </Typography>
+                      <Typography
+                        variant="h5"
+                        color={theme.palette.secondary.main}
+                      >
+                        Sadar
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    width: '2px',
+                    height: '6vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    margin: '3.4rem 2rem',
+                    fontSize: '1.5rem',
+                  }}
+                />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: '',
+                    bgcolor: '',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      flexDirection: '',
+                      overflow: '',
+                    }}
+                  >
+                    <Box>
+                      {' '}
+                      <img src={scheduleIcon} alt="Schedule Icon" sx={{}} />
+                    </Box>
+                    <Box>
+                      <Typography variant="h6" color="text.primary">
+                        Date and Time
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        color={theme.palette.secondary.main}
+                        sx={{fontSize: '1.5rem'}}
+                      >
+                        12th May, 3:30PM
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Details>

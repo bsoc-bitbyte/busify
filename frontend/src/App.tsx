@@ -11,20 +11,23 @@ import BusDetails from './pages/BusDetails';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <ValidateAuth />
-      <CssBaseline />
-      <Box margin={{xs: '2rem', md: '3rem 5rem'}}>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/google" element={<GoogleAuthLogin />} />
-          <Route path="/bus-schedule" element={<BusSchedule />} />
-          <Route path="/bus-details" element={<BusDetails />} />
-        </Routes>
-        <Footer />
-      </Box>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <ValidateAuth />
+        <CssBaseline />
+        <Box margin={{xs: '2rem', md: '3rem 5rem'}}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/google" element={<GoogleAuthLogin />} />
+            <Route path="/bus-schedule" element={<BusSchedule />} />
+            <Route path="/bus-details" element={<BusDetails />} />
+          </Routes>
+          <Footer />
+        </Box>
+      </ThemeProvider>
+      <BusDetails />
+    </>
   );
 }
 
