@@ -2,7 +2,6 @@ import {Typography, Box, Button} from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import type {BusTicketData} from './ticketData';
-// eslint-disable-next-line node/no-extraneous-import
 import toast, {Toaster} from 'react-hot-toast';
 import {useAuthStore} from '../../store/authStore';
 import React from 'react';
