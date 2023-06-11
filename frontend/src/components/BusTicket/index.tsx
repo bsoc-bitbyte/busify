@@ -2,6 +2,9 @@ import {Typography, Box, Button} from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import type {BusTicketData} from './ticketData';
+import toast, {Toaster} from 'react-hot-toast';
+import {useAuthStore} from '../../store/authStore';
+import React from 'react';
 
 export default function BusTicket({
   checkpoints,
@@ -9,6 +12,23 @@ export default function BusTicket({
   price,
   seatsLeft,
 }: BusTicketData) {
+  const [isToasterActive, setIsToasterActive] = React.useState(false);
+
+  const notify = () => {
+    if (!isToasterActive) {
+      setIsToasterActive(true);
+
+      toast.error('You need to login first', {
+        position: 'top-center',
+        duration: 3000,
+      });
+    }
+
+    setTimeout(() => {
+      setIsToasterActive(false);
+    }, 3000);
+  };
+  const {isAuth} = useAuthStore();
   return (
     <Box
       sx={{
@@ -135,6 +155,7 @@ export default function BusTicket({
             {seatsLeft} Seats Left
           </Typography>
           <Button
+            onClick={notify}
             variant="contained"
             startIcon={<ConfirmationNumberIcon />}
             sx={{
@@ -148,6 +169,8 @@ export default function BusTicket({
           >
             Book Ticket
           </Button>
+
+          {!isAuth && <Toaster position="top-center" />}
         </Box>
       </Box>
     </Box>
