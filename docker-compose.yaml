@@ -13,9 +13,20 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - busify-test-network
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass ${REDIS_PASSWORD} --loglevel warning
+    volumes:
+      - redis-data:/data
+    networks:
+      - busify-test-network
 networks:
   busify-test-network:
      driver: bridge
 
 volumes:
   postgres-data:
+  redis-data:
