@@ -1,10 +1,20 @@
-import {useTheme, Typography, Box, Button, styled} from '@mui/material';
+import React from 'react';
+import {
+  useTheme,
+  Typography,
+  Box,
+  Button,
+  styled,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 import getGoogleOAuthURL from '../../utils/getOAuthRedirectUrl';
 import {Link} from 'react-router-dom';
 import {useAuthStore} from '../../store/authStore';
 import helpIcon from '../../assets/helpIcon.svg';
 import googleIcon from '../../assets/googleIcon.svg';
 import {Avatar} from '@mui/material';
+import axios from 'axios';
 
 const NavContainer = styled(Box)`
   display: flex;
@@ -39,9 +49,47 @@ const ProfileContainer = styled(Box)`
   border-radius: 8px;
 `;
 
+const LinkContainer = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export default function Navbar() {
   const theme = useTheme();
-  const {isAuth, user} = useAuthStore();
+  const {isAuth, user, setIsAuth, setUser} = useAuthStore();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const openmenu = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const closeMenu = async (
+    event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>
+  ) => {
+    event.stopPropagation();
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async (
+    event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>
+  ) => {
+    event.stopPropagation();
+    setAnchorEl(null);
+
+    try {
+      const response = await axios.get('http://localhost:3333/auth/logout');
+
+      if (response.status === 200) {
+        setIsAuth(false);
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
     <NavContainer>
       <Typography
@@ -49,9 +97,12 @@ export default function Navbar() {
         color={theme.palette.primary.main}
         fontSize={{xs: '1.25rem', md: '2.5rem'}}
       >
-        <Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>
+        <LinkContainer
+          to="/"
+          style={{textDecoration: 'none', color: 'inherit'}}
+        >
           BUSIFY
-        </Link>
+        </LinkContainer>
       </Typography>
       <Box
         sx={{
@@ -74,12 +125,20 @@ export default function Navbar() {
             </Typography>
           </GoogleButton>
         ) : (
-          <ProfileContainer>
+          <ProfileContainer
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={openmenu}
+            style={{cursor: 'pointer'}}
+          >
             <Avatar
               alt={user?.name}
               src={user?.picture}
               sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
             />
+
             <Typography
               variant="h6"
               color={theme.palette.common.black}
@@ -88,6 +147,29 @@ export default function Navbar() {
             >
               Hi, {user?.name}!
             </Typography>
+
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={closeMenu}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem>
+                {' '}
+                <LinkContainer to="#" onClick={closeMenu}>
+                  View Profile
+                </LinkContainer>{' '}
+              </MenuItem>
+              <MenuItem>
+                {' '}
+                <LinkContainer to="/" onClick={handleLogout}>
+                  Logout
+                </LinkContainer>{' '}
+              </MenuItem>
+            </Menu>
           </ProfileContainer>
         )}
       </Box>
