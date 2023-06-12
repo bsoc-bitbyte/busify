@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {useAuthStore} from '../../store/authStore';
 import helpIcon from '../../assets/helpIcon.svg';
 import googleIcon from '../../assets/googleIcon.svg';
+import {Avatar} from '@mui/material';
 
 const NavContainer = styled(Box)`
   display: flex;
@@ -74,6 +75,11 @@ export default function Navbar() {
           </GoogleButton>
         ) : (
           <ProfileContainer>
+            <Avatar
+              alt={user?.name}
+              src={user?.picture}
+              sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
+            />
             <Typography
               variant="h6"
               color={theme.palette.common.black}
