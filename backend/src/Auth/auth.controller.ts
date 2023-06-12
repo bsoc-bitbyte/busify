@@ -12,6 +12,11 @@ export class AuthController {
     return await this.authService.googleLoginCallback(code, res);
   }
   @UseGuards(JwtAuthGuard)
+  @Get('logout')
+  async logout(@Res() res: Response) {
+    return await this.authService.logout(res);
+  }
+  @UseGuards(JwtAuthGuard)
   @Get('me')
   async getCurrentUser(@Req() req: Request) {
     const user = await this.authService.getCurrentUser(req);

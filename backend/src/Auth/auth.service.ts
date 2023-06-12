@@ -65,6 +65,14 @@ export class AuthService {
     return user;
   }
 
+  // /logout route handler
+  async logout(res) {
+    res
+      .clearCookie('jwt')
+      .status(200)
+      .send({message: 'Successfully logged out.'});
+  }
+
   // helper functions
 
   // create the jwt token with the user id and email
