@@ -24,3 +24,15 @@ type BusTicketType = {
   days: string[];
   ticketPrice: number;
 };
+
+type BusDetailsType = {
+  disabled?: boolean;
+};
+
+type BusTicketData = {
+  checkpoints: string[];
+  time: string;
+  price: number;
+  seatsLeft: number;
+  disabled?: boolean;
+};

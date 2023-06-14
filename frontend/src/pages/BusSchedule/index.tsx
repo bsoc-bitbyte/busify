@@ -8,7 +8,19 @@ import axios from 'axios';
 
 const BusSchedule = () => {
   const currentScreen = useScreen();
+  const [selectedDay, setSelectedDay] = useState<string>('');
   const [schedule, setSchedule] = useState<BusTicketType[]>([]);
+  const [today, setToday] = useState<Date>(new Date());
+
+  const weekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
 
   useEffect(() => {
     const getScheduleData = async () => {
@@ -17,6 +29,8 @@ const BusSchedule = () => {
       });
       if (res.status === 200) {
         setSchedule(res.data.schedule);
+        setToday(new Date(res.data.today));
+        setSelectedDay(weekDays[today.getDay()]);
       }
     };
     getScheduleData();
@@ -49,7 +63,19 @@ const BusSchedule = () => {
             'Saturday',
           ].map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
-              <Typography color={theme.palette.secondary.main}>
+              <Typography
+                color={
+                  today.getDay() === index
+                    ? theme.palette.primary.main
+                    : selectedDay === weekDays[index]
+                    ? theme.palette.grey[900]
+                    : theme.palette.grey[500]
+                }
+                onClick={() => setSelectedDay(weekDays[index])}
+                sx={{
+                  cursor: 'pointer',
+                }}
+              >
                 {currentScreen === 'xs' || currentScreen === 'md'
                   ? day.slice(0, 3)
                   : day}
@@ -59,15 +85,20 @@ const BusSchedule = () => {
         </Grid>
         <Grid container direction="column" marginTop="2rem">
           <Grid item>
-            {schedule.map((TicketData, index) => (
-              <BusTicket
-                checkpoints={TicketData.checkpoints}
-                price={TicketData.ticketPrice}
-                time={TicketData.departureTime}
-                seatsLeft={TicketData.ticketPrice}
-                key={index}
-              />
-            ))}
+            {schedule.map((TicketData, index) => {
+              if (TicketData.days.includes(selectedDay)) {
+                return (
+                  <BusTicket
+                    checkpoints={TicketData.checkpoints}
+                    price={TicketData.ticketPrice}
+                    time={TicketData.departureTime}
+                    disabled={selectedDay !== weekDays[today.getDay()]}
+                    seatsLeft={50}
+                    key={index}
+                  />
+                );
+              }
+            })}
           </Grid>
         </Grid>
       </Grid>

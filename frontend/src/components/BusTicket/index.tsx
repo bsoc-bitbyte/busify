@@ -1,16 +1,17 @@
 import {Typography, Box, Button} from '@mui/material';
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
-import type {BusTicketData} from './ticketData';
 import toast, {Toaster} from 'react-hot-toast';
 import {useAuthStore} from '../../store/authStore';
+import BusDetails from '../BusDetails';
 import React from 'react';
+import {BusTicketData} from '../../types';
 
 export default function BusTicket({
   checkpoints,
   time,
   price,
   seatsLeft,
+  disabled,
 }: BusTicketData) {
   const [isToasterActive, setIsToasterActive] = React.useState(false);
 
@@ -28,6 +29,7 @@ export default function BusTicket({
       setIsToasterActive(false);
     }, 3000);
   };
+
   const {isAuth} = useAuthStore();
   return (
     <Box
@@ -154,21 +156,7 @@ export default function BusTicket({
           >
             {seatsLeft} Seats Left
           </Typography>
-          <Button
-            onClick={notify}
-            variant="contained"
-            startIcon={<ConfirmationNumberIcon />}
-            sx={{
-              padding: '0.5vw 1.2vw',
-              fontSize: {xs: '10px', sm: '12px', md: '15px'},
-              minWidth: 'max-content',
-              '&:hover': {
-                backgroundColor: '#FBBC05',
-              },
-            }}
-          >
-            Book Ticket
-          </Button>
+          <BusDetails disabled={disabled} />
 
           {!isAuth && <Toaster position="top-center" />}
         </Box>

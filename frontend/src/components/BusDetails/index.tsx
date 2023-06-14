@@ -14,6 +14,8 @@ import arrorIcon from '../../assets/arrowIcon.svg';
 import scheduleIcon from '../../assets/schedule-icon.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import {BusDetailsType} from '../../types';
 
 interface Passenger {
   rollNumber: string;
@@ -89,7 +91,7 @@ const AddPassengerButton = styled(Button)`
   }
 `;
 
-const BusDetails = () => {
+const BusDetails = ({disabled}: BusDetailsType) => {
   const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [passengers, setPassengers] = useState<Passenger[]>([]);
@@ -128,7 +130,22 @@ const BusDetails = () => {
 
   return (
     <>
-      <Button onClick={openDrawer}>Open Drawer</Button>
+      <Button
+        onClick={openDrawer}
+        variant="contained"
+        disabled={disabled}
+        startIcon={<ConfirmationNumberIcon />}
+        sx={{
+          padding: '0.5vw 1.2vw',
+          fontSize: {xs: '10px', sm: '12px', md: '15px'},
+          minWidth: 'max-content',
+          '&:hover': {
+            backgroundColor: '#FBBC05',
+          },
+        }}
+      >
+        Book Ticket
+      </Button>
       <Drawer
         anchor="right"
         open={isDrawerOpen}
