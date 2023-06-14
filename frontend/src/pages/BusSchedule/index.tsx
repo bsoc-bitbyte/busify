@@ -1,11 +1,26 @@
 import {Grid, Typography} from '@mui/material';
 import BusTicket from '../../components/BusTicket';
-import {TicketData} from '../../components/BusTicket/ticketData';
 import theme from '../../theme';
 import {useScreen} from '../../customHooks/useScreen';
+import {useEffect, useState} from 'react';
+import {BusTicketType} from '../../types';
+import axios from 'axios';
 
 const BusSchedule = () => {
   const currentScreen = useScreen();
+  const [schedule, setSchedule] = useState<BusTicketType[]>([]);
+
+  useEffect(() => {
+    const getScheduleData = async () => {
+      const res = await axios.get('http://localhost:3333/bus/schedule/', {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        setSchedule(res.data.schedule);
+      }
+    };
+    getScheduleData();
+  }, []);
 
   return (
     <>
@@ -25,13 +40,13 @@ const BusSchedule = () => {
           }}
         >
           {[
+            'Sunday',
             'Monday',
             'Tuesday',
             'Wednesday',
             'Thursday',
             'Friday',
             'Saturday',
-            'Sunday',
           ].map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
               <Typography color={theme.palette.secondary.main}>
@@ -44,12 +59,12 @@ const BusSchedule = () => {
         </Grid>
         <Grid container direction="column" marginTop="2rem">
           <Grid item>
-            {[...Array(5)].map((_, index) => (
+            {schedule.map((TicketData, index) => (
               <BusTicket
                 checkpoints={TicketData.checkpoints}
-                price={TicketData.price}
-                seatsLeft={TicketData.seatsLeft}
-                time={TicketData.time}
+                price={TicketData.ticketPrice}
+                time={TicketData.departureTime}
+                seatsLeft={TicketData.ticketPrice}
                 key={index}
               />
             ))}

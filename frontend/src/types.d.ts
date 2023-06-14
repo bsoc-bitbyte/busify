@@ -13,3 +13,14 @@ export interface CustomButtonProps extends Omit<TooltipProps, 'children'> {
   href?: string;
   onClick?: () => void;
 }
+
+type BusTicketType = {
+  id: string;
+  busNumber: string;
+  checkpoints: string[];
+  from: string;
+  to: string;
+  departureTime: string;
+  days: string[];
+  ticketPrice: number;
+};
