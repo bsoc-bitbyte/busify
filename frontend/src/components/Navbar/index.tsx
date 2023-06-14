@@ -7,6 +7,7 @@ import {
   styled,
   Menu,
   MenuItem,
+  IconButton,
 } from '@mui/material';
 import getGoogleOAuthURL from '../../utils/getOAuthRedirectUrl';
 import {Link} from 'react-router-dom';
@@ -14,6 +15,8 @@ import {useAuthStore} from '../../store/authStore';
 import helpIcon from '../../assets/helpIcon.svg';
 import googleIcon from '../../assets/googleIcon.svg';
 import {Avatar} from '@mui/material';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import toast, {Toaster} from 'react-hot-toast';
 import axios from 'axios';
 
 const NavContainer = styled(Box)`
@@ -42,11 +45,14 @@ const GoogleButton = styled(Button)`
   }
 `;
 
+const forMobile = window.innerWidth <= 450;
+
 const ProfileContainer = styled(Box)`
   display: flex;
   align-items: center;
-  border: 0.5px solid #4f4f4f;
+  border: ${forMobile ? 'none' : '0.5px solid #4f4f4f'};
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const LinkContainer = styled(Link)`
@@ -79,16 +85,34 @@ export default function Navbar() {
     setAnchorEl(null);
 
     try {
-      const response = await axios.get('http://localhost:3333/auth/logout');
+      const response = await axios.get('http://localhost:3333/auth/logout', {
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         setIsAuth(false);
         setUser(null);
+        window.location.replace('/');
       }
     } catch (error) {
       console.error('Logout error:', error);
+      toast.error('Logout failed. Please try again', {
+        position: 'top-center',
+        duration: 3000,
+      });
     }
   };
+
+  let menuSize = 130;
+  if (user && !forMobile) {
+    if (user.name.length <= 5) {
+      menuSize = 130;
+    } else if (user.name.length > 5 && user.name.length <= 10) {
+      menuSize = 165;
+    } else {
+      menuSize = 220;
+    }
+  }
 
   return (
     <NavContainer>
@@ -117,6 +141,7 @@ export default function Navbar() {
             Help
           </Typography>
         </HelpButton>
+
         {!isAuth ? (
           <GoogleButton variant="outlined" href={getGoogleOAuthURL()}>
             <img src={googleIcon} alt="google" />
@@ -133,20 +158,33 @@ export default function Navbar() {
             onClick={openmenu}
             style={{cursor: 'pointer'}}
           >
-            <Avatar
-              alt={user?.name}
-              src={user?.picture}
-              sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
-            />
+            {forMobile ? (
+              <IconButton>
+                <Avatar
+                  alt={user?.name}
+                  src={user?.picture}
+                  sx={{width: '1.8rem', height: '1.8rem'}}
+                />
+                {<ArrowDropDown />}
+              </IconButton>
+            ) : (
+              <>
+                <Avatar
+                  alt={user?.name}
+                  src={user?.picture}
+                  sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
+                />
 
-            <Typography
-              variant="h6"
-              color={theme.palette.common.black}
-              padding="0.5rem 1rem"
-              textTransform={'none'}
-            >
-              Hi, {user?.name}!
-            </Typography>
+                <Typography
+                  variant="h6"
+                  color={theme.palette.common.black}
+                  padding="0.5rem 1rem"
+                  textTransform={'none'}
+                >
+                  Hi, {user?.name}!
+                </Typography>
+              </>
+            )}
 
             <Menu
               id="basic-menu"
@@ -155,24 +193,24 @@ export default function Navbar() {
               onClose={closeMenu}
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
+                style: {width: menuSize},
               }}
             >
               <MenuItem>
-                {' '}
                 <LinkContainer to="#" onClick={closeMenu}>
                   View Profile
-                </LinkContainer>{' '}
+                </LinkContainer>
               </MenuItem>
               <MenuItem>
-                {' '}
-                <LinkContainer to="/" onClick={handleLogout}>
+                <LinkContainer to="#" onClick={handleLogout}>
                   Logout
-                </LinkContainer>{' '}
+                </LinkContainer>
               </MenuItem>
             </Menu>
           </ProfileContainer>
         )}
       </Box>
+      <Toaster position="top-center" />
     </NavContainer>
   );
 }
