@@ -1,10 +1,12 @@
 import {create} from 'zustand';
+
 interface AuthStore {
   isAuth: boolean;
   user: User | null;
   setIsAuth: (isAuth: boolean) => void;
   setUser: (user: User | null) => void;
 }
+
 interface User {
   id: number;
   email: string;

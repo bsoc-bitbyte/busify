@@ -7,7 +7,7 @@ import ValidateAuth from './components/ValidateAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
-import BusDetails from './pages/BusDetails';
+import BusDetails from './components/BusDetails';
 
 function App() {
   return (

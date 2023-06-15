@@ -1,11 +1,40 @@
 import {Grid, Typography} from '@mui/material';
 import BusTicket from '../../components/BusTicket';
-import {TicketData} from '../../components/BusTicket/ticketData';
 import theme from '../../theme';
 import {useScreen} from '../../customHooks/useScreen';
+import {useEffect, useState} from 'react';
+import {BusTicketType} from '../../types';
+import axios from 'axios';
 
 const BusSchedule = () => {
   const currentScreen = useScreen();
+  const [selectedDay, setSelectedDay] = useState<string>('');
+  const [schedule, setSchedule] = useState<BusTicketType[]>([]);
+  const [today, setToday] = useState<Date>(new Date());
+
+  const weekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  useEffect(() => {
+    const getScheduleData = async () => {
+      const res = await axios.get('http://localhost:3333/bus/schedule/', {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        setSchedule(res.data.schedule);
+        setToday(new Date(res.data.today));
+        setSelectedDay(weekDays[today.getDay()]);
+      }
+    };
+    getScheduleData();
+  }, []);
 
   return (
     <>
@@ -24,16 +53,25 @@ const BusSchedule = () => {
           }}
         >
           {[
+            'Sunday',
             'Monday',
             'Tuesday',
             'Wednesday',
             'Thursday',
             'Friday',
             'Saturday',
-            'Sunday',
           ].map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
-              <Typography color={theme.palette.secondary.main}>
+              <Typography
+                onClick={() => setSelectedDay(day)}
+                sx={{
+                  cursor: 'pointer',
+                  color: selectedDay === day ? theme.palette.primary.main : '',
+                  fontWeight: selectedDay === day ? 'bold' : 'normal',
+                  padding: '0.25rem',
+                  borderRadius: '8px',
+                }}
+              >
                 {currentScreen === 'xs' || currentScreen === 'md'
                   ? day.slice(0, 3)
                   : day}
@@ -43,15 +81,20 @@ const BusSchedule = () => {
         </Grid>
         <Grid container direction="column" marginTop="2rem">
           <Grid item>
-            {[...Array(5)].map((_, index) => (
-              <BusTicket
-                checkpoints={TicketData.checkpoints}
-                price={TicketData.price}
-                seatsLeft={TicketData.seatsLeft}
-                time={TicketData.time}
-                key={index}
-              />
-            ))}
+            {schedule.map((TicketData, index) => {
+              if (TicketData.days.includes(selectedDay)) {
+                return (
+                  <BusTicket
+                    checkpoints={TicketData.checkpoints}
+                    price={TicketData.ticketPrice}
+                    time={TicketData.departureTime}
+                    disabled={selectedDay !== weekDays[today.getDay()]}
+                    seatsLeft={50}
+                    key={index}
+                  />
+                );
+              }
+            })}
           </Grid>
         </Grid>
       </Grid>
