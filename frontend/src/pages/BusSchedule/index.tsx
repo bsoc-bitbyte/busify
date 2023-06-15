@@ -43,7 +43,6 @@ const BusSchedule = () => {
           container
           justifyContent="space-between"
           alignItems="center"
-          md={12}
           lg={10}
           sx={{
             border: '1px solid rgba(0, 0, 0, 0.2)',
