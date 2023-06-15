@@ -32,7 +32,6 @@ export default function BusTicket({
   return (
     <Box
       sx={{
-        width: '100%',
         display: 'flex',
         marginBottom: {xs: '1.5rem', sm: '2rem'},
         justifyContent: 'center',
@@ -42,7 +41,7 @@ export default function BusTicket({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          width: {xs: '100%', sm: '33.5rem', md: '46rem'},
+          width: {xs: '100%', lg: '85%'},
           height: {xs: '11rem', sm: '12rem', md: '14rem'},
           borderRadius: {xs: '10px', sm: '0.882vw'},
           border: '1px solid rgba(0, 0, 0, 0.2)',
