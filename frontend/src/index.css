@@ -4,24 +4,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 /* scrollbar */
 ::-webkit-scrollbar {
-width: 10px;
+  width: 6px;
+  height: 6px;
 }
 
-::-webkit-scrollbar-track {
-background: inherit;
+scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-background-color: #FBBC05;
-border-radius: 25px;
-border: .1px solid rgb(135, 99, 0);
+  background-color: rgba(127, 125, 125, 0.4);
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-background: #464646; 
+scrollbar-thumb {
+  background-color: rgba(127, 125, 125, 0.4);
+  border-radius: 10px;
 }

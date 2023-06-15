@@ -29,7 +29,17 @@ const Details = styled(Box)`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   margin: 2rem 0;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
+`;
+
+const Icon = styled('img')`
+  width: 40px;
+  height: 40px;
+
+  @media (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const FareBreakdown = styled(Box)`
@@ -54,37 +64,45 @@ const PassengersContainer = styled(Box)`
 `;
 
 const CustomTextField = styled(TextField)`
-  .MuiOutlinedInput-root {
-    &:hover fieldset {
-      border-color: rgba(0, 0, 0, 0.5);
-    }
-    &.Mui-focused fieldset {
-      border-color: rgba(0, 0, 0, 0.5);
-    }
+  .MuiInput-underline:after {
+    border-bottom-color: rgba(0, 0, 0, 0.5);
   }
+
   .MuiFormLabel-root.Mui-focused {
     color: rgba(0, 0, 0, 0.7);
+  }
+
+  .MuiFormLabel-root {
+    font-size: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .MuiFormLabel-root {
+      font-size: 12px;
+    }
   }
 
   margin: 0;
 `;
 
 const CrossIcon = styled(CloseIcon)`
-  font-size: 16px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   padding: 2px;
 `;
 
 const AddPassengerIcon = styled(AddIcon)`
-  font-size: 16px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   padding: 2px;
 `;
 
 const AddPassengerButton = styled(Button)`
+  display: flex;
+  align-items: center;
   color: rgba(0, 0, 0, 0.5);
+  min-width: max-content;
+
   &:hover {
     color: rgba(0, 0, 0, 0.5);
     background-color: transparent;
@@ -98,7 +116,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
 
   const drawerstyle = {
-    width: '66.6667%',
+    width: {xs: '100%', sm: '66.6667%'},
     padding: '2rem',
   };
 
@@ -154,32 +172,87 @@ const BusDetails = ({disabled}: BusDetailsType) => {
           sx: drawerstyle,
         }}
       >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
+          <IconButton
+            onClick={closeDrawer}
+            sx={{display: {xs: 'flex', sm: 'none'}}}
+            size="small"
+          >
+            <CrossIcon sx={{fontSize: {md: '1rem'}}} />
+          </IconButton>
+        </Box>
         <Box>
-          <Typography variant="h2" color={theme.palette.secondary.main}>
+          <Typography
+            variant="h2"
+            fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+            color={theme.palette.secondary.main}
+          >
             Bus Details
           </Typography>
-          <Details>
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={busIcon} alt="Bus Icon" />
-              <Box>
-                <Typography variant="h6" color={theme.palette.common.black}>
-                  From
-                </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
-                  Rewa Residency
-                </Typography>
+          <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: {xs: '10px', md: '2rem'},
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: {xs: '5px', md: '10px'},
+                }}
+              >
+                <Icon src={busIcon} alt="Bus Icon" />
+                <Box>
+                  <Typography
+                    variant="h6"
+                    fontSize={{xs: '0.8rem', md: '1rem'}}
+                    color={theme.palette.common.black}
+                  >
+                    From
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
+                    color={theme.palette.secondary.main}
+                  >
+                    Rewa Residency
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-            <img src={arrorIcon} alt="Arrow Icon" />
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={busIcon} alt="Bus Icon" />
-              <Box>
-                <Typography variant="h6" color={theme.palette.common.black}>
-                  To
-                </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
-                  Sadar
-                </Typography>
+              <img src={arrorIcon} alt="Arrow Icon" />
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: {xs: '5px', md: '10px'},
+                }}
+              >
+                <Icon src={busIcon} alt="Bus Icon" />
+                <Box>
+                  <Typography
+                    variant="h6"
+                    fontSize={{xs: '0.8rem', md: '1rem'}}
+                    color={theme.palette.common.black}
+                  >
+                    To
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
+                    color={theme.palette.secondary.main}
+                  >
+                    Sadar
+                  </Typography>
+                </Box>
               </Box>
             </Box>
 
@@ -189,16 +262,25 @@ const BusDetails = ({disabled}: BusDetailsType) => {
                 height: '5vh',
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 margin: '0 2rem',
+                display: {xs: 'none', sm: 'block'},
               }}
             />
 
             <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <img src={scheduleIcon} alt="Schedule Icon" />
+              <Icon src={scheduleIcon} alt="Schedule Icon" />
               <Box>
-                <Typography variant="h6" color="text.primary">
+                <Typography
+                  variant="h6"
+                  fontSize={{xs: '0.8rem', md: '1rem'}}
+                  color={theme.palette.common.black}
+                >
                   Date and Time
                 </Typography>
-                <Typography variant="h4" color={theme.palette.secondary.main}>
+                <Typography
+                  variant="h4"
+                  fontSize={{xs: '1.25rem', md: '1.5rem'}}
+                  color={theme.palette.secondary.main}
+                >
                   12th May, 3:30PM
                 </Typography>
               </Box>
@@ -213,24 +295,38 @@ const BusDetails = ({disabled}: BusDetailsType) => {
               alignItems: 'center',
             }}
           >
-            <Typography variant="h2" color={theme.palette.secondary.main}>
+            <Typography
+              variant="h2"
+              fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+              color={theme.palette.secondary.main}
+            >
               Passenger Details
             </Typography>
             {!isAddingPassenger ? (
               <AddPassengerButton
                 variant="text"
-                startIcon={<AddPassengerIcon />}
                 onClick={() => setIsAddingPassenger(true)}
                 style={{display: passengers.length === 4 ? 'none' : 'flex'}}
               >
-                Add a new passenger
+                <AddPassengerIcon sx={{fontSize: {md: '1rem'}}} />
+                <Typography
+                  variant="h6"
+                  color={theme.palette.common.black}
+                  textTransform="none"
+                  sx={{
+                    display: {xs: 'none', sm: 'block'},
+                    marginLeft: '0.5rem',
+                  }}
+                >
+                  Add a new passenger
+                </Typography>
               </AddPassengerButton>
             ) : (
               <IconButton
                 onClick={() => setIsAddingPassenger(false)}
                 size="small"
               >
-                <CrossIcon />
+                <CrossIcon sx={{fontSize: {md: '1rem'}}} />
               </IconButton>
             )}
           </Box>
@@ -250,7 +346,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
                   onClick={() => handleRemovePassenger(passenger.rollNumber)}
                   size="small"
                 >
-                  <CrossIcon />
+                  <CrossIcon sx={{fontSize: {md: '1rem'}}} />
                 </IconButton>
               </Box>
             ))}
@@ -264,7 +360,11 @@ const BusDetails = ({disabled}: BusDetailsType) => {
                     height: '20vh',
                   }}
                 >
-                  <Typography variant="h5" color={theme.palette.common.black}>
+                  <Typography
+                    variant="h5"
+                    color={theme.palette.common.black}
+                    fontSize={{xs: '1rem', md: '1.25rem'}}
+                  >
                     No Passengers are added currently
                   </Typography>
                 </Box>
@@ -287,7 +387,11 @@ const BusDetails = ({disabled}: BusDetailsType) => {
           </PassengersContainer>
         </Box>
         <Box>
-          <Typography variant="h2" color={theme.palette.secondary.main}>
+          <Typography
+            variant="h2"
+            fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+            color={theme.palette.secondary.main}
+          >
             Fare Breakdown
           </Typography>
           <FareBreakdown>
@@ -336,7 +440,10 @@ const BusDetails = ({disabled}: BusDetailsType) => {
               <Typography
                 variant="h4"
                 color={theme.palette.secondary.main}
-                fontWeight={600}
+                sx={{
+                  fontSize: {xs: '1.25rem', md: '1.5rem'},
+                  fontWeight: {xs: 600, md: 700},
+                }}
               >
                 NET AMOUNT TO PAY
               </Typography>
