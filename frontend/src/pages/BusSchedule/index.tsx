@@ -64,16 +64,13 @@ const BusSchedule = () => {
           ].map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
               <Typography
-                color={
-                  today.getDay() === index
-                    ? theme.palette.primary.main
-                    : selectedDay === weekDays[index]
-                    ? theme.palette.grey[900]
-                    : theme.palette.grey[500]
-                }
-                onClick={() => setSelectedDay(weekDays[index])}
+                onClick={() => setSelectedDay(day)}
                 sx={{
                   cursor: 'pointer',
+                  color: selectedDay === day ? theme.palette.primary.main : '',
+                  fontWeight: selectedDay === day ? 'bold' : 'normal',
+                  padding: '0.25rem',
+                  borderRadius: '8px',
                 }}
               >
                 {currentScreen === 'xs' || currentScreen === 'md'

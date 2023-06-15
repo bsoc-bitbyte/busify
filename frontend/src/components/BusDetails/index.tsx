@@ -66,7 +66,7 @@ const CustomTextField = styled(TextField)`
     color: rgba(0, 0, 0, 0.7);
   }
 
-  margin: 1rem 0;
+  margin: 0;
 `;
 
 const CrossIcon = styled(CloseIcon)`
@@ -273,13 +273,14 @@ const BusDetails = ({disabled}: BusDetailsType) => {
               <form onSubmit={handleAddPassenger}>
                 <CustomTextField
                   label="Write passenger’s roll number"
-                  variant="outlined"
+                  variant="standard"
                   fullWidth
-                  onKeyPress={event => {
+                  onKeyDown={event => {
                     if (event.key === 'Enter') {
                       handleAddPassenger(event);
                     }
                   }}
+                  onBlur={event => handleAddPassenger(event)}
                 />
               </form>
             )}
