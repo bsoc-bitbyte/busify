@@ -14,11 +14,12 @@ const BusSchedule = () => {
           container
           justifyContent="space-between"
           alignItems="center"
+          lg={10}
           sx={{
             border: '1px solid rgba(0, 0, 0, 0.2)',
             boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
             borderRadius: '8px',
-            margin: '2.5rem 0 0 2rem',
+            marginTop: '2.5rem',
             padding: currentScreen === 'xs' ? '1rem' : '1.5rem 3rem',
           }}
         >
