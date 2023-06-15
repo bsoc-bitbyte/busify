@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {
   useTheme,
   Typography,
@@ -103,16 +103,7 @@ export default function Navbar() {
     }
   };
 
-  let menuSize = 130;
-  if (user && !forMobile) {
-    if (user.name.length <= 5) {
-      menuSize = 130;
-    } else if (user.name.length > 5 && user.name.length <= 10) {
-      menuSize = 165;
-    } else {
-      menuSize = 220;
-    }
-  }
+  const profile_container = useRef<HTMLDivElement | null>(null);
 
   return (
     <NavContainer>
@@ -157,6 +148,7 @@ export default function Navbar() {
             aria-expanded={open ? 'true' : undefined}
             onClick={openmenu}
             style={{cursor: 'pointer'}}
+            ref={profile_container}
           >
             {forMobile ? (
               <IconButton>
@@ -193,7 +185,11 @@ export default function Navbar() {
               onClose={closeMenu}
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
-                style: {width: menuSize},
+                style: {
+                  width: forMobile
+                    ? 130
+                    : profile_container.current?.offsetWidth || 0,
+                },
               }}
             >
               <MenuItem>
