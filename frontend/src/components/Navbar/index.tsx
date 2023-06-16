@@ -51,6 +51,10 @@ const ProfileContainer = styled(Box)`
   align-items: center;
   border-radius: 8px;
   cursor: pointer;
+  &:hover {
+    border: 0.5px solid ${({theme}) => theme.palette.primary.main};
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const LinkContainer = styled(Link)`
@@ -78,8 +82,6 @@ export default function Navbar() {
   };
 
   const handleLogout = async () => {
-    setAnchorEl(null);
-
     try {
       const response = await axios.get('http://localhost:3333/auth/logout', {
         withCredentials: true,
@@ -97,6 +99,7 @@ export default function Navbar() {
         duration: 3000,
       });
     }
+    setAnchorEl(null);
   };
 
   const profile_container = useRef<HTMLDivElement | null>(null);
@@ -143,7 +146,7 @@ export default function Navbar() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={openmenu}
-            style={{
+            sx={{
               cursor: 'pointer',
               border: currentScreen === 'xs' ? 'none' : '0.5px solid #4f4f4f',
             }}
@@ -197,10 +200,8 @@ export default function Navbar() {
                   View Profile
                 </LinkContainer>
               </MenuItem>
-              <MenuItem>
-                <LinkContainer to="#" onClick={handleLogout}>
-                  Logout
-                </LinkContainer>
+              <MenuItem onClick={handleLogout}>
+                <LinkContainer to="#">Logout</LinkContainer>
               </MenuItem>
             </Menu>
           </ProfileContainer>
