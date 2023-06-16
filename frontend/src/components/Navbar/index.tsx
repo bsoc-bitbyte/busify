@@ -18,6 +18,7 @@ import {Avatar} from '@mui/material';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import toast, {Toaster} from 'react-hot-toast';
 import axios from 'axios';
+import {useScreen} from '../../customHooks/useScreen';
 
 const NavContainer = styled(Box)`
   display: flex;
@@ -45,12 +46,9 @@ const GoogleButton = styled(Button)`
   }
 `;
 
-const forMobile = window.innerWidth <= 450;
-
 const ProfileContainer = styled(Box)`
   display: flex;
   align-items: center;
-  border: ${forMobile ? 'none' : '0.5px solid #4f4f4f'};
   border-radius: 8px;
   cursor: pointer;
 `;
@@ -61,6 +59,7 @@ const LinkContainer = styled(Link)`
 `;
 
 export default function Navbar() {
+  const currentScreen = useScreen();
   const theme = useTheme();
   const {isAuth, user, setIsAuth, setUser} = useAuthStore();
 
@@ -147,10 +146,13 @@ export default function Navbar() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={openmenu}
-            style={{cursor: 'pointer'}}
+            style={{
+              cursor: 'pointer',
+              border: currentScreen === 'xs' ? 'none' : '0.5px solid #4f4f4f',
+            }}
             ref={profile_container}
           >
-            {forMobile ? (
+            {currentScreen === 'xs' ? (
               <IconButton>
                 <Avatar
                   alt={user?.name}
@@ -186,9 +188,10 @@ export default function Navbar() {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
                 style: {
-                  width: forMobile
-                    ? 130
-                    : profile_container.current?.offsetWidth || 0,
+                  width:
+                    currentScreen === 'xs'
+                      ? 130
+                      : profile_container.current?.offsetWidth || 0,
                 },
               }}
             >
