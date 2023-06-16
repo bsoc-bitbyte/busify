@@ -77,10 +77,7 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  const handleLogout = async (
-    event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>
-  ) => {
-    event.stopPropagation();
+  const handleLogout = async () => {
     setAnchorEl(null);
 
     try {
