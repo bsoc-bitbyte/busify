@@ -29,13 +29,16 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    [Install](https://docs.docker.com/engine/install/)
 
    ```bash
-   docker compose up
+   docker compose --env-file backend/.env up
    ```
 
 5. In new terminal type
 
    ```bash
    cd backend
+   npx prisma generate
+   npm run migrate:dev
+   npm run seed
    npm install
    npm run start:dev
    ```
