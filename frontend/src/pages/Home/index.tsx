@@ -11,12 +11,14 @@ const Home = () => {
   return (
     <Grid container direction="column" marginTop="2rem">
       <Grid item>
-        <HeroContainer>
+        <HeroContainer
+          height={{xs: '18rem', sm: '20rem', md: '22rem', lg: '24rem'}}
+        >
           <Typography
             variant="h2"
             color="white"
-            fontSize={{xs: '2rem', md: '4rem'}}
-            maxWidth={{xs: '90%', md: '50%'}}
+            fontSize={{xs: '1.8rem', sm: '2.5rem', md: '3.3rem', lg: '3.6rem'}}
+            maxWidth={{xs: '90%', md: '60%'}}
             textAlign="center"
             fontWeight="700"
           >
@@ -25,6 +27,15 @@ const Home = () => {
           <CTA
             variant="contained"
             color="primary"
+            sx={{
+              fontSize: {
+                xs: '0.9rem',
+                sm: '1.1rem',
+                md: '1.2rem',
+                lg: '1.3rem',
+              },
+              fontWeight: '600',
+            }}
             onClick={() => navigate('/bus-schedule')}
           >
             See Schedule
@@ -98,7 +109,6 @@ const HeroContainer = styled(Box)({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  height: '55vh',
   padding: '0 1rem',
   display: 'flex',
   flexDirection: 'column',
@@ -114,7 +124,6 @@ const CTA = styled(Button)({
   borderRadius: 8,
   padding: '0.5rem 2.5rem',
   width: 'fit-content',
-  fontSize: '1.2rem',
 
   '&:hover': {
     backgroundColor: '#FBBC05',
