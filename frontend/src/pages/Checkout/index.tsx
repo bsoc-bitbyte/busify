@@ -4,10 +4,9 @@ import arrorIcon from '../../assets/arrowIcon.svg';
 import scheduleIcon from '../../assets/schedule-icon.svg';
 import {BusDetailsType} from '../../types';
 import {useOrderStore} from '../../store/orderStore';
+import BusDetailsCard from '../../components/BusDetailsCard';
+import {useLocation} from 'react-router-dom';
 
-interface Passenger {
-  rollNumber: string;
-}
 const ConatinerMain = styled(Box)`
 width: {xs: '100%', sm: '66.6667%'},
     padding: '2rem',
@@ -55,9 +54,11 @@ const PassengersContainer = styled(Box)`
   min-height: 20vh;
 `;
 
-const BusDetails = ({disabled}: BusDetailsType) => {
+const BusDetails = () => {
   const passengerDetail = useOrderStore(state => state.passengerDetail);
   const theme = useTheme();
+  const location = useLocation();
+  const {from, to, time} = location.state;
 
   return (
     <>
@@ -85,95 +86,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
             Bus Details
           </Typography>
           <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: {xs: '10px', md: '2rem'},
-              }}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    From
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Rewa Residency
-                  </Typography>
-                </Box>
-              </Box>
-              <img src={arrorIcon} alt="Arrow Icon" />
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    To
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Sadar
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                width: '2px',
-                height: '5vh',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                margin: '0 2rem',
-                display: {xs: 'none', sm: 'block'},
-              }}
-            />
-
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <Icon src={scheduleIcon} alt="Schedule Icon" />
-              <Box>
-                <Typography
-                  variant="h6"
-                  fontSize={{xs: '0.8rem', md: '1rem'}}
-                  color={theme.palette.common.black}
-                >
-                  Date and Time
-                </Typography>
-                <Typography
-                  variant="h4"
-                  fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                  color={theme.palette.secondary.main}
-                >
-                  12th May, 3:30PM
-                </Typography>
-              </Box>
-            </Box>
+            <BusDetailsCard from={from} to={to} time={time} />
           </Details>
         </Box>
         <Box>

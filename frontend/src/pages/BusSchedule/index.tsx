@@ -91,6 +91,8 @@ const BusSchedule = () => {
                     disabled={selectedDay !== weekDays[today.getDay()]}
                     seatsLeft={50}
                     key={index}
+                    to={TicketData.to}
+                    from={TicketData.from}
                   />
                 );
               }

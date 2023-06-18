@@ -11,6 +11,8 @@ export default function BusTicket({
   time,
   price,
   seatsLeft,
+  from,
+  to,
   disabled,
 }: BusTicketData) {
   const [isToasterActive, setIsToasterActive] = React.useState(false);
@@ -161,7 +163,7 @@ export default function BusTicket({
           >
             {seatsLeft} Seats Left
           </Typography>
-          <BusDetails disabled={disabled} />
+          <BusDetails from={from} to={to} time={time} disabled={disabled} />
           {!isAuth && <Toaster position="top-center" />}
         </Box>
       </Box>
