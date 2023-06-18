@@ -9,9 +9,6 @@ import {
   TextField,
   IconButton,
 } from '@mui/material';
-import busIcon from '../../assets/bus-icon.svg';
-import arrorIcon from '../../assets/arrowIcon.svg';
-import scheduleIcon from '../../assets/schedule-icon.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
@@ -20,6 +17,7 @@ import {useNavigate} from 'react-router-dom';
 import {useOrderStore} from '../../store/orderStore';
 import toast, {Toaster} from 'react-hot-toast';
 import React from 'react';
+import BusDetailsCard from '../BusDetailsCard';
 
 interface Passenger {
   rollNumber: string;
@@ -34,16 +32,6 @@ const Details = styled(Box)`
   border-radius: 8px;
   margin: 2rem 0;
   padding: 1.5rem;
-`;
-
-const Icon = styled('img')`
-  width: 40px;
-  height: 40px;
-
-  @media (max-width: 600px) {
-    width: 30px;
-    height: 30px;
-  }
 `;
 
 const FareBreakdown = styled(Box)`
@@ -113,7 +101,7 @@ const AddPassengerButton = styled(Button)`
   }
 `;
 
-const BusDetails = ({disabled}: BusDetailsType) => {
+const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
   const removePassenger = useOrderStore(state => state.removePassenger);
   const passengerDetail = useOrderStore(state => state.passengerDetail);
@@ -223,95 +211,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
             Bus Details
           </Typography>
           <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: {xs: '10px', md: '2rem'},
-              }}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    From
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Rewa Residency
-                  </Typography>
-                </Box>
-              </Box>
-              <img src={arrorIcon} alt="Arrow Icon" />
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    To
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Sadar
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                width: '2px',
-                height: '5vh',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                margin: '0 2rem',
-                display: {xs: 'none', sm: 'block'},
-              }}
-            />
-
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <Icon src={scheduleIcon} alt="Schedule Icon" />
-              <Box>
-                <Typography
-                  variant="h6"
-                  fontSize={{xs: '0.8rem', md: '1rem'}}
-                  color={theme.palette.common.black}
-                >
-                  Date and Time
-                </Typography>
-                <Typography
-                  variant="h4"
-                  fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                  color={theme.palette.secondary.main}
-                >
-                  12th May, 3:30PM
-                </Typography>
-              </Box>
-            </Box>
+            <BusDetailsCard from={from} to={to} time={time} />
           </Details>
         </Box>
         <Box>
@@ -498,7 +398,15 @@ const BusDetails = ({disabled}: BusDetailsType) => {
           <Button
             variant="contained"
             onClick={() => {
-              passengerDetail.length ? navigate('/Checkout') : notify();
+              passengerDetail.length
+                ? navigate('/Checkout', {
+                    state: {
+                      from,
+                      to,
+                      time,
+                    },
+                  })
+                : notify();
             }}
             sx={{
               padding: '0.5rem 2rem',
