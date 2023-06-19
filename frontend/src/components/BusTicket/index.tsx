@@ -31,7 +31,6 @@ export default function BusTicket({
       setIsToasterActive(false);
     }, 3000);
   };
-
   const {isAuth} = useAuthStore();
   return (
     <Box
