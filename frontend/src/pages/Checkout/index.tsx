@@ -5,6 +5,7 @@ import scheduleIcon from '../../assets/schedule-icon.svg';
 import {BusDetailsType} from '../../types';
 import {useOrderStore} from '../../store/orderStore';
 import BusDetailsCard from '../../components/BusDetailsCard';
+import Ticketfare from '../../components/Ticketfare';
 import {useLocation} from 'react-router-dom';
 
 const ConatinerMain = styled(Box)`
@@ -58,7 +59,7 @@ const BusDetails = () => {
   const passengerDetail = useOrderStore(state => state.passengerDetail);
   const theme = useTheme();
   const location = useLocation();
-  const {from, to, time} = location.state;
+  const {from, to, time, ticketQuantity} = location.state;
 
   return (
     <>
@@ -129,71 +130,7 @@ const BusDetails = () => {
           >
             Fare Breakdown
           </Typography>
-          <FareBreakdown>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Price
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Quantity
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: '1rem',
-              }}
-            >
-              <Typography
-                variant="h4"
-                color={theme.palette.secondary.main}
-                sx={{
-                  fontSize: {xs: '1.25rem', md: '1.5rem'},
-                  fontWeight: {xs: 600, md: 700},
-                }}
-              >
-                NET AMOUNT TO PAY
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography fontWeight={600}>&#x20B9;</Typography>
-                <Typography
-                  variant="h1"
-                  color={theme.palette.secondary.main}
-                  fontWeight={600}
-                >
-                  0
-                </Typography>
-              </Box>
-            </Box>
-          </FareBreakdown>
+          <Ticketfare />
         </Box>
         <Box
           sx={{

@@ -18,6 +18,7 @@ import {useOrderStore} from '../../store/orderStore';
 import toast, {Toaster} from 'react-hot-toast';
 import React from 'react';
 import BusDetailsCard from '../BusDetailsCard';
+import Ticketfare from '../Ticketfare';
 
 interface Passenger {
   rollNumber: string;
@@ -105,6 +106,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
   const removePassenger = useOrderStore(state => state.removePassenger);
   const passengerDetail = useOrderStore(state => state.passengerDetail);
+  const ticketQuantity = useOrderStore(state => state.ticketQuantity);
   const navigate = useNavigate();
   const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -151,6 +153,9 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
       input.value = '';
       setIsAddingPassenger(false);
       addPassenger(rollNumber);
+      useOrderStore.setState(state => ({
+        ticketQuantity: state.ticketQuantity + 1,
+      }));
     }
   };
 
@@ -159,6 +164,9 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
       prevPassengers.filter(p => p.rollNumber !== rollNumber)
     );
     removePassenger(rollNumber);
+    useOrderStore.setState(state => ({
+      ticketQuantity: state.ticketQuantity - 1,
+    }));
   };
 
   return (
@@ -182,7 +190,12 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
       <Drawer
         anchor="right"
         open={isDrawerOpen}
-        onClose={closeDrawer}
+        onClose={() => {
+          closeDrawer();
+          passengerDetail.map(value => {
+            removePassenger(value.rollNumber);
+          });
+        }}
         PaperProps={{
           sx: drawerstyle,
         }}
@@ -321,71 +334,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
           >
             Fare Breakdown
           </Typography>
-          <FareBreakdown>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Price
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Quantity
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: '1rem',
-              }}
-            >
-              <Typography
-                variant="h4"
-                color={theme.palette.secondary.main}
-                sx={{
-                  fontSize: {xs: '1.25rem', md: '1.5rem'},
-                  fontWeight: {xs: 600, md: 700},
-                }}
-              >
-                NET AMOUNT TO PAY
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography fontWeight={600}>&#x20B9;</Typography>
-                <Typography
-                  variant="h1"
-                  color={theme.palette.secondary.main}
-                  fontWeight={600}
-                >
-                  0
-                </Typography>
-              </Box>
-            </Box>
-          </FareBreakdown>
+          <Ticketfare />
         </Box>
         <Box
           sx={{
@@ -404,6 +353,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
                       from,
                       to,
                       time,
+                      ticketQuantity,
                     },
                   })
                 : notify();
