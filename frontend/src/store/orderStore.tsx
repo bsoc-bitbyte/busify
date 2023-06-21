@@ -1,8 +1,8 @@
 import {create} from 'zustand';
 
 interface OrderStore {
-  startingPoint: string;
-  endingPoint: string;
+  source: string;
+  destination: string;
   date: string;
   time: string;
   ticketQuantity: number;
@@ -16,8 +16,8 @@ interface PassengerDetail {
 }
 
 export const useOrderStore = create<OrderStore>(set => ({
-  startingPoint: '',
-  endingPoint: '',
+  source: '',
+  destination: '',
   date: '',
   time: '',
   ticketQuantity: 0,

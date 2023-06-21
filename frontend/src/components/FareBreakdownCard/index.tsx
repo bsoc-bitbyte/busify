@@ -11,7 +11,7 @@ const FareBreakdown = styled(Box)`
   padding: 1rem;
 `;
 
-export default function Ticketfare() {
+export default function FareBreakdownCard() {
   const theme = useTheme();
   const ticketQuantity = useOrderStore(state => state.ticketQuantity);
   return (
