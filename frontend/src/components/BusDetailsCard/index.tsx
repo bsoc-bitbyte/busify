@@ -2,7 +2,7 @@ import {useTheme, Typography, styled, Box} from '@mui/material';
 import busIcon from '../../assets/bus-icon.svg';
 import arrorIcon from '../../assets/arrowIcon.svg';
 import scheduleIcon from '../../assets/schedule-icon.svg';
-import {BusDetailsType} from '../../types';
+import {useOrderStore} from '../../store/orderStore';
 
 const Icon = styled('img')`
   width: 40px;
@@ -14,8 +14,11 @@ const Icon = styled('img')`
   }
 `;
 
-function BusDetailsCard({from, to, time}: BusDetailsType) {
+function BusDetailsCard() {
   const theme = useTheme();
+  const time = useOrderStore(state => state.time);
+  const source = useOrderStore(state => state.source);
+  const destination = useOrderStore(state => state.destination);
   return (
     <>
       <Box
@@ -46,7 +49,7 @@ function BusDetailsCard({from, to, time}: BusDetailsType) {
               fontSize={{xs: '1.25rem', md: '1.5rem'}}
               color={theme.palette.secondary.main}
             >
-              {from}
+              {source}
             </Typography>
           </Box>
         </Box>
@@ -72,7 +75,7 @@ function BusDetailsCard({from, to, time}: BusDetailsType) {
               fontSize={{xs: '1.25rem', md: '1.5rem'}}
               color={theme.palette.secondary.main}
             >
-              {to}
+              {destination}
             </Typography>
           </Box>
         </Box>

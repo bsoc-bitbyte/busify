@@ -1,4 +1,4 @@
-import {Typography, Box, Button} from '@mui/material';
+import {Typography, Box} from '@mui/material';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import toast, {Toaster} from 'react-hot-toast';
 import {useAuthStore} from '../../store/authStore';

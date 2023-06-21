@@ -1,16 +1,11 @@
 import {useTheme, Typography, Button, styled, Box} from '@mui/material';
-import busIcon from '../../assets/bus-icon.svg';
-import arrorIcon from '../../assets/arrowIcon.svg';
-import scheduleIcon from '../../assets/schedule-icon.svg';
-import {BusDetailsType} from '../../types';
 import {useOrderStore} from '../../store/orderStore';
 import BusDetailsCard from '../../components/BusDetailsCard';
-import Ticketfare from '../../components/Ticketfare';
-import {useLocation} from 'react-router-dom';
+import Ticketfare from '../../components/FareBreakdownCard';
 
 const ConatinerMain = styled(Box)`
-width: {xs: '100%', sm: '66.6667%'},
-    padding: '2rem',
+  width: {xs: '100%', sm: '66.6667%'},
+  padding: '2rem',
 `;
 
 const Details = styled(Box)`
@@ -22,26 +17,6 @@ const Details = styled(Box)`
   border-radius: 8px;
   margin: 2rem 0;
   padding: 1.5rem;
-`;
-
-const Icon = styled('img')`
-  width: 40px;
-  height: 40px;
-
-  @media (max-width: 600px) {
-    width: 30px;
-    height: 30px;
-  }
-`;
-
-const FareBreakdown = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin: 2rem 0;
-  padding: 1rem;
 `;
 
 const PassengersContainer = styled(Box)`
@@ -57,16 +32,16 @@ const PassengersContainer = styled(Box)`
 
 const BusDetails = () => {
   const passengerDetail = useOrderStore(state => state.passengerDetail);
+  const ticketQuantity = useOrderStore(state => state.ticketQuantity);
   const theme = useTheme();
-  const location = useLocation();
-  const {from, to, time, ticketQuantity} = location.state;
-
   return (
     <>
       <ConatinerMain>
         <Typography
-          variant="h1"
-          fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+          variant="h2"
+          fontSize={{xs: '2.5rem', sm: '2.75rem', md: '3rem'}}
+          marginTop="1.5rem"
+          marginBottom="2.75rem"
           color={theme.palette.secondary.main}
         >
           Checkout
@@ -78,36 +53,21 @@ const BusDetails = () => {
             alignItems: 'center',
           }}
         ></Box>
-        <Box>
-          <Typography
-            variant="h2"
-            fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
-            color={theme.palette.secondary.main}
-          >
-            Bus Details
-          </Typography>
-          <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
-            <BusDetailsCard from={from} to={to} time={time} />
-          </Details>
-        </Box>
-        <Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Typography
-              variant="h2"
-              fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
-              color={theme.palette.secondary.main}
-            >
-              Passenger Details
-            </Typography>
-          </Box>
-          <PassengersContainer>
-            {passengerDetail.map((passenger, index) => (
+        <Box display="flex" justifyContent="space-between" gap="4rem">
+          <Box>
+            <Box>
+              <Typography
+                variant="h2"
+                fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+                color={theme.palette.secondary.main}
+              >
+                Bus Details
+              </Typography>
+              <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
+                <BusDetailsCard />
+              </Details>
+            </Box>
+            <Box>
               <Box
                 sx={{
                   display: 'flex',
@@ -115,44 +75,128 @@ const BusDetails = () => {
                   alignItems: 'center',
                 }}
               >
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  {index + 1}. {passenger.rollNumber}
+                <Typography
+                  variant="h2"
+                  fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+                  color={theme.palette.secondary.main}
+                >
+                  Passenger Details
                 </Typography>
               </Box>
-            ))}
-          </PassengersContainer>
-        </Box>
-        <Box>
-          <Typography
-            variant="h2"
-            fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
-            color={theme.palette.secondary.main}
-          >
-            Fare Breakdown
-          </Typography>
-          <Ticketfare />
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            marginTop: '2rem',
-          }}
-        >
-          <Button
-            variant="contained"
-            // onClick={() => navigate('/Checkout')}
-            sx={{
-              padding: '0.5rem 2rem',
-              borderRadius: '8px',
-              '&:hover': {
-                backgroundColor: theme.palette.primary.main,
-              },
-            }}
-          >
-            Pay Now
-          </Button>
+              <PassengersContainer>
+                {passengerDetail.map((passenger, index) => (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      color={theme.palette.secondary.main}
+                    >
+                      {index + 1}. {passenger.rollNumber}
+                    </Typography>
+                  </Box>
+                ))}
+              </PassengersContainer>
+            </Box>
+            <Box>
+              <Typography
+                variant="h2"
+                fontSize={{xs: '1.5rem', sm: '1.75rem', md: '2rem'}}
+                color={theme.palette.secondary.main}
+              >
+                Fare Breakdown
+              </Typography>
+              <Ticketfare />
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                marginTop: '2rem',
+              }}
+            ></Box>
+          </Box>
+          <Box>
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+              height="7.5rem"
+            >
+              <Box display="flex" justifyContent="space-between" gap="7rem">
+                <Typography
+                  variant="body2"
+                  fontSize="1rem"
+                  color={theme.palette.secondary.main}
+                >
+                  Total Amount
+                </Typography>
+                <Box display="flex">
+                  <Typography fontSize="1.1rem" fontWeight="600">
+                    &#x20B9;
+                  </Typography>
+                  <Typography fontSize="1.1rem" fontWeight="600">
+                    {ticketQuantity * 20}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" gap="7rem">
+                <Typography
+                  variant="body2"
+                  fontSize="1rem"
+                  color={theme.palette.secondary.main}
+                >
+                  Processing Fee
+                </Typography>
+                <Box display="flex">
+                  <Typography fontSize="1.1rem" fontWeight="600">
+                    &#x20B9;
+                  </Typography>
+                  <Typography fontSize="1.1rem" fontWeight="600">
+                    {Math.ceil(ticketQuantity * 20 * 0.02)}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" gap="7rem">
+                <Typography
+                  variant="h1"
+                  fontSize="1rem"
+                  color={theme.palette.secondary.main}
+                >
+                  Grand Total
+                </Typography>
+                <Box display="flex">
+                  <Typography fontSize="1.1rem" fontWeight="800">
+                    &#x20B9;
+                  </Typography>
+                  <Typography fontSize="1.1rem" fontWeight="800">
+                    {ticketQuantity * 20 +
+                      Math.ceil(ticketQuantity * 20 * 0.02)}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box marginTop="2rem">
+              <Button
+                variant="contained"
+                sx={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '8px',
+                  width: '100%',
+                  '&:hover': {
+                    backgroundColor: theme.palette.primary.main,
+                  },
+                }}
+              >
+                Pay Now
+              </Button>
+            </Box>
+          </Box>
         </Box>
       </ConatinerMain>
     </>

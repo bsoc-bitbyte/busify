@@ -18,11 +18,7 @@ import {useOrderStore} from '../../store/orderStore';
 import toast, {Toaster} from 'react-hot-toast';
 import React from 'react';
 import BusDetailsCard from '../BusDetailsCard';
-import Ticketfare from '../Ticketfare';
-
-interface Passenger {
-  rollNumber: string;
-}
+import FareBreakDownCard from '../FareBreakdownCard';
 
 const Details = styled(Box)`
   display: flex;
@@ -33,16 +29,6 @@ const Details = styled(Box)`
   border-radius: 8px;
   margin: 2rem 0;
   padding: 1.5rem;
-`;
-
-const FareBreakdown = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin: 2rem 0;
-  padding: 1rem;
 `;
 
 const PassengersContainer = styled(Box)`
@@ -106,11 +92,9 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
   const removePassenger = useOrderStore(state => state.removePassenger);
   const passengerDetail = useOrderStore(state => state.passengerDetail);
-  const ticketQuantity = useOrderStore(state => state.ticketQuantity);
   const navigate = useNavigate();
   const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
   const [isToasterActive, setIsToasterActive] = React.useState(false);
   const notify = () => {
@@ -143,16 +127,16 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
 
     if (
       rollNumber !== '' &&
-      passengers.length < 4 &&
-      !passengers.some(p => p.rollNumber === rollNumber) &&
+      passengerDetail.length < 4 &&
+      !passengerDetail.some(p => p.rollNumber === rollNumber) &&
       !rollNumber.includes(' ')
     ) {
-      const newPassenger: Passenger = {rollNumber};
+      //   const newPassenger: Passenger = {rollNumber};
 
-      setPassengers(prevPassengers => [...prevPassengers, newPassenger]);
+      //   setPassengers(prevPassengers => [...prevPassengers, newPassenger]);
+      addPassenger(rollNumber);
       input.value = '';
       setIsAddingPassenger(false);
-      addPassenger(rollNumber);
       useOrderStore.setState(state => ({
         ticketQuantity: state.ticketQuantity + 1,
       }));
@@ -160,9 +144,6 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   };
 
   const handleRemovePassenger = (rollNumber: string) => {
-    setPassengers(prevPassengers =>
-      prevPassengers.filter(p => p.rollNumber !== rollNumber)
-    );
     removePassenger(rollNumber);
     useOrderStore.setState(state => ({
       ticketQuantity: state.ticketQuantity - 1,
@@ -172,7 +153,15 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   return (
     <>
       <Button
-        onClick={openDrawer}
+        onClick={() => {
+          useOrderStore.setState(state => ({
+            ...state,
+            source: from,
+            destination: to,
+            time: time,
+          })),
+            openDrawer();
+        }}
         variant="contained"
         disabled={disabled}
         startIcon={<ConfirmationNumberIcon />}
@@ -192,9 +181,13 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
         open={isDrawerOpen}
         onClose={() => {
           closeDrawer();
+          // setPassengers([]);
           passengerDetail.map(value => {
             removePassenger(value.rollNumber);
           });
+          useOrderStore.setState(() => ({
+            ticketQuantity: 0,
+          }));
         }}
         PaperProps={{
           sx: drawerstyle,
@@ -224,7 +217,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
             Bus Details
           </Typography>
           <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
-            <BusDetailsCard from={from} to={to} time={time} />
+            <BusDetailsCard />
           </Details>
         </Box>
         <Box>
@@ -246,7 +239,9 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
               <AddPassengerButton
                 variant="text"
                 onClick={() => setIsAddingPassenger(true)}
-                style={{display: passengers.length === 4 ? 'none' : 'flex'}}
+                style={{
+                  display: passengerDetail.length === 4 ? 'none' : 'flex',
+                }}
               >
                 <AddPassengerIcon sx={{fontSize: {md: '1rem'}}} />
                 <Typography
@@ -271,7 +266,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
             )}
           </Box>
           <PassengersContainer>
-            {passengers.map((passenger, index) => (
+            {passengerDetail.map((passenger, index) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -291,7 +286,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
               </Box>
             ))}
             {!isAddingPassenger ? (
-              passengers.length === 0 && (
+              passengerDetail.length === 0 && (
                 <Box
                   sx={{
                     display: 'flex',
@@ -334,7 +329,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
           >
             Fare Breakdown
           </Typography>
-          <Ticketfare />
+          <FareBreakDownCard />
         </Box>
         <Box
           sx={{
@@ -347,16 +342,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
           <Button
             variant="contained"
             onClick={() => {
-              passengerDetail.length
-                ? navigate('/Checkout', {
-                    state: {
-                      from,
-                      to,
-                      time,
-                      ticketQuantity,
-                    },
-                  })
-                : notify();
+              passengerDetail.length ? navigate('/Checkout') : notify();
             }}
             sx={{
               padding: '0.5rem 2rem',
