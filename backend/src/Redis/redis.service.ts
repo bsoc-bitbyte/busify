@@ -1,29 +1,39 @@
 import {Injectable, Logger} from '@nestjs/common';
-import {InjectRedis} from '@liaoliaots/nestjs-redis';
-import Redis from 'ioredis';
+import {Repository} from 'redis-om';
+import {createClient} from 'redis';
+import {orderSchema} from './schema';
+
 @Injectable()
 export class RedisService {
   private readonly logger = new Logger(RedisService.name);
-  constructor(@InjectRedis() private readonly redis: Redis) {}
+  private readonly client = createClient({
+    socket: {
+      host: 'localhost',
+      port: 6379,
+    },
+    password: process.env.REDIS_PASSWORD,
+  });
+  constructor() {}
   async onModuleInit() {
-    await this.redis.ping((err, result) =>
-      this.logger.log(`Redis ping result: ${result}`)
-    );
-  }
-  async set(key: string, value: string, expire?: number) {
-    if (expire) {
-      return await this.redis.setex(key, expire, value);
-    } else {
-      return await this.redis.set(key, value);
+    if (!process.env.REDIS_PASSWORD) {
+      this.logger.error('REDIS_PASSWORD is not set');
+      return;
+    }
+    try {
+      await this.client.connect();
+      this.logger.log('Redis connected');
+    } catch (error) {
+      this.logger.error(error);
     }
   }
   async get(key: string) {
-    return await this.redis.get(key);
+    return this.client.get(key);
   }
-  async del(key: string) {
-    return await this.redis.del(key);
+  async set(key: string, value: string) {
+    return this.client.set(key, value);
   }
-  async exists(key: string) {
-    return await this.redis.exists(key);
+  async setOrder(order: any) {
+    const orderRepo = new Repository(orderSchema, this.client);
+    return await orderRepo.save(order.id, order);
   }
 }
