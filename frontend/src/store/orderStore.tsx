@@ -6,6 +6,7 @@ interface OrderStore {
   date: string;
   time: string;
   ticketQuantity: number;
+  price: number;
   passengerDetail: PassengerDetail[];
   addPassenger: (newRoll: string) => void;
   removePassenger: (rollNumber: string) => void;
@@ -21,6 +22,7 @@ export const useOrderStore = create<OrderStore>(set => ({
   date: '',
   time: '',
   ticketQuantity: 0,
+  price: 0,
   passengerDetail: [],
   addPassenger: newRoll =>
     set(state => ({

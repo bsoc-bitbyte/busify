@@ -5,6 +5,7 @@ import {useAuthStore} from '../../store/authStore';
 import BusDetails from '../BusDetails';
 import React from 'react';
 import {BusTicketData} from '../../types';
+import {useOrderStore} from '../../store/orderStore';
 
 export default function BusTicket({
   checkpoints,
@@ -32,6 +33,10 @@ export default function BusTicket({
     }, 3000);
   };
   const {isAuth} = useAuthStore();
+  useOrderStore.setState(state => ({
+    ...state,
+    price: price,
+  }));
   return (
     <Box
       sx={{

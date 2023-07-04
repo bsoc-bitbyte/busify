@@ -13,7 +13,7 @@ const FareBreakdown = styled(Box)`
 
 export default function FareBreakdownCard() {
   const theme = useTheme();
-  const ticketQuantity = useOrderStore(state => state.ticketQuantity);
+  const {price, ticketQuantity} = useOrderStore();
   return (
     <FareBreakdown>
       <Box
@@ -29,7 +29,7 @@ export default function FareBreakdownCard() {
         <Box sx={{display: 'flex', gap: '2px'}}>
           <Typography>&#x20B9;</Typography>
           <Typography variant="h6" color={theme.palette.secondary.main}>
-            20
+            {price}
           </Typography>
         </Box>
       </Box>
@@ -75,7 +75,7 @@ export default function FareBreakdownCard() {
             color={theme.palette.secondary.main}
             fontWeight={600}
           >
-            {ticketQuantity * 20}
+            {ticketQuantity * price}
           </Typography>
         </Box>
       </Box>

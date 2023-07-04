@@ -1,7 +1,7 @@
 import {useTheme, Typography, Button, styled, Box} from '@mui/material';
 import {useOrderStore} from '../../store/orderStore';
 import BusDetailsCard from '../../components/BusDetailsCard';
-import Ticketfare from '../../components/FareBreakdownCard';
+import FareBreakDownCard from '../../components/FareBreakdownCard';
 
 const ConatinerMain = styled(Box)`
   width: {xs: '100%', sm: '66.6667%'},
@@ -31,8 +31,7 @@ const PassengersContainer = styled(Box)`
 `;
 
 const BusDetails = () => {
-  const passengerDetail = useOrderStore(state => state.passengerDetail);
-  const ticketQuantity = useOrderStore(state => state.ticketQuantity);
+  const {passengerDetail, ticketQuantity, price} = useOrderStore();
   const theme = useTheme();
   return (
     <>
@@ -110,7 +109,7 @@ const BusDetails = () => {
               >
                 Fare Breakdown
               </Typography>
-              <Ticketfare />
+              <FareBreakDownCard />
             </Box>
             <Box
               sx={{
@@ -141,7 +140,7 @@ const BusDetails = () => {
                     &#x20B9;
                   </Typography>
                   <Typography fontSize="1.1rem" fontWeight="600">
-                    {ticketQuantity * 20}
+                    {ticketQuantity * price}
                   </Typography>
                 </Box>
               </Box>
@@ -158,7 +157,7 @@ const BusDetails = () => {
                     &#x20B9;
                   </Typography>
                   <Typography fontSize="1.1rem" fontWeight="600">
-                    {Math.ceil(ticketQuantity * 20 * 0.02)}
+                    {Math.ceil(ticketQuantity * price * 0.02)}
                   </Typography>
                 </Box>
               </Box>
@@ -175,8 +174,8 @@ const BusDetails = () => {
                     &#x20B9;
                   </Typography>
                   <Typography fontSize="1.1rem" fontWeight="800">
-                    {ticketQuantity * 20 +
-                      Math.ceil(ticketQuantity * 20 * 0.02)}
+                    {ticketQuantity * price +
+                      Math.ceil(ticketQuantity * price * 0.02)}
                   </Typography>
                 </Box>
               </Box>
