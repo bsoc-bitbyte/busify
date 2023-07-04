@@ -7,11 +7,13 @@ interface AuthStore {
   setUser: (user: User | null) => void;
 }
 
+
 interface User {
   id: number;
   email: string;
   name: string;
   picture: string;
+  role: string;
 }
 
 export const useAuthStore = create<AuthStore>(set => ({
