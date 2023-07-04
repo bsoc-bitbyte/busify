@@ -28,10 +28,12 @@ export class BusController {
   async getBusSchedule() {
     return this.busService.getBusSchedule();
   }
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('booked-tickets')
   async getBookedTickets() {
     return this.busService.getBookedTickets();
   }
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Post('bus')
   async createNewBus(@Body() bus: BusDto) {
     try {
@@ -42,7 +44,7 @@ export class BusController {
       }
     }
   }
-
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('conductor')
   async getAllConductors() {
     try {
@@ -53,6 +55,7 @@ export class BusController {
       }
     }
   }
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('conductor/:id')
   async getConductorById(@Param('id') conductorId: string) {
     try {
@@ -63,6 +66,7 @@ export class BusController {
       }
     }
   }
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('contractor')
   async getAllContractors() {
     try {
@@ -73,6 +77,7 @@ export class BusController {
       }
     }
   }
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('contractor/:id')
   async getContractorById(@Param('id') contractorId: string) {
     try {
@@ -83,7 +88,7 @@ export class BusController {
       }
     }
   }
-
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Post('contractor')
   async createNewContractor(@Body() contractor: ContractorDto) {
     try {
@@ -94,7 +99,8 @@ export class BusController {
       }
     }
   }
-  @Delete('contracotr/:id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @Delete('contractor/:id')
   async removeContractor(@Body() contractorId: string) {
     try {
       return this.busService.removeContractor(contractorId);
@@ -104,7 +110,7 @@ export class BusController {
       }
     }
   }
-
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Post('conductor')
   async createNewConductor(@Body() conductor: ConductorDto) {
     try {
@@ -115,7 +121,7 @@ export class BusController {
       }
     }
   }
-
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete('conductor/:id')
   async removeConductor(@Param('id') conductorId: string) {
     try {
@@ -126,7 +132,7 @@ export class BusController {
       }
     }
   }
-
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Post('schedule')
   async createNewSchedule(@Body() schedule: ScheduleDto) {
     return this.busService.createSchedule(schedule);
