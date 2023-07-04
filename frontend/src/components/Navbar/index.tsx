@@ -33,9 +33,6 @@ const HelpButton = styled(Box)`
 `;
 
 const ManageButton = styled(Box)`
-  @media (max-width: 500px) {
-    display: none;
-  }
   display: flex;
   align-items: center;
   border-radius: 8px;
@@ -156,7 +153,7 @@ export default function Navbar() {
               Login with Google
             </Typography>
           </GoogleButton>
-         ) : (
+        ) : (
           <ProfileContainer
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
@@ -223,16 +220,20 @@ export default function Navbar() {
             </Menu>
           </ProfileContainer>
         )}
-        
-        {user?.role === 'admin' ? ((currentScreen === 'lg' || currentScreen === 'xl') ? 
-                  <ManageButton>
-                      <Typography variant="h6" color={theme.palette.common.black}>
-                        Manage Buses
-                      </Typography>
-                  </ManageButton>: (<></>)) 
-                  : (<></>)
-        }
-        
+
+        {user?.role === 'admin' ? (
+          currentScreen === 'lg' || currentScreen === 'xl' ? (
+            <ManageButton>
+              <Typography variant="h6" color={theme.palette.common.black}>
+                Manage Buses
+              </Typography>
+            </ManageButton>
+          ) : (
+            <></>
+          )
+        ) : (
+          <></>
+        )}
       </Box>
       <Toaster position="top-center" />
     </NavContainer>
