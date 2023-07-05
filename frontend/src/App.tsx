@@ -10,10 +10,8 @@ import BusSchedule from './pages/BusSchedule';
 import BusDetails from './components/BusDetails';
 import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
-import {useAuthStore} from './store/authStore';
 
 function App() {
-  const {isAuth} = useAuthStore();
   return (
     <ThemeProvider theme={theme}>
       <ValidateAuth />
@@ -28,7 +26,7 @@ function App() {
           <Route
             path="/demo-Page"
             element={
-              <UserProtectedRoute isAuth={isAuth}>
+              <UserProtectedRoute>
                 <Demopage />
               </UserProtectedRoute>
             }
