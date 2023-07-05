@@ -19,6 +19,7 @@ import toast, {Toaster} from 'react-hot-toast';
 import React from 'react';
 import BusDetailsCard from '../BusDetailsCard';
 import FareBreakDownCard from '../FareBreakdownCard';
+import {useAuthStore} from '../../store/authStore';
 
 const Details = styled(Box)`
   display: flex;
@@ -90,18 +91,18 @@ const AddPassengerButton = styled(Button)`
 
 const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
-  const removePassenger = useOrderStore(state => state.removePassenger);
-  const passengerDetail = useOrderStore(state => state.passengerDetail);
+  const {passengerDetail, removePassenger} = useOrderStore();
   const navigate = useNavigate();
   const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
-  const [isToasterActive, setIsToasterActive] = React.useState(false);
-  const notify = () => {
+  const [isToasterActive, setIsToasterActive] = useState(false);
+  const {isAuth} = useAuthStore();
+  const notify = (message: string) => {
     if (!isToasterActive) {
       setIsToasterActive(true);
 
-      toast.error('Add atleast one passenger', {
+      toast.error(message, {
         position: 'top-center',
         duration: 3000,
       });
@@ -131,9 +132,6 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
       !passengerDetail.some(p => p.rollNumber === rollNumber) &&
       !rollNumber.includes(' ')
     ) {
-      //   const newPassenger: Passenger = {rollNumber};
-
-      //   setPassengers(prevPassengers => [...prevPassengers, newPassenger]);
       addPassenger(rollNumber);
       input.value = '';
       setIsAddingPassenger(false);
@@ -150,21 +148,27 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
     }));
   };
 
+  const bookTicketHandler = () => {
+    if (!isAuth) {
+      notify('Please login to book a ticket');
+      return;
+    }
+    useOrderStore.setState(state => ({
+      ...state,
+      source: from,
+      destination: to,
+      time: time,
+    })),
+      openDrawer();
+  };
+
   return (
     <>
       <Button
-        onClick={() => {
-          useOrderStore.setState(state => ({
-            ...state,
-            source: from,
-            destination: to,
-            time: time,
-          })),
-            openDrawer();
-        }}
         variant="contained"
         disabled={disabled}
         startIcon={<ConfirmationNumberIcon />}
+        onClick={bookTicketHandler}
         sx={{
           padding: '0.5vw 1.2vw',
           fontSize: {xs: '10px', sm: '12px', md: '15px'},
@@ -181,7 +185,6 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
         open={isDrawerOpen}
         onClose={() => {
           closeDrawer();
-          // setPassengers([]);
           passengerDetail.map(value => {
             removePassenger(value.rollNumber);
           });
@@ -342,7 +345,9 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
           <Button
             variant="contained"
             onClick={() => {
-              passengerDetail.length ? navigate('/Checkout') : notify();
+              passengerDetail.length
+                ? navigate('/Checkout')
+                : notify('Please add atleast one passenger');
             }}
             sx={{
               padding: '0.5rem 2rem',

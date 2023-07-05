@@ -1,42 +1,16 @@
 import {Typography, Box} from '@mui/material';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
-import toast, {Toaster} from 'react-hot-toast';
-import {useAuthStore} from '../../store/authStore';
 import BusDetails from '../BusDetails';
-import React from 'react';
 import {BusTicketData} from '../../types';
-import {useOrderStore} from '../../store/orderStore';
-
 export default function BusTicket({
   checkpoints,
   time,
   price,
   seatsLeft,
+  disabled,
   from,
   to,
-  disabled,
 }: BusTicketData) {
-  const [isToasterActive, setIsToasterActive] = React.useState(false);
-
-  const notify = () => {
-    if (!isToasterActive) {
-      setIsToasterActive(true);
-
-      toast.error('You need to login first', {
-        position: 'top-center',
-        duration: 3000,
-      });
-    }
-
-    setTimeout(() => {
-      setIsToasterActive(false);
-    }, 3000);
-  };
-  const {isAuth} = useAuthStore();
-  useOrderStore.setState(state => ({
-    ...state,
-    price: price,
-  }));
   return (
     <Box
       sx={{
@@ -106,7 +80,7 @@ export default function BusTicket({
                   backgroundColor: 'rgba(0, 0, 0, 0.8)',
                   borderRadius: '1.7vw',
                   minWidth: 'fit-content',
-                  padding: {xs: '1px 3px', sm: '2px 6px'},
+                  padding: '2px 8px',
                   marginRight: {xs: '3px', sm: '8px'},
                   marginBottom: {xs: '1.5rem', sm: '0px'},
                 }}
@@ -168,7 +142,6 @@ export default function BusTicket({
             {seatsLeft} Seats Left
           </Typography>
           <BusDetails from={from} to={to} time={time} disabled={disabled} />
-          {!isAuth && <Toaster position="top-center" />}
         </Box>
       </Box>
     </Box>
