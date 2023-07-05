@@ -6,6 +6,8 @@ import FareBreakDownCard from '../../components/FareBreakdownCard';
 const ConatinerMain = styled(Box)`
   width: {xs: '100%', sm: '66.6667%'},
   padding: '2rem',
+  margin: '2 2',
+
 `;
 
 const Details = styled(Box)`
@@ -48,11 +50,11 @@ const BusDetails = () => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
+            flexDirection: {xs: 'column', lg: 'row'},
+            justifyContent: 'space-between',
+            gap: '4rem',
           }}
-        ></Box>
-        <Box display="flex" justifyContent="space-between" gap="4rem">
+        >
           <Box>
             <Box>
               <Typography
@@ -111,21 +113,15 @@ const BusDetails = () => {
               </Typography>
               <FareBreakDownCard />
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                marginTop: '2rem',
-              }}
-            ></Box>
           </Box>
           <Box>
             <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-between"
-              height="7.5rem"
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: {xs: '11.5rem', md: '14rem'},
+              }}
             >
               <Box display="flex" justifyContent="space-between" gap="7rem">
                 <Typography
@@ -179,21 +175,21 @@ const BusDetails = () => {
                   </Typography>
                 </Box>
               </Box>
-            </Box>
-            <Box marginTop="2rem">
-              <Button
-                variant="contained"
-                sx={{
-                  padding: '0.5rem 2rem',
-                  borderRadius: '8px',
-                  width: '100%',
-                  '&:hover': {
-                    backgroundColor: theme.palette.primary.main,
-                  },
-                }}
-              >
-                Pay Now
-              </Button>
+              <Box display="flex" justifyContent="center" marginTop="1rem">
+                <Button
+                  variant="contained"
+                  sx={{
+                    padding: {xs: '0.7rem', sm: '1rem'},
+                    borderRadius: '8px',
+                    width: {xs: '80%', lg: '100%'},
+                    '&:hover': {
+                      backgroundColor: theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  Pay Now
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
