@@ -27,6 +27,9 @@ type BusTicketType = {
 
 type BusDetailsType = {
   disabled?: boolean;
+  time?: string;
+  from?: string;
+  to?: string;
 };
 
 type BusTicketData = {
@@ -35,4 +38,6 @@ type BusTicketData = {
   price: number;
   seatsLeft: number;
   disabled?: boolean;
+  from?: string;
+  to?: string;
 };

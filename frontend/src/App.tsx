@@ -7,6 +7,7 @@ import ValidateAuth from './components/ValidateAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
+import Checkout from './pages/Checkout';
 import BusDetails from './components/BusDetails';
 import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/google" element={<GoogleAuthLogin />} />
           <Route path="/bus-schedule" element={<BusSchedule />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/bus-details" element={<BusDetails />} />
           <Route
             path="/demo-Page"

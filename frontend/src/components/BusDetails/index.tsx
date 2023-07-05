@@ -9,18 +9,17 @@ import {
   TextField,
   IconButton,
 } from '@mui/material';
-import busIcon from '../../assets/bus-icon.svg';
-import arrorIcon from '../../assets/arrowIcon.svg';
-import scheduleIcon from '../../assets/schedule-icon.svg';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import {BusDetailsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
-
-interface Passenger {
-  rollNumber: string;
-}
+import {useOrderStore} from '../../store/orderStore';
+import toast, {Toaster} from 'react-hot-toast';
+import React from 'react';
+import BusDetailsCard from '../BusDetailsCard';
+import FareBreakDownCard from '../FareBreakdownCard';
+import {useAuthStore} from '../../store/authStore';
 
 const Details = styled(Box)`
   display: flex;
@@ -31,26 +30,6 @@ const Details = styled(Box)`
   border-radius: 8px;
   margin: 2rem 0;
   padding: 1.5rem;
-`;
-
-const Icon = styled('img')`
-  width: 40px;
-  height: 40px;
-
-  @media (max-width: 600px) {
-    width: 30px;
-    height: 30px;
-  }
-`;
-
-const FareBreakdown = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  margin: 2rem 0;
-  padding: 1rem;
 `;
 
 const PassengersContainer = styled(Box)`
@@ -110,12 +89,30 @@ const AddPassengerButton = styled(Button)`
   }
 `;
 
-const BusDetails = ({disabled}: BusDetailsType) => {
+const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
+  const addPassenger = useOrderStore(state => state.addPassenger);
+  const {passengerDetail, removePassenger} = useOrderStore();
+  const navigate = useNavigate();
   const theme = useTheme();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
+  const [isToasterActive, setIsToasterActive] = useState(false);
+  const {isAuth} = useAuthStore();
+  const notify = (message: string) => {
+    if (!isToasterActive) {
+      setIsToasterActive(true);
+
+      toast.error(message, {
+        position: 'top-center',
+        duration: 3000,
+      });
+    }
+
+    setTimeout(() => {
+      setIsToasterActive(false);
+    }, 3000);
+  };
 
   const drawerstyle = {
     width: {xs: '100%', sm: '66.6667%'},
@@ -129,32 +126,50 @@ const BusDetails = ({disabled}: BusDetailsType) => {
     event.preventDefault();
     const input = event.target as HTMLInputElement;
     const rollNumber = input.value.trim().toUpperCase();
+
     if (
       rollNumber !== '' &&
-      passengers.length < 4 &&
-      !passengers.some(p => p.rollNumber === rollNumber) &&
+      passengerDetail.length < 4 &&
+      !passengerDetail.some(p => p.rollNumber === rollNumber) &&
       !rollNumber.includes(' ')
     ) {
-      const newPassenger: Passenger = {rollNumber};
-      setPassengers(prevPassengers => [...prevPassengers, newPassenger]);
+      addPassenger(rollNumber);
       input.value = '';
       setIsAddingPassenger(false);
+      useOrderStore.setState(state => ({
+        ticketQuantity: state.ticketQuantity + 1,
+      }));
     }
   };
 
   const handleRemovePassenger = (rollNumber: string) => {
-    setPassengers(prevPassengers =>
-      prevPassengers.filter(p => p.rollNumber !== rollNumber)
-    );
+    removePassenger(rollNumber);
+    useOrderStore.setState(state => ({
+      ticketQuantity: state.ticketQuantity - 1,
+    }));
+  };
+
+  const bookTicketHandler = () => {
+    if (!isAuth) {
+      notify('Please login to book a ticket');
+      return;
+    }
+    useOrderStore.setState(state => ({
+      ...state,
+      source: from,
+      destination: to,
+      time: time,
+    })),
+      openDrawer();
   };
 
   return (
     <>
       <Button
-        onClick={openDrawer}
         variant="contained"
         disabled={disabled}
         startIcon={<ConfirmationNumberIcon />}
+        onClick={bookTicketHandler}
         sx={{
           padding: '0.5vw 1.2vw',
           fontSize: {xs: '10px', sm: '12px', md: '15px'},
@@ -169,7 +184,15 @@ const BusDetails = ({disabled}: BusDetailsType) => {
       <Drawer
         anchor="right"
         open={isDrawerOpen}
-        onClose={closeDrawer}
+        onClose={() => {
+          closeDrawer();
+          passengerDetail.map(value => {
+            removePassenger(value.rollNumber);
+          });
+          useOrderStore.setState(() => ({
+            ticketQuantity: 0,
+          }));
+        }}
         PaperProps={{
           sx: drawerstyle,
         }}
@@ -198,95 +221,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
             Bus Details
           </Typography>
           <Details sx={{flexDirection: {xs: 'column', sm: 'row'}}}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: {xs: '10px', md: '2rem'},
-              }}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    From
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Rewa Residency
-                  </Typography>
-                </Box>
-              </Box>
-              <img src={arrorIcon} alt="Arrow Icon" />
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: {xs: '5px', md: '10px'},
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={{xs: '0.8rem', md: '1rem'}}
-                    color={theme.palette.common.black}
-                  >
-                    To
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                    color={theme.palette.secondary.main}
-                  >
-                    Sadar
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                width: '2px',
-                height: '5vh',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                margin: '0 2rem',
-                display: {xs: 'none', sm: 'block'},
-              }}
-            />
-
-            <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-              <Icon src={scheduleIcon} alt="Schedule Icon" />
-              <Box>
-                <Typography
-                  variant="h6"
-                  fontSize={{xs: '0.8rem', md: '1rem'}}
-                  color={theme.palette.common.black}
-                >
-                  Date and Time
-                </Typography>
-                <Typography
-                  variant="h4"
-                  fontSize={{xs: '1.25rem', md: '1.5rem'}}
-                  color={theme.palette.secondary.main}
-                >
-                  12th May, 3:30PM
-                </Typography>
-              </Box>
-            </Box>
+            <BusDetailsCard />
           </Details>
         </Box>
         <Box>
@@ -308,7 +243,9 @@ const BusDetails = ({disabled}: BusDetailsType) => {
               <AddPassengerButton
                 variant="text"
                 onClick={() => setIsAddingPassenger(true)}
-                style={{display: passengers.length === 4 ? 'none' : 'flex'}}
+                style={{
+                  display: passengerDetail.length === 4 ? 'none' : 'flex',
+                }}
               >
                 <AddPassengerIcon sx={{fontSize: {md: '1rem'}}} />
                 <Typography
@@ -333,7 +270,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
             )}
           </Box>
           <PassengersContainer>
-            {passengers.map((passenger, index) => (
+            {passengerDetail.map((passenger, index) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -353,7 +290,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
               </Box>
             ))}
             {!isAddingPassenger ? (
-              passengers.length === 0 && (
+              passengerDetail.length === 0 && (
                 <Box
                   sx={{
                     display: 'flex',
@@ -396,71 +333,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
           >
             Fare Breakdown
           </Typography>
-          <FareBreakdown>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Price
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6" color={theme.palette.secondary.main}>
-                Ticket Quantity
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography>&#x20B9;</Typography>
-                <Typography variant="h6" color={theme.palette.secondary.main}>
-                  0
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: '1rem',
-              }}
-            >
-              <Typography
-                variant="h4"
-                color={theme.palette.secondary.main}
-                sx={{
-                  fontSize: {xs: '1.25rem', md: '1.5rem'},
-                  fontWeight: {xs: 600, md: 700},
-                }}
-              >
-                NET AMOUNT TO PAY
-              </Typography>
-              <Box sx={{display: 'flex', gap: '2px'}}>
-                <Typography fontWeight={600}>&#x20B9;</Typography>
-                <Typography
-                  variant="h1"
-                  color={theme.palette.secondary.main}
-                  fontWeight={600}
-                >
-                  0
-                </Typography>
-              </Box>
-            </Box>
-          </FareBreakdown>
+          <FareBreakDownCard />
         </Box>
         <Box
           sx={{
@@ -472,7 +345,11 @@ const BusDetails = ({disabled}: BusDetailsType) => {
         >
           <Button
             variant="contained"
-            onClick={() => navigate('/demo-Page')}
+            onClick={() => {
+              passengerDetail.length
+                ? navigate('/Checkout')
+                : notify('Please add atleast one passenger');
+            }}
             sx={{
               padding: '0.5rem 2rem',
               borderRadius: '8px',
@@ -483,6 +360,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
           >
             Pay Now
           </Button>
+          <Toaster />
         </Box>
       </Drawer>
     </>

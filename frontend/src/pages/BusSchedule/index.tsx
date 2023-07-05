@@ -52,15 +52,7 @@ const BusSchedule = () => {
             padding: currentScreen === 'xs' ? '1rem' : '1.5rem 3rem',
           }}
         >
-          {[
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-          ].map((day, index) => (
+          {weekDays.map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
               <Typography
                 onClick={() => setSelectedDay(day)}
@@ -91,6 +83,8 @@ const BusSchedule = () => {
                     disabled={selectedDay !== weekDays[today.getDay()]}
                     seatsLeft={50}
                     key={index}
+                    to={TicketData.to}
+                    from={TicketData.from}
                   />
                 );
               }
