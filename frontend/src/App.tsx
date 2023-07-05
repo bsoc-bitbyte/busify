@@ -23,7 +23,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/google" element={<GoogleAuthLogin />} />
           <Route path="/bus-schedule" element={<BusSchedule />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/checkout"
+            element={
+              <UserProtectedRoute>
+                <Checkout />
+              </UserProtectedRoute>
+            }
+          />
           <Route path="/bus-details" element={<BusDetails />} />
           <Route
             path="/demo-Page"

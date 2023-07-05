@@ -5,22 +5,20 @@ import {useScreen} from '../../customHooks/useScreen';
 import {useEffect, useState} from 'react';
 import {BusTicketType} from '../../types';
 import axios from 'axios';
-
+const weekDays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 const BusSchedule = () => {
   const currentScreen = useScreen();
   const [selectedDay, setSelectedDay] = useState<string>('');
   const [schedule, setSchedule] = useState<BusTicketType[]>([]);
   const [today, setToday] = useState<Date>(new Date());
-
-  const weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
 
   useEffect(() => {
     const getScheduleData = async () => {
@@ -34,7 +32,7 @@ const BusSchedule = () => {
       }
     };
     getScheduleData();
-  }, []);
+  }, [today]);
 
   return (
     <>

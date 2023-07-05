@@ -92,7 +92,6 @@ const AddPassengerButton = styled(Button)`
 const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
   const {passengerDetail, removePassenger} = useOrderStore();
-  const navigate = useNavigate();
   const theme = useTheme();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
