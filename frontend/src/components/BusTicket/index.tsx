@@ -2,6 +2,7 @@ import {Typography, Box} from '@mui/material';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import BusDetails from '../BusDetails';
 import {BusTicketData} from '../../types';
+import {useOrderStore} from '../../store/orderStore';
 export default function BusTicket({
   checkpoints,
   time,
@@ -10,9 +11,11 @@ export default function BusTicket({
   from,
   to,
   disabled,
-  from,
-  to,
 }: BusTicketData) {
+  useOrderStore.setState(state => ({
+    ...state,
+    price: price,
+  }));
   return (
     <Box
       sx={{
