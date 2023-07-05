@@ -32,7 +32,7 @@ const BusSchedule = () => {
       }
     };
     getScheduleData();
-  }, [today]);
+  }, []);
 
   return (
     <>
