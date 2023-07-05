@@ -94,6 +94,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const {passengerDetail, removePassenger} = useOrderStore();
   const navigate = useNavigate();
   const theme = useTheme();
+  const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
   const [isToasterActive, setIsToasterActive] = useState(false);
