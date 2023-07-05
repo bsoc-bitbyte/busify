@@ -44,7 +44,6 @@ export default function FareBreakdownCard() {
           Ticket Quantity
         </Typography>
         <Box sx={{display: 'flex', gap: '2px'}}>
-          <Typography>&#x20B9;</Typography>
           <Typography variant="h6" color={theme.palette.secondary.main}>
             {ticketQuantity}
           </Typography>
@@ -66,7 +65,7 @@ export default function FareBreakdownCard() {
             fontWeight: {xs: 600, md: 700},
           }}
         >
-          NET AMOUNT TO PAY
+          TOTAL
         </Typography>
         <Box sx={{display: 'flex', gap: '2px'}}>
           <Typography fontWeight={600}>&#x20B9;</Typography>
