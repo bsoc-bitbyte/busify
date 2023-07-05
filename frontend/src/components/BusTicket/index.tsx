@@ -7,6 +7,8 @@ export default function BusTicket({
   time,
   price,
   seatsLeft,
+  from,
+  to,
   disabled,
   from,
   to,
