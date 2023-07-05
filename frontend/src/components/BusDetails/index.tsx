@@ -16,6 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import {BusDetailsType} from '../../types';
+import {useNavigate} from 'react-router-dom';
 
 interface Passenger {
   rollNumber: string;
@@ -111,6 +112,7 @@ const AddPassengerButton = styled(Button)`
 
 const BusDetails = ({disabled}: BusDetailsType) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
@@ -470,6 +472,7 @@ const BusDetails = ({disabled}: BusDetailsType) => {
         >
           <Button
             variant="contained"
+            onClick={() => navigate('/demo-Page')}
             sx={{
               padding: '0.5rem 2rem',
               borderRadius: '8px',

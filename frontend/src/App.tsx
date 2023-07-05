@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BusSchedule from './pages/BusSchedule';
 import BusDetails from './components/BusDetails';
+import Demopage from './pages/DemoPage/demopage';
+import UserProtectedRoute from './components/ProtectedRoutes';
 
 function App() {
   return (
@@ -21,6 +23,14 @@ function App() {
           <Route path="/google" element={<GoogleAuthLogin />} />
           <Route path="/bus-schedule" element={<BusSchedule />} />
           <Route path="/bus-details" element={<BusDetails />} />
+          <Route
+            path="/demo-Page"
+            element={
+              <UserProtectedRoute>
+                <Demopage />
+              </UserProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </Box>
