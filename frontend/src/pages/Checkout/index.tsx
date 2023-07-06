@@ -2,6 +2,9 @@ import {useTheme, Typography, Button, styled, Box} from '@mui/material';
 import {useOrderStore} from '../../store/orderStore';
 import BusDetailsCard from '../../components/BusDetailsCard';
 import FareBreakDownCard from '../../components/FareBreakdownCard';
+import {Navigate} from 'react-router-dom';
+import {toast} from 'react-hot-toast';
+import {useAuthStore} from '../../store/authStore';
 
 const ConatinerMain = styled(Box)`
   width: {xs: '100%', sm: '66.6667%'},
@@ -35,7 +38,12 @@ const PassengersContainer = styled(Box)`
 const BusDetails = () => {
   const {passengerDetail, ticketQuantity, price} = useOrderStore();
   const theme = useTheme();
-  return (
+  return passengerDetail.length === 0 ? (
+    <>
+      {toast.error('Please book a ticket first!')}
+      <Navigate to="/bus-schedule" />
+    </>
+  ) : (
     <>
       <ConatinerMain>
         <Typography
