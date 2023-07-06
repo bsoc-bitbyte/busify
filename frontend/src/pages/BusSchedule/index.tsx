@@ -5,22 +5,20 @@ import {useScreen} from '../../customHooks/useScreen';
 import {useEffect, useState} from 'react';
 import {BusTicketType} from '../../types';
 import axios from 'axios';
-
+const weekDays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 const BusSchedule = () => {
   const currentScreen = useScreen();
   const [selectedDay, setSelectedDay] = useState<string>('');
   const [schedule, setSchedule] = useState<BusTicketType[]>([]);
   const [today, setToday] = useState<Date>(new Date());
-
-  const weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
 
   useEffect(() => {
     const getScheduleData = async () => {
@@ -52,15 +50,7 @@ const BusSchedule = () => {
             padding: currentScreen === 'xs' ? '1rem' : '1.5rem 3rem',
           }}
         >
-          {[
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-          ].map((day, index) => (
+          {weekDays.map((day, index) => (
             <Grid item xs={1.2} key={index} textAlign="center">
               <Typography
                 onClick={() => setSelectedDay(day)}
@@ -91,6 +81,8 @@ const BusSchedule = () => {
                     disabled={selectedDay !== weekDays[today.getDay()]}
                     seatsLeft={50}
                     key={index}
+                    to={TicketData.to}
+                    from={TicketData.from}
                   />
                 );
               }

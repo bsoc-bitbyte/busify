@@ -28,21 +28,25 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    [Install](https://docs.docker.com/engine/install/)
 
+   After installing docker, run the following command to start database containers.
+
    ```bash
-   docker compose up
+   docker compose --env-file backend/.env up
    ```
 
-5. In new terminal type
+6. In new terminal type
 
    ```bash
    cd backend
    npm install
+   npm run migrate:dev
+   npm run seed
    npm run start:dev
    ```
 
    This will start the backend server.
 
-6. Open another new terminal and type
+7. Open another new terminal and type
 
    ```bash
    cd frontend
@@ -52,25 +56,25 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    This will start the frontend server.
 
-7. Make changes in source code.
+8. Make changes in source code.
 
-8. Stage your changes and commit
+9. Stage your changes and commit
 
    ```bash
    git add <filename>
    ```
 
-9. Commit your changes
+10. Commit your changes
 
    ```bash
    git commit -m "<type>(optional_scope): <your_commit_message>"
    ```
 
-10. Push your local commits to the remote repo.
+11. Push your local commits to the remote repo.
 
-11. git push
+12. git push
 
-12. Create a PR to develop repository.
+13. Create a PR to develop repository.
 
 # For Creating a New PUll Request 💡💻
 

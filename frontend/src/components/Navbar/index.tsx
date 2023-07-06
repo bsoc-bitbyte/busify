@@ -32,6 +32,20 @@ const HelpButton = styled(Box)`
   cursor: pointer;
 `;
 
+const ManageButton = styled(Box)`
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fbbc05;
+  padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+  border: 4px solid #fbbc05;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  }
+`;
+
 const GoogleButton = styled(Button)`
   display: flex;
   align-items: center;
@@ -205,6 +219,20 @@ export default function Navbar() {
               </MenuItem>
             </Menu>
           </ProfileContainer>
+        )}
+
+        {user?.role === 'admin' ? (
+          currentScreen === 'lg' || currentScreen === 'xl' ? (
+            <ManageButton>
+              <Typography variant="h6" color={theme.palette.common.black}>
+                Manage Buses
+              </Typography>
+            </ManageButton>
+          ) : (
+            <></>
+          )
+        ) : (
+          <></>
         )}
       </Box>
       <Toaster position="top-center" />
