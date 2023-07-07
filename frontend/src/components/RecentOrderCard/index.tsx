@@ -18,135 +18,150 @@ export default function RecentOrderCard() {
   `;
 
   return (
-    <Card           sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingX: '1rem',
-                    my: '2.5rem',
-                    border: '1px solid rgba(0, 0, 0, 0.1)',
-                    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
-                    width: '100%'
-                }}
-                >
-      <Box>
-        <Box sx={{display: 'flex', flexDirection: 'column'}}>
-          <CardContent sx={{flex: '1 0 auto'}}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                columnGap: '1rem',
-                alignItems: 'center',
-                paddingBottom: '.2rem',
-              }}
+    <Card
+  sx={{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingX: "1rem",
+    my: "1rem",
+    border: "1px solid rgba(0, 0, 0, 0.1)",
+    boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.1)",
+    width: "100%",
+  }}
+>
+  <Box>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <CardContent sx={{ flex: "1 0 auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            columnGap: "1rem",
+            alignItems: "center",
+            paddingBottom: ".2rem",
+          }}
+        >
+          <Chip
+            sx={{
+              fontSize: { md: ".7rem" },
+              color: "white",
+              backgroundColor: "black",
+            }}
+            size="small"
+            label="order_M1m6RTTJ9mqpVY"
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: ".3rem",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              component="div"
+              fontSize={{ md: ".8rem", lg: "1rem" }}
+              fontWeight="bold"
             >
-              <Chip
-                sx={{
-                  fontSize:{md:'.7rem'},
-                  color: 'white',
-                  backgroundColor: 'black',
-                }}
-                size="small"
-                label="order_M1m6RTTJ9mqpVY"
-              />
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '.3rem',
-                  alignItems: 'center',
-                }}
-              >
-                <Typography component="div" fontSize={{md:".8rem",lg:"1rem"}} fontWeight="bold">
-                  By
-                </Typography>
-                <Typography component="div" fontSize={{md:".8rem",lg:"1rem"}}>
-                  Neyati
-                </Typography>
-              </Box>
-              <Typography
-                component="div"
-                fontSize={{md:".6rem",lg:".8rem"}}
-                fontWeight="bold"
-                color="rgba(0, 0, 0, 0.4)"
-              >
-                2 min ago
-              </Typography>
-            </Box>
-          </CardContent>
+              By
+            </Typography>
+            <Typography component="div" fontSize={{ md: ".8rem", lg: "1rem" }}>
+              Neyati
+            </Typography>
+          </Box>
+          <Typography
+            component="div"
+            fontSize={{ md: ".7rem", lg: ".8rem" }}
+            fontWeight="bold"
+            color="rgba(0, 0, 0, 0.4)"
+          >
+            2 min ago
+          </Typography>
         </Box>
-        <Box sx={{display: 'flex', flexDirection: 'column'}}>
-          <CardContent sx={{flex: '1 0 auto'}}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: {lg:'row', md:"column"},
-                gap: '.8rem',
-                alignItems: {lg:'center'},
-              }}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '.2rem',
-                  alignItems: 'center',
-                }}
-              >
-                <Icon src={busIcon} alt="Bus Icon" />
-                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
-                  Rewa Residency
-                </Typography>
-                <Icon src={arrowIcon} alt="Arrow Icon" />
-                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
-                  Sadar
-                </Typography>
-              </Box>
+      </CardContent>
+    </Box>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <CardContent sx={{ flex: "1 0 auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { lg: "row", md: "column" },
+            gap: ".8rem",
+            alignItems: { lg: "center" },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: ".2rem",
+              alignItems: "center",
+            }}
+          >
+            <Icon src={busIcon} alt="Bus Icon" />
+            <Typography component="div" fontSize={{ md: "1rem", lg: "1.1rem" }}>
+              Rewa Residency
+            </Typography>
+            <Icon src={arrowIcon} alt="Arrow Icon" />
+            <Typography component="div" fontSize={{ md: "1rem", lg: "1.1rem" }}>
+              Sadar
+            </Typography>
+          </Box>
 
-              <Typography
-                component="div"
-                mx={{md:"0rem", lg:"1rem"}}
-                fontWeight="bold"
-                color="rgba(0, 0, 0, 0.4)"
-                fontSize={{md:"0rem", lg:"1rem"}}
-              >
-                |
-              </Typography>
+          <Typography
+            component="div"
+            mx={{ md: "0rem", lg: "1rem" }}
+            fontWeight="bold"
+            color="rgba(0, 0, 0, 0.4)"
+            fontSize={{ md: "0rem", lg: "1rem" }}
+          >
+            |
+          </Typography>
 
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '.2rem',
-                  alignItems: 'center',
-                }}
-              >
-                <Icon src={scheduleIcon} alt="Schedule Icon" />
-                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
-                  12 May, 3:00 Pm
-                </Typography>
-              </Box>
-            </Box>
-          </CardContent>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: ".2rem",
+              alignItems: "center",
+            }}
+          >
+            <Icon src={scheduleIcon} alt="Schedule Icon" />
+            <Typography component="div" fontSize={{ md: "1rem", lg: "1.1rem" }}>
+              12 May, 3:00 Pm
+            </Typography>
+          </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          mr: '.8rem',
-          ml:'0rem',
-          rowGap: '1rem',
-        }}
-      >
-        <Typography component="div" sx={{fontWeight:'bold'}} fontSize={{md:'2.2rem', lg:'2.3rem'}}>
-          &#x20B9;  75
-        </Typography>
-        <Chip label="View Details" size="small" variant="outlined" sx={{fontSize:'.8rem'}}/>
-      </Box>
-    </Card>
+      </CardContent>
+    </Box>
+  </Box>
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      mr: ".8rem",
+      ml: "0rem",
+      rowGap: "1rem",
+    }}
+  >
+    <Typography
+      component="div"
+      sx={{ fontWeight: "bold" }}
+      fontSize={{ md: "2.2rem", lg: "2.3rem" }}
+    >
+      &#x20B9; 75
+    </Typography>
+    <Chip
+      label="View Details"
+      size="small"
+      variant="outlined"
+      sx={{ fontSize: ".8rem" }}
+    />
+  </Box>
+</Card>;
+
   );
 }
