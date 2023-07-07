@@ -310,7 +310,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
             ) : (
               <form onSubmit={handleAddPassenger}>
                 <CustomTextField
-                  label="Write passenger’s roll number"
+                  label="Write passenger’s Email ID"
                   variant="standard"
                   fullWidth
                   onKeyDown={event => {
