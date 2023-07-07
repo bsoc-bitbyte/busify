@@ -50,8 +50,8 @@ export default function SideBar() {
         anchor="left"
         variant="permanent"
         sx={{
-          width: '16rem',
-          flexShrink: 0,
+          width: '10rem',
+          flexShrink: 1,
           '& .MuiDrawer-paper': {
             width: '16rem',
             boxSizing: 'border-box',
