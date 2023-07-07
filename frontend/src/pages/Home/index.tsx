@@ -27,15 +27,6 @@ const Home = () => {
           <CTA
             variant="contained"
             color="primary"
-            sx={{
-              fontSize: {
-                xs: '0.9rem',
-                sm: '1.1rem',
-                md: '1.2rem',
-                lg: '1.3rem',
-              },
-              fontWeight: '600',
-            }}
             onClick={() => navigate('/bus-schedule')}
           >
             See Schedule
@@ -119,16 +110,28 @@ const HeroContainer = styled(Box)({
   boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.2)',
 });
 
-const CTA = styled(Button)({
+const CTA = styled(Button)(({theme}) => ({
   marginTop: '2.5rem',
   borderRadius: 8,
   padding: '0.5rem 2.5rem',
   width: 'fit-content',
-
+  fontWeight: '600',
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '0.9rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.1rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '1.3rem', // Font size for screens from small (sm) breakpoint and above
+  },
   '&:hover': {
     backgroundColor: '#FBBC05',
   },
-});
+}));
 
 const Card = styled(Box)({
   display: 'flex',
