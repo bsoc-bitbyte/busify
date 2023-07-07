@@ -9,11 +9,11 @@ interface OrderStore {
   price: number;
   passengerDetail: PassengerDetail[];
   addPassenger: (newRoll: string) => void;
-  removePassenger: (rollNumber: string) => void;
+  removePassenger: (emailID: string) => void;
 }
 
 interface PassengerDetail {
-  rollNumber: string;
+  emailID: string;
 }
 
 export const useOrderStore = create<OrderStore>(set => ({
@@ -27,13 +27,13 @@ export const useOrderStore = create<OrderStore>(set => ({
   addPassenger: newRoll =>
     set(state => ({
       ...state,
-      passengerDetail: [...state.passengerDetail, {rollNumber: newRoll}],
+      passengerDetail: [...state.passengerDetail, {emailID: newRoll}],
     })),
-  removePassenger: rollNumber =>
+  removePassenger: emailID =>
     set(state => ({
       ...state,
       passengerDetail: state.passengerDetail.filter(
-        passenger => passenger.rollNumber !== rollNumber
+        passenger => passenger.emailID !== emailID
       ),
     })),
 }));
