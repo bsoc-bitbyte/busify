@@ -8,28 +8,28 @@ import scheduleIcon from '../../assets/schedule-icon.svg';
 
 export default function RecentOrderCard() {
   const Icon = styled('img')`
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 2rem;
 
     @media (max-width: 600px) {
-      width: 30px;
-      height: 30px;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   `;
 
   return (
-    <Card
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem',
-        my: '2.5rem',
-        border: '1px solid rgba(0, 0, 0, 0.1)',
-        boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
-      }}
-    >
+    <Card           sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingX: '1rem',
+                    my: '2.5rem',
+                    border: '1px solid rgba(0, 0, 0, 0.1)',
+                    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.1)',
+                    width: '100%'
+                }}
+                >
       <Box>
         <Box sx={{display: 'flex', flexDirection: 'column'}}>
           <CardContent sx={{flex: '1 0 auto'}}>
@@ -37,17 +37,18 @@ export default function RecentOrderCard() {
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                columnGap: '1.5rem',
+                columnGap: '1rem',
                 alignItems: 'center',
                 paddingBottom: '.2rem',
               }}
             >
               <Chip
                 sx={{
-                  fontSize: '.7rem',
+                  fontSize:{md:'.7rem'},
                   color: 'white',
                   backgroundColor: 'black',
                 }}
+                size="small"
                 label="order_M1m6RTTJ9mqpVY"
               />
               <Box
@@ -58,16 +59,16 @@ export default function RecentOrderCard() {
                   alignItems: 'center',
                 }}
               >
-                <Typography component="div" fontSize="1rem" fontWeight="bold">
+                <Typography component="div" fontSize={{md:".8rem",lg:"1rem"}} fontWeight="bold">
                   By
                 </Typography>
-                <Typography component="div" fontSize="1rem">
+                <Typography component="div" fontSize={{md:".8rem",lg:"1rem"}}>
                   Neyati
                 </Typography>
               </Box>
               <Typography
                 component="div"
-                fontSize=".8rem"
+                fontSize={{md:".6rem",lg:".8rem"}}
                 fontWeight="bold"
                 color="rgba(0, 0, 0, 0.4)"
               >
@@ -81,35 +82,35 @@ export default function RecentOrderCard() {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: {lg:'row', md:"column"},
                 gap: '.8rem',
-                alignItems: 'center',
+                alignItems: {lg:'center'},
               }}
             >
               <Box
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
-                  gap: '.8rem',
+                  gap: '.2rem',
                   alignItems: 'center',
                 }}
               >
                 <Icon src={busIcon} alt="Bus Icon" />
-                <Typography component="div" fontSize="1.3rem">
+                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
                   Rewa Residency
                 </Typography>
-                <Icon src={arrowIcon} alt="Bus Icon" />
-                <Typography component="div" fontSize="1.3rem">
+                <Icon src={arrowIcon} alt="Arrow Icon" />
+                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
                   Sadar
                 </Typography>
               </Box>
 
               <Typography
                 component="div"
-                mx="1.5rem"
+                mx={{md:"0rem", lg:"1rem"}}
                 fontWeight="bold"
                 color="rgba(0, 0, 0, 0.4)"
-                fontSize="1.5rem"
+                fontSize={{md:"0rem", lg:"1rem"}}
               >
                 |
               </Typography>
@@ -118,12 +119,12 @@ export default function RecentOrderCard() {
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
-                  gap: '.8rem',
+                  gap: '.2rem',
                   alignItems: 'center',
                 }}
               >
                 <Icon src={scheduleIcon} alt="Schedule Icon" />
-                <Typography component="div" fontSize="1.3rem">
+                <Typography component="div" fontSize={{md:"1rem", lg:"1.1rem"}}>
                   12 May, 3:00 Pm
                 </Typography>
               </Box>
@@ -137,15 +138,14 @@ export default function RecentOrderCard() {
           flexDirection: 'column',
           alignItems: 'center',
           mr: '.8rem',
+          ml:'0rem',
           rowGap: '1rem',
         }}
       >
-        <Typography component="div" variant="h1">
-          &#x20B9; 75
+        <Typography component="div" sx={{fontWeight:'bold'}} fontSize={{md:'2.2rem', lg:'2.3rem'}}>
+          &#x20B9;  75
         </Typography>
-        <Typography component="div" fontSize="1.1rem">
-          View Details
-        </Typography>
+        <Chip label="View Details" size="small" variant="outlined" sx={{fontSize:'.8rem'}}/>
       </Box>
     </Card>
   );
