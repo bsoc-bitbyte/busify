@@ -15,6 +15,7 @@ model Users {
     picture   String
     role      String   @default("user")
     createdAt DateTime @default(now())
+    Order     Order?
 }
 
 model Bus {
@@ -37,6 +38,8 @@ model Schedule {
     departureTime String
     days          String[]
     ticketPrice   Int
+    Ticket        Ticket?
+    Order         Order?
 }
 
 model Conductor {
@@ -53,4 +56,27 @@ model Contractor {
     phone   String
     address String
     Bus     Bus[]
+}
+
+model Ticket {
+    id         String   @id
+    scheduleId String   @unique
+    createdAt  DateTime @default(now())
+    orderId    String   @unique
+    Schedule   Schedule @relation(fields: [scheduleId], references: [id])
+    Order      Order    @relation(fields: [orderId], references: [id])
+}
+
+model Order {
+    id            String   @id
+    userId        String   @unique
+    scheduleId    String   @unique
+    tickets       Ticket[]
+    status        String   @default("pending") // how to make this enum
+    amount        Int
+    attempts      Int      @default(0)
+    receiptNumber String   @unique
+    createdAt     DateTime @default(now())
+    Schedule      Schedule @relation(fields: [scheduleId], references: [id])
+    User          Users    @relation(fields: [userId], references: [id])
 }

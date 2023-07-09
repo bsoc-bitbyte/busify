@@ -19,3 +19,19 @@ export const orderSchema = new Schema(
     dataStructure: 'JSON',
   }
 );
+
+export const ticketInventorySchema = new Schema(
+  'ticketInventory',
+  {
+    scheduleId: {
+      type: 'string',
+      indexed: true,
+    },
+    seatsLeft: {
+      type: 'number',
+    },
+  },
+  {
+    dataStructure: 'JSON',
+  }
+);
