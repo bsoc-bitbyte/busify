@@ -11,12 +11,14 @@ const Home = () => {
   return (
     <Grid container direction="column" marginTop="2rem">
       <Grid item>
-        <HeroContainer>
+        <HeroContainer
+          height={{xs: '18rem', sm: '20rem', md: '28rem', lg: '34rem'}}
+        >
           <Typography
             variant="h2"
             color="white"
-            fontSize={{xs: '2rem', md: '4rem'}}
-            maxWidth={{xs: '90%', md: '50%'}}
+            fontSize={{xs: '1.8rem', sm: '2.5rem', md: '3.3rem', lg: '3.6rem'}}
+            maxWidth={{xs: '90%', md: '60%'}}
             textAlign="center"
             fontWeight="700"
           >
@@ -98,7 +100,6 @@ const HeroContainer = styled(Box)({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  height: '55vh',
   padding: '0 1rem',
   display: 'flex',
   flexDirection: 'column',
@@ -109,17 +110,28 @@ const HeroContainer = styled(Box)({
   boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.2)',
 });
 
-const CTA = styled(Button)({
+const CTA = styled(Button)(({theme}) => ({
   marginTop: '2.5rem',
   borderRadius: 8,
   padding: '0.5rem 2.5rem',
   width: 'fit-content',
-  fontSize: '1.2rem',
-
+  fontWeight: '600',
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '0.9rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.1rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '1.2rem', // Font size for screens from small (sm) breakpoint and above
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '1.3rem', // Font size for screens from small (sm) breakpoint and above
+  },
   '&:hover': {
     backgroundColor: '#FBBC05',
   },
-});
+}));
 
 const Card = styled(Box)({
   display: 'flex',
