@@ -9,7 +9,6 @@ interface AuthStore {
   setIsLoading: (isloading: boolean) => void;
 }
 
-
 interface User {
   id: number;
   email: string;
