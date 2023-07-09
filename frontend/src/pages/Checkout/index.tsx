@@ -105,7 +105,7 @@ const BusDetails = () => {
                       variant="h6"
                       color={theme.palette.secondary.main}
                     >
-                      {index + 1}. {passenger.rollNumber}
+                      {index + 1}. {passenger.emailID}
                     </Typography>
                   </Box>
                 ))}

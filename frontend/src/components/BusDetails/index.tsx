@@ -124,15 +124,22 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const handleAddPassenger = (event: React.FormEvent) => {
     event.preventDefault();
     const input = event.target as HTMLInputElement;
-    const rollNumber = input.value.trim().toUpperCase();
+    const emailID = input.value.trim();
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(emailID)) {
+      notify('Invalid email address');
+      return;
+    }
 
     if (
-      rollNumber !== '' &&
+      emailID !== '' &&
       passengerDetail.length < 4 &&
-      !passengerDetail.some(p => p.rollNumber === rollNumber) &&
-      !rollNumber.includes(' ')
+      !passengerDetail.some(p => p.emailID === emailID) &&
+      !emailID.includes(' ')
     ) {
-      addPassenger(rollNumber);
+      addPassenger(emailID);
       input.value = '';
       setIsAddingPassenger(false);
       useOrderStore.setState(state => ({
@@ -141,8 +148,8 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
     }
   };
 
-  const handleRemovePassenger = (rollNumber: string) => {
-    removePassenger(rollNumber);
+  const handleRemovePassenger = (emailID: string) => {
+    removePassenger(emailID);
     useOrderStore.setState(state => ({
       ticketQuantity: state.ticketQuantity - 1,
     }));
@@ -186,7 +193,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
         onClose={() => {
           closeDrawer();
           passengerDetail.map(value => {
-            removePassenger(value.rollNumber);
+            removePassenger(value.emailID);
           });
           useOrderStore.setState(() => ({
             ticketQuantity: 0,
@@ -278,10 +285,10 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
                 }}
               >
                 <Typography variant="h6" color={theme.palette.secondary.main}>
-                  {index + 1}. {passenger.rollNumber}
+                  {index + 1}. {passenger.emailID}
                 </Typography>
                 <IconButton
-                  onClick={() => handleRemovePassenger(passenger.rollNumber)}
+                  onClick={() => handleRemovePassenger(passenger.emailID)}
                   size="small"
                 >
                   <CrossIcon sx={{fontSize: {md: '1rem'}}} />
@@ -310,7 +317,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
             ) : (
               <form onSubmit={handleAddPassenger}>
                 <CustomTextField
-                  label="Write passenger’s roll number"
+                  label="Write passenger’s Email ID"
                   variant="standard"
                   fullWidth
                   onKeyDown={event => {
