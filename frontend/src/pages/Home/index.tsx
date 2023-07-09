@@ -12,7 +12,7 @@ const Home = () => {
     <Grid container direction="column" marginTop="2rem">
       <Grid item>
         <HeroContainer
-          height={{xs: '18rem', sm: '20rem', md: '22rem', lg: '24rem'}}
+          height={{xs: '18rem', sm: '20rem', md: '28rem', lg: '34rem'}}
         >
           <Typography
             variant="h2"
