@@ -11,6 +11,8 @@ import Checkout from './pages/Checkout';
 import BusDetails from './components/BusDetails';
 import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
+import AdminSideBar from './components/AdminSideBar';
 
 function App() {
   return (
@@ -38,6 +40,15 @@ function App() {
               <UserProtectedRoute>
                 <Demopage />
               </UserProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <AdminProtectedRoute>
+                <AdminSideBar />
+              </AdminProtectedRoute>
             }
           />
         </Routes>
