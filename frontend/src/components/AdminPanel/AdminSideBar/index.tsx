@@ -14,9 +14,19 @@ import BusIcon from '@mui/icons-material/DepartureBoard';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useTheme, styled} from '@mui/material';
+import {useScreen} from '../../../customHooks/useScreen';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/ArrowCircleLeft';
 
 export default function SideBar() {
   const theme = useTheme();
+  const currentScreen = useScreen();
+
+  const closeSidebar = () => {
+    if (document.getElementById('drawer')) {
+      (document.getElementById('drawer') as HTMLElement).style.display = 'none';
+    }
+  };
 
   const LinkContainer = styled(Link)`
     text-decoration: none;
@@ -45,15 +55,16 @@ export default function SideBar() {
   };
 
   return (
-    <Box>
+    <Box id="drawer" display={{xs: 'none', sm: 'flex'}}>
       <Drawer
         anchor="left"
         variant="permanent"
         sx={{
-          width: '16rem',
-          flexShrink: 0,
+          width: '10rem',
+          flexShrink: 1,
+
           '& .MuiDrawer-paper': {
-            width: '16rem',
+            width: '13rem',
             boxSizing: 'border-box',
             border: 'none',
             display: 'flex',
@@ -64,6 +75,19 @@ export default function SideBar() {
           },
         }}
       >
+        <IconButton
+          size="large"
+          onClick={closeSidebar}
+          sx={{
+            display: {sm: 'none'},
+            position: 'absolute',
+            left: '10rem',
+            top: '.1rem',
+          }}
+        >
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
+
         <Toolbar>
           <Typography
             variant="h1"

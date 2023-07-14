@@ -17,7 +17,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <ValidateAuth />
       <CssBaseline />
-      <Box margin={{xs: '2rem', md: '3rem 5rem'}}>
+      <Box margin={{xs: '1rem', md: '3rem 5rem'}}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
