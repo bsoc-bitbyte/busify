@@ -13,4 +13,4 @@ npm run start:dev &
 cd ../frontend
 
 ##  start the frontend development server
-npm run dev & gnome-terminal -- npm run dev
+gnome-terminal -- npm run dev
