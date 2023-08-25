@@ -68,15 +68,15 @@ model Ticket {
 }
 
 model Order {
-    id            String   @id
-    userId        String   @unique
-    scheduleId    String   @unique
-    tickets       Ticket[]
-    status        String   @default("pending") // how to make this enum
-    amount        Int
-    attempts      Int      @default(0)
-    receiptNumber String   @unique
-    createdAt     DateTime @default(now())
-    Schedule      Schedule @relation(fields: [scheduleId], references: [id])
-    User          Users    @relation(fields: [userId], references: [id])
+    id          String   @id
+    userId      String   @unique
+    scheduleId  String   @unique
+    amount      Int
+    status      String   @default("pending") // how to make this enum
+    receipt     String   @unique
+    noOfTickets Int
+    createdAt   DateTime @default(now())
+    Schedule    Schedule @relation(fields: [scheduleId], references: [id])
+    User        Users    @relation(fields: [userId], references: [id])
+    tickets     Ticket[]
 }

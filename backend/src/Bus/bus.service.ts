@@ -1,10 +1,14 @@
 import {HttpException, Injectable} from '@nestjs/common';
 import {PrismaService} from 'src/Prisma/prisma.service';
+import {RedisService} from 'src/Redis/redis.service';
 import {v4 as uuidv4} from 'uuid';
 
 @Injectable()
 export class BusService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly redisService: RedisService
+  ) {}
   async getBusSchedule() {
     return {
       today: new Date(),
@@ -99,6 +103,15 @@ export class BusService {
         ...schedule,
       },
     });
+  }
+  async getInventory(scheduleId: string) {
+    const inventory = await this.redisService
+      .getClient()
+      .hGet('inventory', scheduleId);
+    if (Number(inventory) <= 0) {
+      throw new HttpException('No tickets available', 404);
+    }
+    return Number(inventory);
   }
   async getBookedTickets() {}
 }

@@ -137,6 +137,12 @@ export class BusController {
     return this.busService.createSchedule(schedule);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('inventory/schedule/:id')
+  async getTicketInventory(@Param('id') scheduleId: string) {
+    return this.busService.getInventory(scheduleId);
+  }
+
   // testing admin guard
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('admin-protected')
