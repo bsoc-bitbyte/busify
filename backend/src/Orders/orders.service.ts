@@ -27,10 +27,9 @@ export class OrdersService {
     const actualAmount =
       (ticketPrice.ticketPrice + amount) * data.totalPassengers;
     if (actualAmount !== Number(data.amount)) {
-      // TODO: throw error
       return new HttpException('Amount mismatch', HttpStatus.BAD_REQUEST);
     } else {
-      const razorpayOrder = await this.razorpayService.createOrder(data.amount); // TODO: match the amount with the schedule amount
+      const razorpayOrder = await this.razorpayService.createOrder(data.amount);
       const order: orderDto = {
         id: razorpayOrder.id,
         userId: data.userId,
