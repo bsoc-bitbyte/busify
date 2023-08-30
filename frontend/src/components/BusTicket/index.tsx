@@ -3,11 +3,13 @@ import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import BusDetails from '../BusDetails';
 import {BusTicketData} from '../../types';
 import {useOrderStore} from '../../store/orderStore';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
 export default function BusTicket({
+  id,
   checkpoints,
   time,
   price,
-  seatsLeft,
   from,
   to,
   disabled,
@@ -16,6 +18,19 @@ export default function BusTicket({
     ...state,
     price: price,
   }));
+  const [seatsLeft, setSeatsLeft] = useState(0);
+  const getAvailableSeats = async (scheduleId: string): Promise<number> => {
+    const result = await axios.get(
+      `http://localhost:3333/bus/inventory/schedule/${scheduleId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return await result.data;
+  };
+  useEffect(() => {
+    getAvailableSeats(id).then(result => setSeatsLeft(result));
+  }, [id]);
   return (
     <Box
       sx={{
@@ -144,7 +159,7 @@ export default function BusTicket({
               color: 'rgba(0, 0, 0, 0.7)',
             }}
           >
-            {seatsLeft} Seats Left
+            {disabled ? 0 : seatsLeft} Seats Left
           </Typography>
           <BusDetails from={from} to={to} time={time} disabled={disabled} />
         </Box>

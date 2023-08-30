@@ -19,7 +19,6 @@ const BusSchedule = () => {
   const [selectedDay, setSelectedDay] = useState<string>('');
   const [schedule, setSchedule] = useState<BusTicketType[]>([]);
   const [today, setToday] = useState<Date>(new Date());
-
   useEffect(() => {
     const getScheduleData = async () => {
       const res = await axios.get('http://localhost:3333/bus/schedule/', {
@@ -32,6 +31,7 @@ const BusSchedule = () => {
       }
     };
     getScheduleData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -75,11 +75,11 @@ const BusSchedule = () => {
               if (TicketData.days.includes(selectedDay)) {
                 return (
                   <BusTicket
+                    id={TicketData.id}
                     checkpoints={TicketData.checkpoints}
                     price={TicketData.ticketPrice}
                     time={TicketData.departureTime}
                     disabled={selectedDay !== weekDays[today.getDay()]}
-                    seatsLeft={50}
                     key={index}
                     to={TicketData.to}
                     from={TicketData.from}

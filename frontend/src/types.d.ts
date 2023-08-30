@@ -33,10 +33,10 @@ type BusDetailsType = {
 };
 
 type BusTicketData = {
+  id: string;
   checkpoints: string[];
   time: string;
   price: number;
-  seatsLeft: number;
   disabled?: boolean;
   from?: string;
   to?: string;
