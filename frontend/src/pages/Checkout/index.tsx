@@ -4,7 +4,6 @@ import BusDetailsCard from '../../components/BusDetailsCard';
 import FareBreakDownCard from '../../components/FareBreakdownCard';
 import {Navigate} from 'react-router-dom';
 import {toast} from 'react-hot-toast';
-import {useAuthStore} from '../../store/authStore';
 
 const ConatinerMain = styled(Box)`
   width: {xs: '100%', sm: '66.6667%'},

@@ -3,13 +3,16 @@ import {useAuthStore} from '../store/authStore';
 import axios from 'axios';
 
 const ValidateAuth: React.FC = () => {
-  const {isAuth, isloading, setIsAuth, setUser, setIsLoading} = useAuthStore();
+  const {setIsAuth, setUser, setIsLoading} = useAuthStore();
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get('http://localhost:3333/auth/me', {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/auth/me`,
+          {
+            withCredentials: true,
+          }
+        );
         if (res.status === 200) {
           setIsAuth(true);
           setUser(res.data);
@@ -20,7 +23,7 @@ const ValidateAuth: React.FC = () => {
       }
     };
     checkAuth();
-  }, [setIsAuth, setUser]);
+  }, [setIsAuth, setIsLoading, setUser]);
   return <></>;
 };
 export default ValidateAuth;

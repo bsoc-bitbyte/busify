@@ -22,9 +22,12 @@ const BusSchedule = () => {
 
   useEffect(() => {
     const getScheduleData = async () => {
-      const res = await axios.get('http://localhost:3333/bus/schedule/', {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/bus/schedule/`,
+        {
+          withCredentials: true,
+        }
+      );
       if (res.status === 200) {
         setSchedule(res.data.schedule);
         setToday(new Date(res.data.today));
@@ -32,6 +35,7 @@ const BusSchedule = () => {
       }
     };
     getScheduleData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -97,9 +97,12 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get('http://localhost:3333/auth/logout', {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/auth/logout`,
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200) {
         setIsAuth(false);
@@ -107,7 +110,6 @@ export default function Navbar() {
         window.location.replace('/');
       }
     } catch (error) {
-      console.error('Logout error:', error);
       toast.error('Logout failed. Please try again', {
         position: 'top-center',
         duration: 3000,

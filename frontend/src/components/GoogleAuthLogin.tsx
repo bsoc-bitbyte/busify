@@ -8,7 +8,7 @@ const GoogleAuthLogin = () => {
     const googleLoginHandler = async () => {
       const code = searchParams.get('code');
       await axios.post(
-        'http://localhost:3333/auth/google',
+        `${import.meta.env.VITE_SERVER_URL}/auth/google`,
         {
           code,
         },

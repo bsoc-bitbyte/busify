@@ -14,13 +14,11 @@ import BusIcon from '@mui/icons-material/DepartureBoard';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useTheme, styled} from '@mui/material';
-import {useScreen} from '../../../customHooks/useScreen';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/ArrowCircleLeft';
 
 export default function SideBar() {
   const theme = useTheme();
-  const currentScreen = useScreen();
 
   const closeSidebar = () => {
     if (document.getElementById('drawer')) {
