@@ -3,7 +3,6 @@ const getGoogleOAuthURL = (): string => {
   const options = {
     redirect_uri: `${import.meta.env.VITE_FRONTEND_URL}/google`,
     client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-    access_type: 'offline',
     response_type: 'code',
     prompt: 'consent',
     scope: [
