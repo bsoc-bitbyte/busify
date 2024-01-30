@@ -7,18 +7,10 @@ import {orderSchema} from './schema';
 export class RedisService {
   private readonly logger = new Logger(RedisService.name);
   private readonly client = createClient({
-    socket: {
-      host: 'localhost',
-      port: 6379,
-    },
-    password: process.env.REDIS_PASSWORD,
+    url: process.env.REDIS_URL,
   });
   constructor() {}
   async onModuleInit() {
-    if (!process.env.REDIS_PASSWORD) {
-      this.logger.error('REDIS_PASSWORD is not set');
-      return;
-    }
     try {
       await this.client.connect();
       this.logger.log('Redis connected');
