@@ -29,6 +29,8 @@ export class AuthService {
         .status(202)
         .cookie('jwt', token, {
           httpOnly: true,
+          sameSite: 'none',
+          secure: true,
         })
         .send(user);
       return;
