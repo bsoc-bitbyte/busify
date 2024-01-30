@@ -88,7 +88,7 @@ export class AuthService {
       code,
       client_id: process.env.GOOGLE_CLIENT_ID,
       client_secret: process.env.GOOGLE_SECRET,
-      redirect_uri: 'http://localhost:3000/google',
+      redirect_uri: `${process.env.FRONTEND_URL}/google`,
       grant_type: 'authorization_code',
     };
     try {

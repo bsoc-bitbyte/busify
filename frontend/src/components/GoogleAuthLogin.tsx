@@ -16,7 +16,7 @@ const GoogleAuthLogin = () => {
           withCredentials: true,
         }
       );
-      window.location.replace('http://localhost:3000');
+      window.location.replace(import.meta.env.VITE_FRONTEND_URL);
     };
     googleLoginHandler();
   }, [searchParams]);
