@@ -74,7 +74,8 @@ export default function FareBreakdownCard() {
             color={theme.palette.secondary.main}
             fontWeight={600}
           >
-            {ticketQuantity * price}
+            {price * ticketQuantity +
+              Math.ceil(0.02 * (price * ticketQuantity))}
           </Typography>
         </Box>
       </Box>

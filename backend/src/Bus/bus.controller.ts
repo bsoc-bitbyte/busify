@@ -144,15 +144,4 @@ export class BusController {
   async adminProtected() {
     return 'This is admin protected route';
   }
-  // testing redis
-  @Get('redis')
-  async redisTest() {
-    // await this.redis.set('test', 'Hello World');
-    const order = await this.redis.setOrder({
-      id: '1',
-      userId: '1',
-      status: 'pending',
-    });
-    return order[EntityId];
-  }
 }

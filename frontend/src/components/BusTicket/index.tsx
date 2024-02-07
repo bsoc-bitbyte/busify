@@ -10,11 +10,13 @@ export default function BusTicket({
   seatsLeft,
   from,
   to,
+  scheduleId,
   disabled,
 }: BusTicketData) {
   useOrderStore.setState(state => ({
     ...state,
     price: price,
+    scheduleId,
   }));
   return (
     <Box

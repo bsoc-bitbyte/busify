@@ -1,9 +1,11 @@
 import {create} from 'zustand';
 
 interface OrderStore {
+  orderID: string;
   source: string;
   destination: string;
   date: string;
+  scheduleId: string;
   time: string;
   ticketQuantity: number;
   price: number;
@@ -17,8 +19,10 @@ interface PassengerDetail {
 }
 
 export const useOrderStore = create<OrderStore>(set => ({
+  orderID: '',
   source: '',
   destination: '',
+  scheduleId: '',
   date: '',
   time: '',
   ticketQuantity: 0,

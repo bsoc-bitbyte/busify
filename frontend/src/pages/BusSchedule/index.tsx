@@ -75,18 +75,19 @@ const BusSchedule = () => {
         </Grid>
         <Grid container direction="column" marginTop="2rem">
           <Grid item>
-            {schedule.map((TicketData, index) => {
-              if (TicketData.days.includes(selectedDay)) {
+            {schedule.map((sche, index) => {
+              if (sche.days.includes(selectedDay)) {
                 return (
                   <BusTicket
-                    checkpoints={TicketData.checkpoints}
-                    price={TicketData.ticketPrice}
-                    time={TicketData.departureTime}
+                    checkpoints={sche.checkpoints}
+                    price={sche.ticketPrice}
+                    time={sche.departureTime}
                     disabled={selectedDay !== weekDays[today.getDay()]}
                     seatsLeft={50}
                     key={index}
-                    to={TicketData.to}
-                    from={TicketData.from}
+                    to={sche.to}
+                    from={sche.from}
+                    scheduleId={sche.id}
                   />
                 );
               }

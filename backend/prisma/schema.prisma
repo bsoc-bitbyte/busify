@@ -15,6 +15,7 @@ model Users {
     picture   String
     role      String   @default("user")
     createdAt DateTime @default(now())
+    orders    Order[] // One-to-Many relationship with Order model
 }
 
 model Bus {
@@ -24,7 +25,7 @@ model Bus {
     contractorId String
     conductor    Conductor  @relation(fields: [conductorId], references: [id])
     conductorId  String
-    Schedule     Schedule[]
+    schedules    Schedule[] // One-to-Many relationship with Schedule model
 }
 
 model Schedule {
@@ -39,11 +40,29 @@ model Schedule {
     ticketPrice   Int
 }
 
+model Ticket {
+    id             String @id
+    orderId        String @unique
+    passengerEmail String
+}
+
+model Order {
+    id         String   @id
+    userId     String
+    scheduleId String
+    status     String   @default("pending") // how to make this enum
+    amount     Int
+    attempts   Int      @default(0)
+    receipt    String   @unique
+    createdAt  DateTime @default(now())
+    user       Users    @relation(fields: [userId], references: [id])
+}
+
 model Conductor {
     id    String @id
     name  String
     phone String
-    Bus   Bus[]
+    buses Bus[] // One-to-Many relationship with Bus model
 }
 
 model Contractor {
@@ -52,5 +71,5 @@ model Contractor {
     email   String @unique
     phone   String
     address String
-    Bus     Bus[]
+    buses   Bus[] // One-to-Many relationship with Bus model
 }

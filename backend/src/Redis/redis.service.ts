@@ -18,14 +18,7 @@ export class RedisService {
       this.logger.error(error);
     }
   }
-  async get(key: string) {
-    return this.client.get(key);
-  }
-  async set(key: string, value: string) {
-    return this.client.set(key, value);
-  }
-  async setOrder(order: any) {
-    const orderRepo = new Repository(orderSchema, this.client);
-    return await orderRepo.save(order.id, order);
+  getClient() {
+    return this.client;
   }
 }

@@ -15,11 +15,11 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import {BusDetailsType} from '../../types';
 import {useNavigate} from 'react-router-dom';
 import {useOrderStore} from '../../store/orderStore';
-import toast, {Toaster} from 'react-hot-toast';
 import React from 'react';
 import BusDetailsCard from '../BusDetailsCard';
 import FareBreakDownCard from '../FareBreakdownCard';
 import {useAuthStore} from '../../store/authStore';
+import {notify} from '../../utils/notify';
 
 const Details = styled(Box)`
   display: flex;
@@ -96,22 +96,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAddingPassenger, setIsAddingPassenger] = useState(false);
-  const [isToasterActive, setIsToasterActive] = useState(false);
   const {isAuth} = useAuthStore();
-  const notify = (message: string) => {
-    if (!isToasterActive) {
-      setIsToasterActive(true);
-
-      toast.error(message, {
-        position: 'top-center',
-        duration: 3000,
-      });
-    }
-
-    setTimeout(() => {
-      setIsToasterActive(false);
-    }, 3000);
-  };
 
   const drawerstyle = {
     width: {xs: '100%', sm: '66.6667%'},
@@ -129,7 +114,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(emailID)) {
-      notify('Invalid email address');
+      notify('Invalid email address', 'error');
       return;
     }
 
@@ -157,7 +142,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
 
   const bookTicketHandler = () => {
     if (!isAuth) {
-      notify('Please login to book a ticket');
+      notify('Please login to book a ticket', 'error');
       return;
     }
     useOrderStore.setState(state => ({
@@ -353,8 +338,8 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
             variant="contained"
             onClick={() => {
               passengerDetail.length
-                ? navigate('/Checkout')
-                : notify('Please add atleast one passenger');
+                ? navigate('/checkout')
+                : notify('Please add atleast one passenger', 'warn');
             }}
             sx={{
               padding: '0.5rem 2rem',
@@ -364,9 +349,8 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
               },
             }}
           >
-            Pay Now
+            Proceed to Checkout
           </Button>
-          <Toaster />
         </Box>
       </Drawer>
     </>

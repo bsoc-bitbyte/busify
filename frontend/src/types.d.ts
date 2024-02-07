@@ -40,4 +40,5 @@ type BusTicketData = {
   disabled?: boolean;
   from?: string;
   to?: string;
+  scheduleId: string;
 };

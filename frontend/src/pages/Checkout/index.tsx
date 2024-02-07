@@ -4,12 +4,16 @@ import BusDetailsCard from '../../components/BusDetailsCard';
 import FareBreakDownCard from '../../components/FareBreakdownCard';
 import {Navigate} from 'react-router-dom';
 import {toast} from 'react-hot-toast';
+import {useEffect, useState} from 'react';
+import {loadScript} from '../../utils/razorpay';
+import {notify} from '../../utils/notify';
+import axios from 'axios';
+import {useAuthStore} from '../../store/authStore';
 
 const ConatinerMain = styled(Box)`
   width: {xs: '100%', sm: '66.6667%'},
   padding: '2rem',
   margin: '2 2',
-
 `;
 
 const Details = styled(Box)`
@@ -35,8 +39,62 @@ const PassengersContainer = styled(Box)`
 `;
 
 const BusDetails = () => {
-  const {passengerDetail, ticketQuantity, price} = useOrderStore();
+  const {passengerDetail, ticketQuantity, price, scheduleId} = useOrderStore();
+  const [razorpayLoading, setRazorpayLoading] = useState(false);
+  const {user} = useAuthStore();
   const theme = useTheme();
+
+  useEffect(() => {}, []);
+
+  async function displayRazorpay() {
+    try {
+      setRazorpayLoading(true);
+      const loadedScript = await loadScript(
+        'https://checkout.razorpay.com/v1/checkout.js'
+      );
+      if (!loadedScript) {
+        notify(
+          'There is some problem with your internet connection. Please try again',
+          'error'
+        );
+        return;
+      }
+      const order = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/orders/create`,
+        {
+          ticketQuantity,
+          scheduleId,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_ID,
+        currency: 'INR',
+        amount: (order.data.amount * 100).toString(),
+        order_id: order.data.id,
+        name: 'Pay for your ticket',
+        description: 'Thank you for nothing. Please give us some money',
+        image: `${import.meta.env.VITE_FRONTEND_URL}/busIcon.svg`,
+        handler: function (response: any) {
+          alert(response.razorpay_payment_id);
+          alert(response.razorpay_order_id);
+          alert(response.razorpay_signature);
+        },
+        prefill: {
+          email: user?.email,
+        },
+      };
+      const _window: any = window;
+      const paymentObject = new _window.Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      notify('Unable to load Razorpay', 'error');
+    } finally {
+      setRazorpayLoading(false);
+    }
+  }
   return passengerDetail.length === 0 ? (
     <>
       {toast.error('Please book a ticket first!')}
@@ -185,6 +243,8 @@ const BusDetails = () => {
               <Box display="flex" justifyContent="center" marginTop="1rem">
                 <Button
                   variant="contained"
+                  disabled={razorpayLoading}
+                  onClick={displayRazorpay}
                   sx={{
                     padding: {xs: '0.7rem', sm: '1rem'},
                     borderRadius: '8px',
@@ -194,7 +254,7 @@ const BusDetails = () => {
                     },
                   }}
                 >
-                  Pay Now
+                  {razorpayLoading ? 'Loading...' : 'Pay Now'}
                 </Button>
               </Box>
             </Box>
