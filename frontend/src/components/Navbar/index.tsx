@@ -19,6 +19,7 @@ import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import toast, {Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import {useScreen} from '../../customHooks/useScreen';
+import bus from '../../assets/busIcon.svg';
 
 const NavContainer = styled(Box)`
   display: flex;
@@ -126,7 +127,20 @@ export default function Navbar() {
         variant="h1"
         color={theme.palette.primary.main}
         fontSize={{xs: '1.25rem', md: '2.5rem'}}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
+        <img
+          src={bus}
+          alt="bus"
+          style={{
+            width: '1.5em',
+            height: '1.5em',
+          }}
+        />
         <LinkContainer
           to="/"
           style={{textDecoration: 'none', color: 'inherit'}}
