@@ -42,3 +42,7 @@ type BusTicketData = {
   to?: string;
   scheduleId: string;
 };
+
+type LayoutProps = {
+  children: React.ReactNode;
+};

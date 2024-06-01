@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout';
 import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
 import {Toaster} from 'react-hot-toast';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
               element={
                 <UserProtectedRoute>
                   <Checkout />
+                </UserProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <UserProtectedRoute>
+                  <Admin />
                 </UserProtectedRoute>
               }
             />
