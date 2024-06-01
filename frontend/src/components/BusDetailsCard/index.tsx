@@ -26,6 +26,8 @@ function BusDetailsCard() {
           display: 'flex',
           alignItems: 'center',
           gap: {xs: '10px', md: '2rem'},
+          flexDirection: {xs: 'column', md: 'row'},
+          margin: {xs: '0', md: '0 0.5rem'},
         }}
       >
         <Box
@@ -85,12 +87,12 @@ function BusDetailsCard() {
           width: '2px',
           height: '5vh',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          margin: '0 2rem',
-          display: {xs: 'none', sm: 'block'},
+          margin: {xs: '0', md: '0 2rem'},
+          display: {xs: 'none', md: 'none', lg: 'block'},
         }}
       />
 
-      <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+      <Box sx={{display: 'flex', alignItems: 'center', gap: '2px'}}>
         <Icon src={scheduleIcon} alt="Schedule Icon" />
         <Box>
           <Typography
