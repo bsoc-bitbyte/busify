@@ -19,14 +19,15 @@ function BusDetailsCard() {
   const time = useOrderStore(state => state.time);
   const source = useOrderStore(state => state.source);
   const destination = useOrderStore(state => state.destination);
+
   return (
     <>
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          gap: {xs: '10px', md: '2rem'},
-          flexDirection: {xs: 'column', md: 'row'},
+          flexDirection: {xs: 'column', sm: 'row'},
+          alignItems: {xs: 'flex-start', sm: 'center'},
+          gap: {xs: '10px', sm: '2px', md: '10px'},
           margin: {xs: '0', md: '0 0.5rem'},
         }}
       >
@@ -34,81 +35,91 @@ function BusDetailsCard() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '10px'},
+            gap: {xs: '5px', md: '5px'},
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
           <Box>
             <Typography
               variant="h6"
-              fontSize={{xs: '0.8rem', md: '1rem'}}
+              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
               color={theme.palette.common.black}
             >
               From
             </Typography>
             <Typography
               variant="h4"
-              fontSize={{xs: '1.25rem', md: '1.5rem'}}
+              fontSize={{xs: '1rem', sm: '0.8rem', md: '1.3rem'}}
               color={theme.palette.secondary.main}
             >
               {source}
             </Typography>
           </Box>
         </Box>
-        <img src={arrorIcon} alt="Arrow Icon" />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: {xs: '100%', sm: 'auto'},
+          }}
+        >
+          <img src={arrorIcon} alt="Arrow Icon" />
+        </Box>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '10px'},
+            gap: {xs: '5px', md: '5px'},
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
           <Box>
             <Typography
               variant="h6"
-              fontSize={{xs: '0.8rem', md: '1rem'}}
+              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
               color={theme.palette.common.black}
             >
               To
             </Typography>
             <Typography
               variant="h4"
-              fontSize={{xs: '1.25rem', md: '1.5rem'}}
+              fontSize={{xs: '1.25rem', sm: '0.8rem', md: '1.3rem'}}
               color={theme.palette.secondary.main}
             >
               {destination}
             </Typography>
           </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          width: '2px',
-          height: '5vh',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          margin: {xs: '0', md: '0 2rem'},
-          display: {xs: 'none', md: 'none', lg: 'block'},
-        }}
-      />
 
-      <Box sx={{display: 'flex', alignItems: 'center', gap: '2px'}}>
-        <Icon src={scheduleIcon} alt="Schedule Icon" />
-        <Box>
-          <Typography
-            variant="h6"
-            fontSize={{xs: '0.8rem', md: '1rem'}}
-            color={theme.palette.common.black}
-          >
-            Date and Time
-          </Typography>
-          <Typography
-            variant="h4"
-            fontSize={{xs: '1.25rem', md: '1.5rem'}}
-            color={theme.palette.secondary.main}
-          >
-            {time}
-          </Typography>
+        <Box
+          sx={{
+            width: '2px',
+            height: '5vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            margin: {xs: '0', sm: '20px', md: '2px 2rem'},
+            display: {xs: 'none', sm: 'none', md: 'block'},
+          }}
+        />
+
+        <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+          <Icon src={scheduleIcon} alt="Schedule Icon" />
+          <Box>
+            <Typography
+              variant="h6"
+              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
+              color={theme.palette.common.black}
+            >
+              Date and Time
+            </Typography>
+            <Typography
+              variant="h4"
+              fontSize={{xs: '1.25rem', sm: '1rem', md: '1.3rem'}}
+              color={theme.palette.secondary.main}
+            >
+              {time}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </>
