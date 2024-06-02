@@ -35,31 +35,31 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    After installing docker, run the following command to start database containers.
 
-   bash
+   ```bash
    docker compose --env-file backend/.env up
-   
+   ```
 
   💡Make Sure Your Docker is running/ON during the whole SetUp 
 
 6. In new terminal type
 
-   bash
+   ```bash
    cd backend
    npm install
    npm run migrate:dev
    npm run seed
    npm run start:dev
-   
+   ```
 
    This will start the backend server.
 
 7. Open another new terminal and type
 
-   bash
+   ```bash
    cd frontend
    npm install
    npm run dev
-   
+   ```
 
    This will start the frontend server.
 
@@ -67,15 +67,15 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 9. Stage your changes and commit
 
-   bash
+  ``` bash
    git add <filename>
-   
+   ```
 
 10. Commit your changes
 
-   bash
+   ```bash
    git commit -m "<type>(optional_scope): <your_commit_message>"
-   
+   ```
 
 11. Push your local commits to the remote repo.
 
@@ -92,10 +92,20 @@ If you're reading this, you're probably creating a Pull Request or planning to d
  components are up and running.
 
  3. To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
-     bash
-   "netstat -ano | findstr :<yourPortNumber>"
-    "taskkill /PID <typeyourPIDhere> /F"
-   
+   For Windows 
+
+     ```bash
+   "netstat -ano | findstr :3333"
+    "taskkill /PID <PID> /F"
+
+   ```
+
+   For Linux
+
+   ```bash
+   "sudo lsof -i | grep 3333"
+   "kill <PID>"
+   ```
 
  4. Right-click on homepage, inspect, navigate to console, access application > cookies, delete JWT files to troubleshoot login issues.
 
@@ -107,39 +117,40 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 1. Navigate to the repository's directory:
 
-   bash
+   ```bash
    cd <repository-directory>
-   
+   ```
 
 2. Ensure you are on the branch you want to use as the base branch:
 
-   bash
+  ``` bash
    git checkout <base-branch>
-   
+   ```
 
 3. Create a new branch for your pull request:
 
-   bash
+   ```bash
    git branch <new-branch-name>
-   
+   ```
 
 4. To Switch to New created branch
-   bash
+   ```bash
    git checkout -b <new-branch-name>
-   
+   ```
 5. Stage and commit your changes:
 
-   bash
+   ```bash
    git add .
    git commit -m "Your commit message here"
-   
+   ```
 
 6. Replace "Your commit message here" with a descriptive message that summarizes the changes you made.
 
 7. Push the new branch to the remote repository:
-   bash
+   ```bash
    git push origin <new-branch-name>
-   
+   ```
+
    This command pushes the new branch to the remote repository, making it available for others to see and review.
 
 - On GitHub navigate to the repository and locate the "New Pull Request" button.
@@ -150,9 +161,9 @@ In our project, we follow the convention of using conventional commit messages f
 
 A conventional commit message consists of a concise and structured format:
 
-bash
+```bash
 <type>(optional_scope): <your_commit_message>
-
+```
 
 The message includes a type and a description, separated by a colon. Here's a breakdown of each component:
 
@@ -170,5 +181,6 @@ Description: The description provides a brief summary of the changes made in the
 
 Examples:-
 
-bash
+```bash
 feat(backend): Add search feature....
+```
