@@ -25,8 +25,8 @@ function BusDetailsCard() {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: {xs: 'column', sm: 'row'},
-          alignItems: {xs: 'flex-start', sm: 'center'},
+          flexDirection: {xs: 'row', sm: 'row'},
+          alignItems: {xs: 'center', sm: 'center'},
           gap: {xs: '10px', sm: '2px', md: '10px'},
           margin: {xs: '0', md: '0 0.5rem'},
         }}
@@ -56,16 +56,7 @@ function BusDetailsCard() {
             </Typography>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: {xs: '100%', sm: 'auto'},
-          }}
-        >
-          <img src={arrorIcon} alt="Arrow Icon" />
-        </Box>
+        <img src={arrorIcon} alt="Arrow Icon" />
         <Box
           sx={{
             display: 'flex',
@@ -84,42 +75,41 @@ function BusDetailsCard() {
             </Typography>
             <Typography
               variant="h4"
-              fontSize={{xs: '1.25rem', sm: '0.8rem', md: '1.3rem'}}
+              fontSize={{xs: '1rem', sm: '0.8rem', md: '1.3rem'}}
               color={theme.palette.secondary.main}
             >
               {destination}
             </Typography>
           </Box>
         </Box>
+      </Box>
+      <Box
+        sx={{
+          width: '2px',
+          height: '5vh',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          margin: {xs: '0', sm: '20px', md: '2px 2rem'},
+          display: {xs: 'none', sm: 'none', md: 'block'},
+        }}
+      />
 
-        <Box
-          sx={{
-            width: '2px',
-            height: '5vh',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            margin: {xs: '0', sm: '20px', md: '2px 2rem'},
-            display: {xs: 'none', sm: 'none', md: 'block'},
-          }}
-        />
-
-        <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-          <Icon src={scheduleIcon} alt="Schedule Icon" />
-          <Box>
-            <Typography
-              variant="h6"
-              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
-              color={theme.palette.common.black}
-            >
-              Date and Time
-            </Typography>
-            <Typography
-              variant="h4"
-              fontSize={{xs: '1.25rem', sm: '1rem', md: '1.3rem'}}
-              color={theme.palette.secondary.main}
-            >
-              {time}
-            </Typography>
-          </Box>
+      <Box sx={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+        <Icon src={scheduleIcon} alt="Schedule Icon" />
+        <Box>
+          <Typography
+            variant="h6"
+            fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
+            color={theme.palette.common.black}
+          >
+            Date and Time
+          </Typography>
+          <Typography
+            variant="h4"
+            fontSize={{xs: '1.25rem', sm: '1rem', md: '1.3rem'}}
+            color={theme.palette.secondary.main}
+          >
+            {time}
+          </Typography>
         </Box>
       </Box>
     </>
