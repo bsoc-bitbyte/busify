@@ -1,21 +1,49 @@
 import Sidebar from '../AdminSideBar';
 // import Footer from '../../Footer';
-import {Grid} from '@mui/material';
+import {Grid, styled} from '@mui/material';
 import {LayoutProps} from '../../../types';
+import Footer from '../../Footer';
+import Navbar from '../../Navbar';
+import theme from '../../../theme';
 
 const AdminLayout = ({children}: LayoutProps) => {
+  const GridItemStyled = styled(Grid)`
+    &.MuiGrid-item {
+      padding: 0;
+    }
+  `;
+
   return (
-    <Grid container spacing={3} margin={0}>
-      <Grid item>
+    <GridItemStyled container spacing={4}>
+      <GridItemStyled
+        item
+        sx={{
+          [theme.breakpoints.up('sm')]: {
+            minWidth: '13rem',
+          },
+        }}
+      >
         <Sidebar />
-      </Grid>
-      <Grid item container xs direction={'column'} alignItems={'flex-start'}>
-        <main>{children}</main>
+      </GridItemStyled>
+      <Grid
+        container
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="stretch"
+        item
+        rowSpacing={4}
+        xs
+      >
+        {' '}
         <Grid alignItems={'stretch'} item xs>
-          {/* Footer goes here */}
+          <Navbar />
+        </Grid>
+        <Grid item>{children}</Grid>
+        <Grid alignItems={'stretch'} item xs>
+          <Footer />
         </Grid>
       </Grid>
-    </Grid>
+    </GridItemStyled>
   );
 };
 
