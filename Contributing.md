@@ -89,7 +89,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
  1. Please remember to include an .env file in both the frontend and backend directories. 
  You can reference any two of the environment variables present in Discord for your configuration.
 
- 2.Ensure Docker is running throughout the setup process. Make sure both the Redis stack and Progress 
+ 2. Ensure Docker is running throughout the setup process. Make sure both the Redis stack and Progress 
  components are up and running.
  
  3. Right-click on homepage, inspect, navigate to console, access application > cookies, delete JWT files to troubleshoot login issues.
@@ -102,16 +102,16 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    For Windows 
 
-     ```bash
-   "netstat -ano | findstr :3333"
-   "taskkill /PID <PID> /F"
+   ```bash
+   netstat -ano | findstr :3333
+   taskkill /PID <PID> /F
    ```
 
    For Linux
 
    ```bash
-   "sudo lsof -i | grep 3333"
-   "kill <PID>"
+   sudo lsof -i | grep 3333
+   kill <PID>
    ```
 
 # For Creating a New PUll Request 💡💻
