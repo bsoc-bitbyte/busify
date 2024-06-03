@@ -10,15 +10,15 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 2. Clone the forked repository.
 
-   bash
+   ```bash
    git clone https://github.com/<your_username>/busify.git
-   
+   ```
 
 3. Navigate to the project directory.
 
-   bash
+   ```bash
    cd busify
-   
+   ```
 
 4. Run the docker container with the command (make sure you have docker installed before running this).
 
@@ -31,6 +31,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    To Install Docker in Windows
 
    [Guide](https://www.youtube.com/watch?v=XgRGI0Pw2mM)
+
    [Install](https://docs.docker.com/desktop/install/windows-install/)
 
    After installing docker, run the following command to start database containers.
@@ -83,21 +84,27 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 13. Create a PR to develop repository.
 
-# ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP 💻
+# ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP  FOR LOGIN ISSUES 💻
 
  1. Please remember to include an .env file in both the frontend and backend directories. 
  You can reference any two of the environment variables present in Discord for your configuration.
 
  2.Ensure Docker is running throughout the setup process. Make sure both the Redis stack and Progress 
  components are up and running.
+ 
+ 3. Right-click on homepage, inspect, navigate to console, access application > cookies, delete JWT files to troubleshoot login issues.
 
- 3. To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
+ 4. Please use ESLint for code quality checks and Prettier for consistent code formatting before submitting pull requests.   This  ensures a clean and readable codebase. Thank you!
+
+# ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP  FOR BLOCKED PORT ERROR 💻
+   
+   To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
+
    For Windows 
 
      ```bash
    "netstat -ano | findstr :3333"
-    "taskkill /PID <PID> /F"
-
+   "taskkill /PID <PID> /F"
    ```
 
    For Linux
@@ -106,12 +113,6 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    "sudo lsof -i | grep 3333"
    "kill <PID>"
    ```
-
- 4. Right-click on homepage, inspect, navigate to console, access application > cookies, delete JWT files to troubleshoot login issues.
-
-
- 5. Please use ESLint for code quality checks and Prettier for consistent code formatting before submitting pull requests.   This  ensures a clean and readable codebase. Thank you!
-   
 
 # For Creating a New PUll Request 💡💻
 
