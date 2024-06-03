@@ -98,7 +98,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 # ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP  FOR BLOCKED PORT ERROR 💻
    
-   To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
+ 1. To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
 
    For Windows 
 
@@ -114,6 +114,37 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    kill <PID>
    ```
 
+ 2. Stop local PostgreSQL (sudo service postgresql stop) and Redis (sudo service redis-server stop) to free up ports 5432 and 6379 for Docker, or configure Docker to use different ports.
+    
+   For PostfreSQL 
+     
+     On Windows
+
+     ```bash
+     net stop postgresql
+     ```
+
+     On Linux
+
+     ```bash
+     sudo service postgresql stop
+     ```
+
+   For Redis 
+
+     On Windows
+
+     ```bash
+     net stop Redis
+     ```
+
+     On Linux
+
+     ```bash
+     sudo service redis-server stop
+     ```
+
+  
 # For Creating a New PUll Request 💡💻
 
 1. Navigate to the repository's directory:
@@ -142,7 +173,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    ```bash
    git add .
-   git commit -m "Your commit message here"
+   git commit -m "<type>(optional_scope): <your_commit_message>"
    ```
 
 6. Replace "Your commit message here" with a descriptive message that summarizes the changes you made.
