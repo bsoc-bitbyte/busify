@@ -22,7 +22,10 @@ export class JwtAuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
     if (request.headers.cookie) {
-      const token = request.headers.cookie.split('=')[1];
+      const headers = Object.fromEntries(
+        request.headers.cookie.split('; ').map(x => x.split('='))
+      );
+      const token = headers['jwt'];
       const user = this.validateToken(token);
       if (!user) {
         throw new UnauthorizedException(

@@ -249,7 +249,7 @@ export default function Navbar() {
           </ProfileContainer>
         )}
 
-        {user?.role === 'admin' ? (
+        {!location.pathname.startsWith('/admin') && user?.role === 'admin' ? (
           currentScreen === 'lg' || currentScreen === 'xl' ? (
             <ManageButton>
               <Typography variant="h6" color={theme.palette.common.black}>
