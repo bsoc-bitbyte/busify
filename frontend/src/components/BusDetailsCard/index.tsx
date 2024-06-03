@@ -25,8 +25,7 @@ function BusDetailsCard() {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: {xs: 'row', sm: 'row'},
-          alignItems: {xs: 'center', sm: 'center'},
+          alignItems: 'center',
           gap: {xs: '10px', sm: '2px', md: '10px'},
           margin: {xs: '0', md: '0 0.5rem'},
         }}
@@ -35,7 +34,7 @@ function BusDetailsCard() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '5px'},
+            gap: '5px',
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
@@ -61,7 +60,7 @@ function BusDetailsCard() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '5px'},
+            gap: '5px',
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
