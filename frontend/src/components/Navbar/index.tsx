@@ -1,24 +1,25 @@
-import React, {useRef} from 'react';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import {
-  useTheme,
-  Typography,
+  Avatar,
   Box,
   Button,
-  styled,
+  IconButton,
   Menu,
   MenuItem,
-  IconButton,
+  Stack,
+  Typography,
+  styled,
+  useTheme,
 } from '@mui/material';
-import getGoogleOAuthURL from '../../utils/getOAuthRedirectUrl';
-import {Link} from 'react-router-dom';
-import {useAuthStore} from '../../store/authStore';
-import helpIcon from '../../assets/helpIcon.svg';
-import googleIcon from '../../assets/googleIcon.svg';
-import {Avatar} from '@mui/material';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import toast, {Toaster} from 'react-hot-toast';
 import axios from 'axios';
+import React, {useRef} from 'react';
+import toast, {Toaster} from 'react-hot-toast';
+import {Link, useLocation} from 'react-router-dom';
+import googleIcon from '../../assets/googleIcon.svg';
+import helpIcon from '../../assets/helpIcon.svg';
 import {useScreen} from '../../customHooks/useScreen';
+import {useAuthStore} from '../../store/authStore';
+import getGoogleOAuthURL from '../../utils/getOAuthRedirectUrl';
 
 const NavContainer = styled(Box)`
   display: flex;
@@ -80,6 +81,7 @@ export default function Navbar() {
   const currentScreen = useScreen();
   const theme = useTheme();
   const {isAuth, user, setIsAuth, setUser} = useAuthStore();
+  const location = useLocation();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -122,18 +124,42 @@ export default function Navbar() {
 
   return (
     <NavContainer>
-      <Typography
-        variant="h1"
-        color={theme.palette.primary.main}
-        fontSize={{xs: '1.25rem', md: '2.5rem'}}
-      >
-        <LinkContainer
-          to="/"
-          style={{textDecoration: 'none', color: 'inherit'}}
+      {location.pathname.startsWith('/admin') && user?.role === 'admin' ? (
+        <Stack>
+          <Typography
+            variant="h1"
+            color={theme.palette.text.primary}
+            fontSize={{xs: '1.5rem', md: '2.5rem'}}
+          >
+            Manage Buses
+          </Typography>
+          <Typography
+            paddingTop={{sm: 0, md: 2}}
+            variant="h6"
+            color={theme.palette.secondary.light}
+          >
+            {new Date().toLocaleDateString('en-UK', {
+              weekday: 'long',
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </Typography>
+        </Stack>
+      ) : (
+        <Typography
+          variant="h1"
+          color={theme.palette.primary.main}
+          fontSize={{xs: '1.25rem', md: '2.5rem'}}
         >
-          BUSIFY
-        </LinkContainer>
-      </Typography>
+          <LinkContainer
+            to="/"
+            style={{textDecoration: 'none', color: 'inherit'}}
+          >
+            BUSIFY
+          </LinkContainer>
+        </Typography>
+      )}
       <Box
         sx={{
           display: 'flex',
@@ -223,7 +249,7 @@ export default function Navbar() {
           </ProfileContainer>
         )}
 
-        {user?.role === 'admin' ? (
+        {!location.pathname.startsWith('/admin') && user?.role === 'admin' ? (
           currentScreen === 'lg' || currentScreen === 'xl' ? (
             <ManageButton>
               <Typography variant="h6" color={theme.palette.common.black}>
