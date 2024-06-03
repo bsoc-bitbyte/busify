@@ -114,35 +114,35 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    kill <PID>
    ```
 
- 2. Stop local PostgreSQL (sudo service postgresql stop) and Redis (sudo service redis-server stop) to free up ports 5432 and 6379 for Docker, or configure Docker to use different ports.
+ 2. Stop local PostgreSQL and Redis to free up ports 5432 and 6379 for Docker, or configure Docker to use different ports.
     
-   For PostfreSQL 
+For PostfreSQL 
      
-     On Windows
+   On Windows
 
-     ```bash
+   ```bash
      net stop postgresql
-     ```
+   ```
 
-     On Linux
+   On Linux
 
-     ```bash
+   ```bash
      sudo service postgresql stop
-     ```
+   ```
 
-   For Redis 
+For Redis 
 
-     On Windows
+   On Windows
 
-     ```bash
+   ```bash
      net stop Redis
-     ```
+   ```
 
-     On Linux
+   On Linux
 
-     ```bash
+   ```bash
      sudo service redis-server stop
-     ```
+   ```
 
   
 # For Creating a New PUll Request 💡💻
