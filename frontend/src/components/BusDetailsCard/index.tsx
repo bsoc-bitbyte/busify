@@ -19,34 +19,36 @@ function BusDetailsCard() {
   const time = useOrderStore(state => state.time);
   const source = useOrderStore(state => state.source);
   const destination = useOrderStore(state => state.destination);
+
   return (
     <>
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: {xs: '10px', md: '2rem'},
+          gap: {xs: '10px', sm: '2px', md: '10px'},
+          margin: {xs: '0', md: '0 0.5rem'},
         }}
       >
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '10px'},
+            gap: '5px',
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
           <Box>
             <Typography
               variant="h6"
-              fontSize={{xs: '0.8rem', md: '1rem'}}
+              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
               color={theme.palette.common.black}
             >
               From
             </Typography>
             <Typography
               variant="h4"
-              fontSize={{xs: '1.25rem', md: '1.5rem'}}
+              fontSize={{xs: '1rem', sm: '0.8rem', md: '1.3rem'}}
               color={theme.palette.secondary.main}
             >
               {source}
@@ -58,21 +60,21 @@ function BusDetailsCard() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: {xs: '5px', md: '10px'},
+            gap: '5px',
           }}
         >
           <Icon src={busIcon} alt="Bus Icon" />
           <Box>
             <Typography
               variant="h6"
-              fontSize={{xs: '0.8rem', md: '1rem'}}
+              fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
               color={theme.palette.common.black}
             >
               To
             </Typography>
             <Typography
               variant="h4"
-              fontSize={{xs: '1.25rem', md: '1.5rem'}}
+              fontSize={{xs: '1rem', sm: '0.8rem', md: '1.3rem'}}
               color={theme.palette.secondary.main}
             >
               {destination}
@@ -85,8 +87,8 @@ function BusDetailsCard() {
           width: '2px',
           height: '5vh',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          margin: '0 2rem',
-          display: {xs: 'none', sm: 'block'},
+          margin: {xs: '0', sm: '20px', md: '2px 2rem'},
+          display: {xs: 'none', sm: 'none', md: 'block'},
         }}
       />
 
@@ -95,14 +97,14 @@ function BusDetailsCard() {
         <Box>
           <Typography
             variant="h6"
-            fontSize={{xs: '0.8rem', md: '1rem'}}
+            fontSize={{xs: '0.8rem', sm: '0.8rem', md: '1rem'}}
             color={theme.palette.common.black}
           >
             Date and Time
           </Typography>
           <Typography
             variant="h4"
-            fontSize={{xs: '1.25rem', md: '1.5rem'}}
+            fontSize={{xs: '1.25rem', sm: '1rem', md: '1.3rem'}}
             color={theme.palette.secondary.main}
           >
             {time}
