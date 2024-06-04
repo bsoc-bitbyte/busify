@@ -28,11 +28,19 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    [Install](https://docs.docker.com/engine/install/)
 
+   To Install Docker in Windows
+
+   [Guide](https://www.youtube.com/watch?v=XgRGI0Pw2mM)
+
+   [Install](https://docs.docker.com/desktop/install/windows-install/)
+
    After installing docker, run the following command to start database containers.
 
    ```bash
    docker compose --env-file backend/.env up
    ```
+
+  💡Make Sure Your Docker is running/ON during the whole SetUp 
 
 6. In new terminal type
 
@@ -60,7 +68,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 9. Stage your changes and commit
 
-   ```bash
+  ``` bash
    git add <filename>
    ```
 
@@ -76,6 +84,67 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 13. Create a PR to develop repository.
 
+# ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP  FOR LOGIN ISSUES 💻
+
+ 1. Please remember to include an .env file in both the frontend and backend directories. 
+ You can reference any two of the environment variables present in Discord for your configuration.
+
+ 2. Ensure Docker is running throughout the setup process. Make sure both the Redis stack and Progress 
+ components are up and running.
+ 
+ 3. Right-click on homepage, inspect, navigate to console, access application > cookies, delete JWT files to troubleshoot login issues.
+
+ 4. Please use ESLint for code quality checks and Prettier for consistent code formatting before submitting pull requests.   This  ensures a clean and readable codebase. Thank you!
+
+# ERROR ❎ AND SOLUTION ✅ FOR COMMON PROBLEMS DURING SETUP  FOR BLOCKED PORT ERROR 💻
+   
+ 1. To resolve port 3333 issues, use netstat to find the PID associated with it, then taskkill to terminate the process using that PID.
+
+   For Windows 
+
+   ```bash
+   netstat -ano | findstr :3333
+   taskkill /PID <PID> /F
+   ```
+
+   For Linux
+
+   ```bash
+   sudo lsof -i | grep 3333
+   kill <PID>
+   ```
+
+ 2. Stop local PostgreSQL and Redis to free up ports 5432 and 6379 for Docker, or configure Docker to use different ports.
+    
+For PostfreSQL 
+     
+   On Windows
+
+   ```bash
+     net stop postgresql
+   ```
+
+   On Linux
+
+   ```bash
+     sudo service postgresql stop
+   ```
+
+For Redis 
+
+   On Windows
+
+   ```bash
+     net stop Redis
+   ```
+
+   On Linux
+
+   ```bash
+     sudo service redis-server stop
+   ```
+
+  
 # For Creating a New PUll Request 💡💻
 
 1. Navigate to the repository's directory:
@@ -86,7 +155,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
 2. Ensure you are on the branch you want to use as the base branch:
 
-   ```bash
+  ``` bash
    git checkout <base-branch>
    ```
 
@@ -104,7 +173,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
 
    ```bash
    git add .
-   git commit -m "Your commit message here"
+   git commit -m "<type>(optional_scope): <your_commit_message>"
    ```
 
 6. Replace "Your commit message here" with a descriptive message that summarizes the changes you made.
@@ -113,6 +182,7 @@ If you're reading this, you're probably creating a Pull Request or planning to d
    ```bash
    git push origin <new-branch-name>
    ```
+
    This command pushes the new branch to the remote repository, making it available for others to see and review.
 
 - On GitHub navigate to the repository and locate the "New Pull Request" button.
