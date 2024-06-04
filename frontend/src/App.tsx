@@ -51,7 +51,14 @@ function App() {
                 </UserProtectedRoute>
               }
             />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/profile"
+              element={
+                <UserProtectedRoute>
+                  <ProfilePage />
+                </UserProtectedRoute>
+              }
+            />
           </Routes>
           {!location.pathname.startsWith('/admin') && <Footer />}
         </Box>
