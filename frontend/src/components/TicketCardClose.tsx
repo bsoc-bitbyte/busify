@@ -8,24 +8,22 @@ const Root = styled(Card)({
   backgroundColor: '#FFC107',
   width: '441.25px',
   height: '211.25px',
-  margin: 'auto',
-  padding: '8px',
+  margin: '16px auto',
   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
-  position: 'relative',
   color: '#fff',
 });
 
 const Header = styled(Box)({
   backgroundColor: '#FFC107',
-  padding: '8px 16px',
+  padding: '8px 32px',
   display: 'flex',
-  justifyContent: 'flex-start',
+  justifyContent: 'space-between',
   alignItems: 'center',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
   color: '#fff',
   fontWeight: 'bold',
-  position: 'relative',
+  position: 'absolute',
   zIndex: 1,
 });
 
@@ -33,17 +31,17 @@ const HeaderText = styled(Typography)({
   color: '#fff',
   fontWeight: 'bold',
   position: 'absolute',
-  top: '-10px',
+  top: '-7px',
   left: '16px',
   backgroundColor: '#FFC107',
-  padding: '4px 8px',
+  padding: '4px 16px',
   borderRadius: '12px',
   boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-  zIndex: 10,
+  zIndex: 20,
 });
 
 const Content = styled(CardContent)({
-  paddingTop: '8px',
+  padding: '38px',
   backgroundColor: '#FFC107',
   color: '#fff',
   paddingBottom: '0px',

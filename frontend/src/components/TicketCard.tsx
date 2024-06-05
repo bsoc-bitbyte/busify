@@ -10,18 +10,16 @@ const Root = styled(Card)({
   height: '231.25px',
   margin: '16px auto',
   border: '1px solid #FFC107',
-  position: 'relative',
 });
 
 const Header = styled(Box)({
-  backgroundColor: '#FFC107',
   padding: '8px 32px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
-  position: 'relative',
+  position: 'absolute',
   zIndex: 10,
 });
 
@@ -39,7 +37,7 @@ const HeaderText = styled(Typography)({
 });
 
 const Content = styled(CardContent)({
-  padding: '16px',
+  padding: '38px',
   paddingBottom: '0px',
 });
 
