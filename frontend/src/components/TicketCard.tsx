@@ -1,46 +1,46 @@
 import React from 'react';
 import {Card, CardContent, Typography, Box} from '@mui/material';
 import {styled} from '@mui/system';
-import busIcon from '../assets/busIcon.svg';
 
 const Root = styled(Card)({
   borderRadius: '16px',
-  overflow: 'hidden',
   backgroundColor: '#fff',
   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  maxWidth: 600,
-  margin: 'auto',
+  width: '441.25px',
+  height: '231.25px',
+  margin: '16px auto',
   border: '1px solid #FFC107',
   position: 'relative',
 });
 
 const Header = styled(Box)({
   backgroundColor: '#FFC107',
-  padding: '8px 16px',
+  padding: '8px 32px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
   position: 'relative',
-  zIndex: 1,
+  zIndex: 10,
 });
 
 const HeaderText = styled(Typography)({
   color: '#fff',
   fontWeight: 'bold',
   position: 'absolute',
-  top: '-3px',
+  top: '-7px',
   left: '16px',
   backgroundColor: '#FFC107',
-  padding: '4px 8px',
+  padding: '4px 16px',
   borderRadius: '12px',
   boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-  zIndex: 10, // Ensuring it stays above other elements
+  zIndex: 20,
 });
 
 const Content = styled(CardContent)({
   padding: '16px',
+  paddingBottom: '0px',
 });
 
 const BusInfo = styled(Box)({
@@ -73,27 +73,23 @@ const DashedLine = styled(Box)({
 
 const DashedSegment = styled(Box)({
   flex: 1,
-  borderTop: '2px dashed #FFC107',
-  position: 'relative',
+  borderTop: '2px solid #FFC107',
+  height: '4px',
+  margin: '0 5px',
 });
 
 const Circle = styled(Box)({
-  width: '12px',
-  height: '12px',
+  width: '14px',
+  height: '14px',
   borderRadius: '50%',
   backgroundColor: '#FFC107',
-});
-
-const Icon = styled('img')({
-  width: '24px',
-  height: '24px',
 });
 
 const LocationInfo = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  paddingBottom: '16px',
+  paddingBottom: '8px',
 });
 
 const Location = styled(Box)({
@@ -153,7 +149,16 @@ const TicketCard: React.FC<TicketCardProps> = ({
         <DashedLine>
           <Circle />
           <DashedSegment />
-          <Icon src={busIcon} alt="Bus Icon" />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
           <DashedSegment />
           <Circle />
         </DashedLine>

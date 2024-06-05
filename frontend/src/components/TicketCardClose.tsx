@@ -6,9 +6,10 @@ const Root = styled(Card)({
   borderRadius: '16px',
   overflow: 'hidden',
   backgroundColor: '#FFC107',
-  maxWidth: 600,
+  width: '441.25px',
+  height: '211.25px',
   margin: 'auto',
-  padding: '16px',
+  padding: '8px',
   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
   position: 'relative',
   color: '#fff',
@@ -42,9 +43,10 @@ const HeaderText = styled(Typography)({
 });
 
 const Content = styled(CardContent)({
-  paddingTop: '16px',
+  paddingTop: '8px',
   backgroundColor: '#FFC107',
   color: '#fff',
+  paddingBottom: '0px',
 });
 
 const BusInfo = styled(Box)({
@@ -55,10 +57,11 @@ const BusInfo = styled(Box)({
   borderBottomLeftRadius: '16px',
   borderBottomRightRadius: '16px',
   backgroundColor: '#FFC107',
+  marginTop: '8px',
 });
 
 const BusNumber = styled(Typography)({
-  fontSize: '1.75rem',
+  fontSize: '1.5rem',
   fontWeight: 'bold',
   color: '#fff',
 });
@@ -71,20 +74,20 @@ const TimeDate = styled(Box)({
 const DashedLine = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   margin: '16px 0',
 });
 
 const DashedSegment = styled(Box)({
-  flex: 1,
-  borderTop: '2px dashed #fff',
-  position: 'relative',
-  margin: '0 8px',
+  width: '20px',
+  height: '0px',
+  borderTop: '2px solid #fff',
+  margin: '0 5px',
 });
 
 const Circle = styled(Box)({
-  width: '16px',
-  height: '16px',
+  width: '12px',
+  height: '12px',
   borderRadius: '50%',
   border: '2px solid #fff',
   display: 'flex',
@@ -93,8 +96,8 @@ const Circle = styled(Box)({
 });
 
 const InnerCircle = styled(Box)({
-  width: '8px',
-  height: '8px',
+  width: '6px',
+  height: '6px',
   borderRadius: '50%',
   backgroundColor: '#fff',
 });
@@ -103,7 +106,7 @@ const LocationInfo = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  paddingBottom: '16px',
+  paddingBottom: '8px',
 });
 
 const Location = styled(Box)({
@@ -140,11 +143,12 @@ const FadedCircle = styled(Box)({
 
 const BoldText = styled(Typography)({
   fontWeight: 'bold',
+  fontSize: '0.875rem',
 });
 
 const BoldFooterText = styled(Typography)({
   fontWeight: 'bold',
-  fontSize: '1.25rem',
+  fontSize: '1rem',
 });
 
 interface TicketCardCloseProps {
@@ -190,6 +194,17 @@ const TicketCardClose: React.FC<TicketCardCloseProps> = ({
           <Circle>
             <InnerCircle />
           </Circle>
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
+          <DashedSegment />
           <DashedSegment />
           <Circle>
             <InnerCircle />
