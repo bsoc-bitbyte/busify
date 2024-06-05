@@ -205,12 +205,13 @@ export default function Navbar() {
               </IconButton>
             ) : (
               <>
-                <Avatar
-                  alt={user?.name}
-                  src={user?.picture}
-                  sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
-                />
-
+                <a href="/profile">
+                  <Avatar
+                    alt={user?.name}
+                    src={user?.picture}
+                    sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
+                  />
+                </a>
                 <Typography
                   variant="h6"
                   color={theme.palette.common.black}

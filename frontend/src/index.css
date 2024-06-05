@@ -26,7 +26,3 @@ scrollbar-thumb {
   background-color: rgba(127, 125, 125, 0.4);
   border-radius: 10px;
 }
-
-.cover {
-  object-fit: cover;
-}

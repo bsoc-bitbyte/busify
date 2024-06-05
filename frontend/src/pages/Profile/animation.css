@@ -1,0 +1,27 @@
+.animate-slide-right {
+    animation: slide 0.7s forwards
+}
+
+.animate-slide-left {
+    animation: slide-left 0.7s backwards
+}
+
+@keyframes slide {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 9.75rem;
+    }
+}
+
+@keyframes slide-left {
+    0% {
+        left: 9.75rem;
+    }
+
+    100% {
+        left: 0;
+    }
+}
