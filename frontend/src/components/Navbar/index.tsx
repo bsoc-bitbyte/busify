@@ -205,13 +205,11 @@ export default function Navbar() {
               </IconButton>
             ) : (
               <>
-                <a href="/profile">
-                  <Avatar
-                    alt={user?.name}
-                    src={user?.picture}
-                    sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
-                  />
-                </a>
+                <Avatar
+                  alt={user?.name}
+                  src={user?.picture}
+                  sx={{width: '1.5rem', height: '1.5rem', marginLeft: '.5em'}}
+                />
                 <Typography
                   variant="h6"
                   color={theme.palette.common.black}
@@ -239,9 +237,7 @@ export default function Navbar() {
               }}
             >
               <MenuItem>
-                <LinkContainer to="#" onClick={closeMenu}>
-                  View Profile
-                </LinkContainer>
+                <LinkContainer to="/profile">View Profile</LinkContainer>
               </MenuItem>
               <MenuItem onClick={handleLogout}>
                 <LinkContainer to="#">Logout</LinkContainer>

@@ -128,7 +128,7 @@ const ProfilePage = () => {
         <Typography
           variant="h2"
           fontSize={{xs: '1rem', sm: '1.25rem', md: '1.5rem'}}
-          fontWeight={500}
+          fontWeight={600}
           marginTop="1.5rem"
           color={theme.palette.primary.main}
         >
