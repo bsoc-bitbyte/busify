@@ -1,18 +1,23 @@
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import SideBar from '../AdminPanel/AdminSideBar';
+import MenuIcon from '@mui/icons-material/Menu';
+
 import {
   Avatar,
   Box,
   Button,
   IconButton,
   Menu,
+  Drawer,
   MenuItem,
   Stack,
   Typography,
   styled,
   useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import axios from 'axios';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import toast, {Toaster} from 'react-hot-toast';
 import {Link, useLocation} from 'react-router-dom';
 import googleIcon from '../../assets/googleIcon.svg';
@@ -86,6 +91,20 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const [isDrawer, setIsDrawer] = React.useState(false);
+  const open1 = Boolean(isDrawer);
+  const matchesMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+  useEffect(() => {
+    if (matchesMediumScreen) {
+      setIsDrawer(true);
+    }
+  }, [matchesMediumScreen]);
+
+  const DrawerList = () => {
+    return <SideBar />;
+  };
+
   const openmenu = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -121,31 +140,53 @@ export default function Navbar() {
   };
 
   const profile_container = useRef<HTMLDivElement | null>(null);
-
   return (
     <NavContainer>
       {location.pathname.startsWith('/admin') && user?.role === 'admin' ? (
-        <Stack>
-          <Typography
-            variant="h1"
-            color={theme.palette.text.primary}
-            fontSize={{xs: '1.5rem', md: '2.5rem'}}
+        <>
+          <IconButton
+            sx={{
+              display: {xs: 'block', sm: 'block', md: 'none'},
+              marginLeft: '0.5rem',
+              marginRight: '0.5rem',
+            }}
+            onClick={() => {
+              setIsDrawer(!isDrawer);
+            }}
           >
-            Manage Buses
-          </Typography>
-          <Typography
-            paddingTop={{sm: 0, md: 2}}
-            variant="h6"
-            color={theme.palette.secondary.light}
-          >
-            {new Date().toLocaleDateString('en-UK', {
-              weekday: 'long',
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}
-          </Typography>
-        </Stack>
+            <MenuIcon
+              sx={{
+                display: {xs: 'flex', sm: 'flex', md: 'none'},
+                color: '#ffc107',
+              }}
+            />
+            <Drawer open={open1} anchor="left" sx={{width: '100%'}}>
+              {isDrawer && DrawerList()}
+            </Drawer>
+          </IconButton>
+
+          <Stack>
+            <Typography
+              variant="h1"
+              color={theme.palette.text.primary}
+              fontSize={{xs: '1.5rem', md: '2.5rem'}}
+            >
+              Manage Buses
+            </Typography>
+            <Typography
+              paddingTop={{sm: 0, md: 2}}
+              variant="h6"
+              color={theme.palette.secondary.light}
+            >
+              {new Date().toLocaleDateString('en-UK', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </Typography>
+          </Stack>
+        </>
       ) : (
         <Typography
           variant="h1"
