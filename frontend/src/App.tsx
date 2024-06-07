@@ -12,6 +12,7 @@ import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
 import {Toaster} from 'react-hot-toast';
 import Admin from './pages/Admin';
+import ProfilePage from './pages/Profile';
 
 function App() {
   const location = useLocation();
@@ -47,6 +48,14 @@ function App() {
               element={
                 <UserProtectedRoute>
                   <Demopage />
+                </UserProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <UserProtectedRoute>
+                  <ProfilePage />
                 </UserProtectedRoute>
               }
             />
