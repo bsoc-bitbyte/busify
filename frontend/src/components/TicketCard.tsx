@@ -3,13 +3,12 @@ import {Card, CardContent, Typography, Box} from '@mui/material';
 import {styled} from '@mui/system';
 
 const Root = styled(Card)({
-  borderRadius: '16px',
+  borderRadius: '24px',
   backgroundColor: '#fff',
   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
   width: '441.25px',
-  height: '231.25px',
+  height: '200px',
   margin: '16px auto',
-  border: '1px solid #FFC107',
 });
 
 const Header = styled(Box)({
@@ -52,8 +51,13 @@ const BusInfo = styled(Box)({
 });
 
 const BusNumber = styled(Typography)({
-  fontSize: '1.75rem',
-  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  fontWeight: 600,
+  color: '#fff',
+});
+const Time = styled(Typography)({
+  fontSize: '1.5rem',
+  fontWeight: 600,
   color: '#fff',
 });
 
@@ -96,13 +100,24 @@ const Location = styled(Box)({
 });
 
 const BoldText = styled(Typography)({
-  fontWeight: 'bold',
+  fontWeight: '500',
+  fontSize: '18px',
+  font: 'Outfit',
   WebkitTextStrokeWidth: '0.5px',
+  lineHeight: '22.68px',
+  color: '#1A1A1A',
 });
-
+const BoldTextBottom = styled(Typography)({
+  fontWeight: '400',
+  fontSize: '9px',
+  font: 'Outfit',
+  WebkitTextStrokeWidth: '0.5px',
+  lineHeight: '22.68px',
+  color: ' #C6C6C6',
+});
 const BoldFooterText = styled(Typography)({
-  fontWeight: 'bold',
-  fontSize: '1.25rem',
+  fontWeight: '500',
+  fontSize: '0.5625rem',
 });
 
 interface TicketCardProps {
@@ -130,18 +145,12 @@ const TicketCard: React.FC<TicketCardProps> = ({
       <Content>
         <LocationInfo>
           <Location>
-            <BoldText variant="h6">{departure}</BoldText>
-            <BoldText variant="subtitle2" color="textSecondary">
-              PDPM IIITDM Jabalpur
-            </BoldText>
+            <BoldText>{departure}</BoldText>
+            <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
           </Location>
           <Location style={{textAlign: 'right'}}>
-            <BoldText variant="h6" align="right">
-              {destination}
-            </BoldText>
-            <BoldText variant="subtitle2" color="textSecondary" align="right">
-              Jabalpur City
-            </BoldText>
+            <BoldText align="right">{destination}</BoldText>
+            <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
           </Location>
         </LocationInfo>
         <DashedLine>
@@ -163,16 +172,14 @@ const TicketCard: React.FC<TicketCardProps> = ({
       </Content>
       <BusInfo>
         <Box>
-          <BoldFooterText variant="subtitle2" style={{color: '#fff'}}>
-            Bus No.
-          </BoldFooterText>
+          <BoldFooterText style={{color: '#fff'}}>Bus No.</BoldFooterText>
           <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
             {busNumber}
           </BusNumber>
         </Box>
         <TimeDate>
-          <BoldFooterText variant="subtitle2">{date}</BoldFooterText>
-          <BoldFooterText variant="h6">{time}</BoldFooterText>
+          <BoldFooterText style={{color: '#fff'}}>{date}</BoldFooterText>
+          <Time>{time}</Time>
         </TimeDate>
       </BusInfo>
     </Root>

@@ -3,11 +3,11 @@ import {Card, CardContent, Typography, Box} from '@mui/material';
 import {styled} from '@mui/system';
 
 const Root = styled(Card)({
-  borderRadius: '16px',
+  borderRadius: '24px',
   overflow: 'hidden',
   backgroundColor: '#FFC107',
   width: '441.25px',
-  height: '211.25px',
+  height: '200px',
   margin: '16px auto',
   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
   color: '#fff',
@@ -31,7 +31,7 @@ const HeaderText = styled(Typography)({
   color: '#fff',
   fontWeight: 'bold',
   position: 'absolute',
-  top: '-7px',
+  top: '-16px',
   left: '16px',
   backgroundColor: '#FFC107',
   padding: '4px 16px',
@@ -41,7 +41,6 @@ const HeaderText = styled(Typography)({
 });
 
 const Content = styled(CardContent)({
-  padding: '38px',
   backgroundColor: '#FFC107',
   color: '#fff',
   paddingBottom: '0px',
@@ -120,7 +119,7 @@ const DoneStamp = styled(Box)({
   color: '#fff',
   fontSize: '2rem',
   fontWeight: 'bold',
-  opacity: 0.1,
+  opacity: 0.2,
   textTransform: 'uppercase',
   textAlign: 'center',
   zIndex: 10,
@@ -135,18 +134,34 @@ const FadedCircle = styled(Box)({
   height: '200px',
   borderRadius: '50%',
   border: '4px dashed #fff',
-  opacity: 0.1,
+  opacity: 0.2,
   zIndex: 9,
 });
 
 const BoldText = styled(Typography)({
+  fontWeight: '600',
+  fontSize: '1.125rem',
+  font: 'Outfit',
+  color: '#FFFFFF',
+});
+const BoldTextBottom = styled(Typography)({
+  fontWeight: '500',
+  fontSize: '9px',
+  font: 'Outfit',
+  WebkitTextStrokeWidth: '0.5px',
+  lineHeight: '11.34px',
+  color: ' #FFFFFF',
+});
+
+const Time = styled(Typography)({
+  fontSize: '1.5rem',
   fontWeight: 'bold',
-  fontSize: '0.875rem',
+  color: '#FFFFFF',
 });
 
 const BoldFooterText = styled(Typography)({
-  fontWeight: 'bold',
-  fontSize: '1rem',
+  fontWeight: '500',
+  fontSize: '0.5625rem',
 });
 
 interface TicketCardCloseProps {
@@ -176,16 +191,12 @@ const TicketCardClose: React.FC<TicketCardCloseProps> = ({
       <Content>
         <LocationInfo>
           <Location>
-            <BoldText variant="h6">{departure}</BoldText>
-            <BoldText variant="subtitle2">PDPM IIITDM Jabalpur</BoldText>
+            <BoldText>{departure}</BoldText>
+            <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
           </Location>
           <Location style={{textAlign: 'right'}}>
-            <BoldText variant="h6" align="right">
-              {destination}
-            </BoldText>
-            <BoldText variant="subtitle2" align="right">
-              Jabalpur City
-            </BoldText>
+            <BoldText align="right">{destination}</BoldText>
+            <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
           </Location>
         </LocationInfo>
         <DashedLine>
@@ -211,16 +222,14 @@ const TicketCardClose: React.FC<TicketCardCloseProps> = ({
       </Content>
       <BusInfo>
         <Box>
-          <BoldFooterText variant="subtitle2" style={{color: '#fff'}}>
-            Bus No.
-          </BoldFooterText>
+          <BoldFooterText style={{color: '#FFFFFF'}}>Bus No.</BoldFooterText>
           <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
             {busNumber}
           </BusNumber>
         </Box>
         <TimeDate>
-          <BoldFooterText variant="subtitle2">{date}</BoldFooterText>
-          <BoldFooterText variant="h6">{time}</BoldFooterText>
+          <BoldFooterText>{date}</BoldFooterText>
+          <Time>{time}</Time>
         </TimeDate>
       </BusInfo>
     </Root>
