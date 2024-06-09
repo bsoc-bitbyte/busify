@@ -11,8 +11,9 @@ import Checkout from './pages/Checkout';
 import Demopage from './pages/DemoPage/demopage';
 import UserProtectedRoute from './components/ProtectedRoutes';
 import {Toaster} from 'react-hot-toast';
-import Admin from './pages/Admin';
+import AdminDashBoard from './pages/AdminDashBoard';
 import ProfilePage from './pages/Profile';
+import AdminProtectedRoute from './components/AdminProtectedRoutes';
 
 function App() {
   const location = useLocation();
@@ -36,11 +37,11 @@ function App() {
               }
             />
             <Route
-              path="/admin"
+              path="/admin/dashboard"
               element={
-                <UserProtectedRoute>
-                  <Admin />
-                </UserProtectedRoute>
+                <AdminProtectedRoute>
+                  <AdminDashBoard />
+                </AdminProtectedRoute>
               }
             />
             <Route
