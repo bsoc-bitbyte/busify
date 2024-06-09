@@ -23,7 +23,7 @@ const Header = styled(Box)({
   borderTopRightRadius: '24px',
   color: '#fff',
   fontWeight: 'bold',
-  position: 'absolute',
+  position: 'relative',
   zIndex: 1,
 });
 
