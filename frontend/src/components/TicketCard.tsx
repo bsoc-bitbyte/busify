@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardContent, Typography, Box} from '@mui/material';
+import {Card, CardContent, Typography, Box, useMediaQuery} from '@mui/material';
 import {styled} from '@mui/system';
 
 const Root = styled(Card)({
@@ -137,6 +137,9 @@ const TicketCard: React.FC<TicketCardProps> = ({
   date,
   ticketId,
 }) => {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const numberOfSegments = isMobile ? 5 : 11;
+
   return (
     <Root>
       <Header>
@@ -155,18 +158,9 @@ const TicketCard: React.FC<TicketCardProps> = ({
         </LocationInfo>
         <DashedLine>
           <Circle />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
+          {Array.from({length: numberOfSegments}, (_, index) => (
+            <DashedSegment key={index} />
+          ))}
           <Circle />
         </DashedLine>
       </Content>

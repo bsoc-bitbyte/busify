@@ -1,16 +1,16 @@
 import React from 'react';
-import {Card, CardContent, Typography, Box} from '@mui/material';
+import {Card, CardContent, Typography, Box, useMediaQuery} from '@mui/material';
 import {styled} from '@mui/system';
 
 const Root = styled(Card)({
   borderRadius: '24px',
-  overflow: 'hidden',
+  overflow: 'visible',
   backgroundColor: '#FFC107',
   width: '441.25px',
   height: '200px',
   margin: '16px auto',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
   color: '#fff',
+  position: 'relative',
 });
 
 const Header = styled(Box)({
@@ -19,8 +19,8 @@ const Header = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  borderTopLeftRadius: '16px',
-  borderTopRightRadius: '16px',
+  borderTopLeftRadius: '24px',
+  borderTopRightRadius: '24px',
   color: '#fff',
   fontWeight: 'bold',
   position: 'absolute',
@@ -35,8 +35,7 @@ const HeaderText = styled(Typography)({
   left: '16px',
   backgroundColor: '#FFC107',
   padding: '4px 16px',
-  borderRadius: '12px',
-  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+  borderRadius: '16px',
   zIndex: 20,
 });
 
@@ -181,6 +180,9 @@ const TicketCardClose: React.FC<TicketCardCloseProps> = ({
   date,
   ticketId,
 }) => {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const numberOfSegments = isMobile ? 5 : 11;
+
   return (
     <Root>
       <Header>
@@ -203,18 +205,9 @@ const TicketCardClose: React.FC<TicketCardCloseProps> = ({
           <Circle>
             <InnerCircle />
           </Circle>
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
-          <DashedSegment />
+          {Array.from({length: numberOfSegments}, (_, index) => (
+            <DashedSegment key={index} />
+          ))}
           <Circle>
             <InnerCircle />
           </Circle>
