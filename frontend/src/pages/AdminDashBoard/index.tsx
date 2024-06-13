@@ -3,7 +3,7 @@ import AdminLayout from '../../components/AdminPanel/AdminLayout';
 const Admin = () => {
   return (
     <>
-      <AdminLayout>Ui elements go here.</AdminLayout>
+      <AdminLayout>Ui elements goes here.</AdminLayout>
     </>
   );
 };

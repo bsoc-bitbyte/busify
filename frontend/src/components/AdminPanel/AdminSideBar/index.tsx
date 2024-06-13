@@ -11,19 +11,28 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ScheduleIcon from '@mui/icons-material/WatchLater';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import BusIcon from '@mui/icons-material/DepartureBoard';
-import {useState} from 'react';
-import {Link} from 'react-router-dom';
+// import {useState} from 'react';
+import useStore from '../../../store/useStore';
+import {Link, useNavigate} from 'react-router-dom';
 import {useTheme, styled} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/ArrowCircleLeft';
 
 export default function SideBar() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const closeSidebar = () => {
     if (document.getElementById('drawer')) {
       (document.getElementById('drawer') as HTMLElement).style.display = 'none';
     }
+  };
+
+  const OpenDashBoard = () => {
+    navigate('/admin/dashboard');
+  };
+  const OpenSchedule = () => {
+    navigate('/admin/schedule');
   };
 
   const LinkContainer = styled(Link)`
@@ -47,9 +56,12 @@ export default function SideBar() {
     margin-bottom: 0.8rem;
   `;
 
-  const [active, setActive] = useState(0);
+  // const [active, setActive] = useState(0);
+  const active = useStore(state => state.active);
+  const setActive = useStore(state => state.setActive);
   const handleClick = (props: number) => {
     setActive(props);
+    console.log(active);
   };
 
   return (
@@ -107,6 +119,7 @@ export default function SideBar() {
           <Item>
             <ListButton
               onClick={() => {
+                OpenDashBoard();
                 handleClick(0);
               }}
               style={{backgroundColor: active === 0 ? '#FBBC05' : 'initial'}}
@@ -135,6 +148,7 @@ export default function SideBar() {
           <Item>
             <ListButton
               onClick={() => {
+                OpenSchedule();
                 handleClick(1);
               }}
               style={{backgroundColor: active === 1 ? '#FBBC05' : 'initial'}}
@@ -163,6 +177,7 @@ export default function SideBar() {
           <Item>
             <ListButton
               onClick={() => {
+                OpenDashBoard();
                 handleClick(2);
               }}
               style={{
@@ -194,6 +209,7 @@ export default function SideBar() {
           <Item>
             <ListButton
               onClick={() => {
+                OpenDashBoard();
                 handleClick(3);
               }}
               style={{backgroundColor: active === 3 ? '#FBBC05' : 'initial'}}
