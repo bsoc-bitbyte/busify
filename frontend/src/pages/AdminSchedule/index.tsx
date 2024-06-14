@@ -1,9 +1,9 @@
 import {Box, Button, Typography, styled} from '@mui/material';
 import AdminLayout from '../../components/AdminPanel/AdminLayout';
-import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import QueueIcon from '@mui/icons-material/Queue';
 import {useState} from 'react';
+import ConductorCards from '../../components/DetailsCards/ConductorCards';
+import BusCards from '../../components/DetailsCards/BusCards';
 
 const AdminSchedule = () => {
   const [count, setCount] = useState(0);
@@ -73,30 +73,6 @@ const AdminSchedule = () => {
                 Conductor Details
               </Typography>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                ml: {
-                  xs: '2rem',
-                  sm: '10rem',
-                  md: '19.8rem',
-                  lg: '34.5rem',
-                  xl: '44rem',
-                },
-              }}
-              onClick={() => {
-                setCount(2);
-              }}
-            >
-              <SearchIcon
-                sx={{
-                  height: '32px',
-                  width: '32px',
-                }}
-              />
-            </Box>
           </Box>
           <Box
             sx={{
@@ -119,7 +95,6 @@ const AdminSchedule = () => {
               display: 'flex',
               justifyContent: 'end',
               mt: '2rem',
-              pr: '2rem',
             }}
           >
             <FilterButton
@@ -136,59 +111,25 @@ const AdminSchedule = () => {
           </Box>
           {count === 0 ? (
             <Box
+              display="flex"
+              width="100%"
+              overflow="auto"
               sx={{
-                mt: '1.5rem',
-                height: '30rem',
+                mt: '1rem',
               }}
             >
-              <Box
-                sx={{
-                  width: '400px',
-                  height: '269px',
-                  borderRadius: '32px',
-                  border: '4px dashed #E6E6E6',
-                  background: '#F9F9F9',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <QueueIcon
-                  sx={{
-                    width: '80px',
-                    height: '80px',
-                    color: '#e6e6e6',
-                  }}
-                />
-              </Box>
+              <BusCards />
             </Box>
           ) : (
             <Box
+              display="flex"
+              width="100%"
+              overflow="auto"
               sx={{
-                mt: '1.5rem',
-                height: '30rem',
+                mt: '1rem',
               }}
             >
-              <Box
-                sx={{
-                  width: '250px',
-                  height: '304px',
-                  borderRadius: '32px',
-                  border: '4px dashed #E6E6E6',
-                  background: '#F9F9F9',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <QueueIcon
-                  sx={{
-                    width: '80px',
-                    height: '80px',
-                    color: '#e6e6e6',
-                  }}
-                />
-              </Box>
+              <ConductorCards />
             </Box>
           )}
         </Box>

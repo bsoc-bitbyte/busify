@@ -12,7 +12,7 @@ import ScheduleIcon from '@mui/icons-material/WatchLater';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import BusIcon from '@mui/icons-material/DepartureBoard';
 // import {useState} from 'react';
-import useStore from '../../../store/useStore';
+import useStore from '../../../store/tabStore';
 import {Link, useNavigate} from 'react-router-dom';
 import {useTheme, styled} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
@@ -56,9 +56,8 @@ export default function SideBar() {
     margin-bottom: 0.8rem;
   `;
 
-  // const [active, setActive] = useState(0);
-  const active = useStore(state => state.active);
-  const setActive = useStore(state => state.setActive);
+  const active = useStore(state => state.activeTab);
+  const setActive = useStore(state => state.setActiveTab);
   const handleClick = (props: number) => {
     setActive(props);
     console.log(active);
