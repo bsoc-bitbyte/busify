@@ -1,5 +1,4 @@
 import {Box, Button, Paper, Typography, styled} from '@mui/material';
-import QueueIcon from '@mui/icons-material/Queue';
 
 const BusCards = () => {
   const FilterButton = styled(Button)`
@@ -73,301 +72,101 @@ const BusCards = () => {
     height: 80px;
     background-color: #fbbc05;
     border-radius: 15px;
-    padding-left: 20px;
+    padding-left: 0px;
     display: flex;
   `;
   const BusTag = styled(Box)`
     width: 117px;
     height: 20px;
     border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
     background: #fff;
   `;
   return (
     <>
-      <Box
-        sx={{
-          width: '100%',
-          height: '50rem',
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: '1fr',
-            sm: '1fr',
-            md: '1fr',
-            lg: '1fr 1fr ',
-            xl: '1fr 1fr ',
-          },
-          gap: '40px',
-          pl: '1rem',
-        }}
-      >
-        <Card>
-          <HeadBar>
-            <Box>
-              <BusTag>
-                <LightText sx={{textAlign: 'center'}}>BUS NUMBER</LightText>
-              </BusTag>
-              <MediumText sx={{mt: '10px'}}>MP - 20 - PA -</MediumText>
-            </Box>
-            <LargeText sx={{ml: '10px', mt: '13px'}}>0369</LargeText>
-          </HeadBar>
-          <Box
-            sx={{
-              width: '395px',
-              height: '70px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box
-              sx={{
-                width: '150px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CAPACITY</LightText>
-              <Box display="flex" sx={{mt: '3px'}}>
-                <BoldText sx={{fontSize: '32px'}}>50</BoldText>
-                <BoldText sx={{fontSize: '12px', pt: '18px', pl: '5px'}}>
-                  Seats
-                </BoldText>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                width: '245px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CONTRACTOR & ID</LightText>
-              <BoldText sx={{fontSize: '24px', mt: '5px'}}>
-                Jagat Zacharia
-              </BoldText>
-              <SmallText sx={{pt: '5px'}}>#4DERT653D5U</SmallText>
-            </Box>
+      <Card>
+        <HeadBar>
+          <Box>
+            <BusTag>
+              <LightText>BUS NUMBER</LightText>
+            </BusTag>
+            <MediumText sx={{pl: '10px', mt: '10px'}}>
+              MP - 20 - PA -
+            </MediumText>
           </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <LightText>SCHEDULE</LightText>
-            <LightText
-              sx={{
-                fontSize: '12px',
-                textDecorationLine: 'underline',
-                letterSpacing: '0px',
-              }}
-            >
-              See More
-            </LightText>
-          </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-            }}
-          >
-            <UpcomingButton>3:30 pm</UpcomingButton>
-            <FilterButton>6:30 pm</FilterButton>
-            <FilterButton>8:00 pm</FilterButton>
-            <FilterButton>10:00 pm</FilterButton>
-          </Box>
-        </Card>
-        <Card>
-          <HeadBar>
-            <Box>
-              <BusTag>
-                <LightText sx={{textAlign: 'center'}}>BUS NUMBER</LightText>
-              </BusTag>
-              <MediumText sx={{mt: '10px'}}>MP - 20 - PA -</MediumText>
-            </Box>
-            <LargeText sx={{ml: '10px', mt: '13px'}}>4495</LargeText>
-          </HeadBar>
-          <Box
-            sx={{
-              width: '395px',
-              height: '70px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box
-              sx={{
-                width: '150px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CAPACITY</LightText>
-              <Box display="flex" sx={{mt: '3px'}}>
-                <BoldText sx={{fontSize: '32px'}}>50</BoldText>
-                <BoldText sx={{fontSize: '12px', pt: '18px', pl: '5px'}}>
-                  Seats
-                </BoldText>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                width: '245px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CONTRACTOR & ID</LightText>
-              <BoldText sx={{fontSize: '24px', mt: '5px'}}>
-                Jagat Zacharia
-              </BoldText>
-              <SmallText sx={{pt: '5px'}}>#4DERT653D5U</SmallText>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <LightText>SCHEDULE</LightText>
-            <LightText
-              sx={{
-                fontSize: '12px',
-                textDecorationLine: 'underline',
-                letterSpacing: '0px',
-              }}
-            >
-              See More
-            </LightText>
-          </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-            }}
-          >
-            <CompletedButton>3:30 pm</CompletedButton>
-            <UpcomingButton>6:30 pm</UpcomingButton>
-            <FilterButton>8:00 pm</FilterButton>
-            <FilterButton>10:00 pm</FilterButton>
-          </Box>
-        </Card>
-        <Card>
-          <HeadBar>
-            <Box>
-              <BusTag>
-                <LightText sx={{textAlign: 'center'}}>BUS NUMBER</LightText>
-              </BusTag>
-              <MediumText sx={{mt: '10px'}}>MP - 20 - PA -</MediumText>
-            </Box>
-            <LargeText sx={{ml: '10px', mt: '13px'}}>2210</LargeText>
-          </HeadBar>
-          <Box
-            sx={{
-              width: '395px',
-              height: '70px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Box
-              sx={{
-                width: '150px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CAPACITY</LightText>
-              <Box display="flex" sx={{mt: '3px'}}>
-                <BoldText sx={{fontSize: '32px'}}>50</BoldText>
-                <BoldText sx={{fontSize: '12px', pt: '18px', pl: '5px'}}>
-                  Seats
-                </BoldText>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                width: '245px',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <LightText>CONTRACTOR & ID</LightText>
-              <BoldText sx={{fontSize: '24px', mt: '5px'}}>
-                Jagat Zacharia
-              </BoldText>
-              <SmallText sx={{pt: '5px'}}>#4DERT653D5U</SmallText>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <LightText>SCHEDULE</LightText>
-            <LightText
-              sx={{
-                fontSize: '12px',
-                textDecorationLine: 'underline',
-                letterSpacing: '0px',
-              }}
-            >
-              See More
-            </LightText>
-          </Box>
-          <Box
-            sx={{
-              width: '395px',
-              display: 'flex',
-              mt: '15px',
-            }}
-          >
-            <UpcomingButton>3:30 pm</UpcomingButton>
-            <UpcomingButton>6:30 pm</UpcomingButton>
-            <FilterButton>8:00 pm</FilterButton>
-            <FilterButton>10:00 pm</FilterButton>
-          </Box>
-        </Card>
+          <LargeText sx={{ml: '10px', mt: '13px'}}>0369</LargeText>
+        </HeadBar>
         <Box
           sx={{
-            width: '435px',
-            height: '279px',
-            borderRadius: '32px',
-            border: '4px dashed #E6E6E6',
-            background: '#F9F9F9',
+            width: '395px',
+            height: '70px',
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            mt: '15px',
+            justifyContent: 'space-between',
           }}
         >
-          <QueueIcon
+          <Box
             sx={{
-              width: '80px',
-              height: '80px',
-              color: '#e6e6e6',
+              width: '150px',
+              height: '70px',
+              display: 'flex',
+              flexDirection: 'column',
             }}
-          />
+          >
+            <LightText>CAPACITY</LightText>
+            <Box display="flex" sx={{mt: '3px'}}>
+              <BoldText sx={{fontSize: '32px'}}>50</BoldText>
+              <BoldText sx={{fontSize: '12px', pt: '18px', pl: '5px'}}>
+                Seats
+              </BoldText>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              width: '245px',
+              height: '70px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <LightText>CONTRACTOR & ID</LightText>
+            <BoldText sx={{fontSize: '24px', mt: '5px'}}>
+              Jagat Zacharia
+            </BoldText>
+            <SmallText sx={{pt: '5px'}}>#4DERT653D5U</SmallText>
+          </Box>
         </Box>
-      </Box>
+        <Box
+          sx={{
+            width: '395px',
+            display: 'flex',
+            mt: '15px',
+            justifyContent: 'space-between',
+          }}
+        >
+          <LightText>SCHEDULE</LightText>
+          <LightText
+            sx={{
+              fontSize: '12px',
+              textDecorationLine: 'underline',
+              letterSpacing: '0px',
+            }}
+          >
+            See More
+          </LightText>
+        </Box>
+        <Box
+          sx={{
+            width: '395px',
+            display: 'flex',
+            mt: '15px',
+          }}
+        >
+          <CompletedButton>3:30 pm</CompletedButton>
+          <UpcomingButton>6:30 pm</UpcomingButton>
+          <FilterButton>8:00 pm</FilterButton>
+          <FilterButton>10:00 pm</FilterButton>
+        </Box>
+      </Card>
     </>
   );
 };

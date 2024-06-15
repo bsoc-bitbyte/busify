@@ -1,12 +1,19 @@
 import {Box, Button, Typography, styled} from '@mui/material';
 import AdminLayout from '../../components/AdminPanel/AdminLayout';
 import AddIcon from '@mui/icons-material/Add';
-import {useState} from 'react';
+import QueueIcon from '@mui/icons-material/Queue';
+import {useEffect, useState} from 'react';
 import ConductorCards from '../../components/DetailsCards/ConductorCards';
 import BusCards from '../../components/DetailsCards/BusCards';
+import useStore from '../../store/tabStore';
 
 const AdminSchedule = () => {
   const [count, setCount] = useState(0);
+
+  const setActive = useStore(state => state.setActiveTab);
+  useEffect(() => {
+    setActive(1);
+  });
 
   const FilterButton = styled(Button)`
     background: #f9f9f9;
@@ -76,7 +83,7 @@ const AdminSchedule = () => {
           </Box>
           <Box
             sx={{
-              height: '4px',
+              height: '5px',
               backgroundColor: '#fbbc05',
               width: count === 1 ? '212px' : '132px',
               transition: '0.3s ease-out',
@@ -85,9 +92,9 @@ const AdminSchedule = () => {
           ></Box>
           <Box
             sx={{
-              height: '3px',
+              height: '2px',
               borderRadius: '4px',
-              backgroundColor: '#c6c6c6',
+              backgroundColor: '#1a1a1a',
             }}
           ></Box>
           <Box
@@ -118,7 +125,46 @@ const AdminSchedule = () => {
                 mt: '1rem',
               }}
             >
-              <BusCards />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '50rem',
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    sm: '1fr',
+                    md: '1fr',
+                    lg: '1fr 1fr ',
+                    xl: '1fr 1fr ',
+                  },
+                  gap: '40px',
+                  pl: '1rem',
+                }}
+              >
+                <BusCards />
+                <BusCards />
+                <BusCards />
+                <Box
+                  sx={{
+                    width: '435px',
+                    height: '279px',
+                    borderRadius: '32px',
+                    border: '4px dashed #E6E6E6',
+                    background: '#F9F9F9',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <QueueIcon
+                    sx={{
+                      width: '80px',
+                      height: '80px',
+                      color: '#e6e6e6',
+                    }}
+                  />
+                </Box>
+              </Box>
             </Box>
           ) : (
             <Box
@@ -129,7 +175,44 @@ const AdminSchedule = () => {
                 mt: '1rem',
               }}
             >
-              <ConductorCards />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '50rem',
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    sm: '1fr',
+                    md: '1fr 1fr',
+                    lg: '1fr 1fr 1fr 1fr',
+                  },
+                  gap: '40px',
+                  pl: '1rem',
+                }}
+              >
+                <ConductorCards />
+                <ConductorCards />
+                <Box
+                  sx={{
+                    width: '260px',
+                    height: '320px',
+                    borderRadius: '22px',
+                    border: '4px dashed #E6E6E6',
+                    background: '#F9F9F9',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <QueueIcon
+                    sx={{
+                      width: '80px',
+                      height: '80px',
+                      color: '#e6e6e6',
+                    }}
+                  />
+                </Box>
+              </Box>
             </Box>
           )}
         </Box>
