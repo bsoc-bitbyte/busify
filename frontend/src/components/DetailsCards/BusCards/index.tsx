@@ -38,14 +38,12 @@ const BusCards = () => {
   `;
   const MediumText = styled(Typography)`
     color: #fff;
-    font-size: 32px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
   `;
   const LargeText = styled(Typography)`
     color: #fff;
-    font-size: 52px;
     font-weight: 600;
     line-height: normal;
   `;
@@ -58,7 +56,7 @@ const BusCards = () => {
     letter-spacing: 1.6px;
   `;
   const Card = styled(Paper)`
-    width: 435px;
+    max-width: 435px;
     height: 279px;
     border-radius: 22px;
     background: #fff;
@@ -68,15 +66,15 @@ const BusCards = () => {
     padding: 20px;
   `;
   const HeadBar = styled(Box)`
-    width: 395px;
-    height: 80px;
+    max-width: 395px;
+    // height: 80px;
     background-color: #fbbc05;
     border-radius: 15px;
     padding-left: 0px;
     display: flex;
   `;
   const BusTag = styled(Box)`
-    width: 117px;
+    max-width: 117px;
     height: 20px;
     border-bottom-right-radius: 8px;
     background: #fff;
@@ -89,16 +87,30 @@ const BusCards = () => {
             <BusTag>
               <LightText>BUS NUMBER</LightText>
             </BusTag>
-            <MediumText sx={{pl: '10px', mt: '10px'}}>
+            <MediumText
+              sx={{
+                pl: '10px',
+                mt: '10px',
+                fontSize: {xs: '28px', sm: '32px'},
+              }}
+            >
               MP - 20 - PA -
             </MediumText>
           </Box>
-          <LargeText sx={{ml: '10px', mt: '13px'}}>0369</LargeText>
+          <LargeText
+            sx={{
+              ml: '10px',
+              mt: '13px',
+              fontSize: {xs: '48px', sm: '52px'},
+            }}
+          >
+            0369
+          </LargeText>
         </HeadBar>
         <Box
           sx={{
-            width: '395px',
-            height: '70px',
+            maxWidth: '395px',
+            // height: '70px',
             display: 'flex',
             mt: '15px',
             justifyContent: 'space-between',
@@ -106,8 +118,8 @@ const BusCards = () => {
         >
           <Box
             sx={{
-              width: '150px',
-              height: '70px',
+              maxWidth: '150px',
+              // height: '70px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -122,8 +134,8 @@ const BusCards = () => {
           </Box>
           <Box
             sx={{
-              width: '245px',
-              height: '70px',
+              maxWidth: '245px',
+              // height: '70px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -137,7 +149,7 @@ const BusCards = () => {
         </Box>
         <Box
           sx={{
-            width: '395px',
+            maxWidth: '395px',
             display: 'flex',
             mt: '15px',
             justifyContent: 'space-between',
@@ -156,7 +168,7 @@ const BusCards = () => {
         </Box>
         <Box
           sx={{
-            width: '395px',
+            maxWidth: '395px',
             display: 'flex',
             mt: '15px',
           }}

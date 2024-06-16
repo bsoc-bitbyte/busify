@@ -42,7 +42,7 @@ const AdminSchedule = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '55px',
+                // height: '55px',
               }}
               onClick={() => {
                 setCount(0);
@@ -63,7 +63,7 @@ const AdminSchedule = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '55px',
+                // height: '55px',
               }}
               onClick={() => {
                 setCount(1);
@@ -134,7 +134,7 @@ const AdminSchedule = () => {
                     xs: '1fr',
                     sm: '1fr',
                     md: '1fr',
-                    lg: '1fr 1fr ',
+                    lg: '1fr',
                     xl: '1fr 1fr ',
                   },
                   gap: '40px',
