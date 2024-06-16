@@ -75,6 +75,55 @@ const demoData = {
       ticketPrice: 20,
     },
   ],
+  users: [
+    {
+      id: 'user1',
+      email: '23bcs200@iiitdmj.ac.in',
+      name: 'Aditya Verma',
+      picture: 'https://example.com/user1.jpg',
+      role: "admin",
+      createdAt: new Date(),
+    },
+    {
+      id: 'user2',
+      email: '23bcs201@iiitdmj.ac.in',
+      name: 'Ram Vyas',
+      picture: 'https://example.com/user1.jpg',
+      role: "user",
+      createdAt: new Date(),
+    },
+  ],
+  tickets: [
+    {
+      orderId: "order1",
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+    }, {
+      orderId: "order2",
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+    },
+  ],
+  orders: [
+    {
+      id: 'order1',
+      userId: 'user2',
+      scheduleId: '1',
+      status: "pending",
+      amount: 100,
+      attempts: 0,
+      receipt: 'receipt1',
+      createdAt: new Date(),
+    },
+    {
+      id: 'order2',
+      userId: 'user2',
+      scheduleId: '2',
+      status: "pending",
+      amount: 200,
+      attempts: 1,
+      receipt: 'receipt2',
+      createdAt: new Date(),
+    },
+  ],
 };
 
 async function cleanDb() {
@@ -102,6 +151,18 @@ async function seedDb() {
       await prisma.schedule.createMany({
         data: demoData.schedule,
       });
+
+      await prisma.ticket.createMany({
+        data: demoData.tickets
+      })
+
+      await prisma.users.createMany({
+        data: demoData.users
+      })
+
+      await prisma.order.createMany({
+        data: demoData.orders
+      })
   console.log('Seeding done');
   await prisma.$disconnect();
 }
