@@ -75,4 +75,84 @@ export class OrdersService {
   }
 
   async paymentConfirmation() {}
+
+  async getRecentOrders(){
+    const today = new Date()
+    today.setHours(0,0,0,0)
+    const orders = await this.prismaService.order.findMany({
+      where: {
+        createdAt: {
+          gte: today
+        },
+      },select:{
+        id: true,
+        scheduleId:true,
+        userId: true, 
+        amount: true,
+        receipt: true,
+        createdAt: true
+      }
+    })
+
+    const schedule = await this.prismaService.schedule.findMany({
+      where: {
+        OR: [...orders.map(order=>({id: order.scheduleId}))]
+      },
+      select: {
+        id: true, 
+        from: true, 
+        to: true, 
+        departureTime: true,
+      }
+    })
+
+    const users = await this.prismaService.users.findMany({
+      where: {
+        OR: [...orders.map(order=>({id: order.scheduleId}))]
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true
+      }
+    })
+
+    const tickets = await this.prismaService.ticket.findMany({
+      where: {
+        OR: [...orders.map(order=>({orderId: order.id}))]
+      },
+      select: {
+        orderId: true,
+        passengerEmail: true
+      }
+    })
+
+  type RecentOrdersProps = {
+    orderId: string
+    ammount: number
+    receipt: string
+    buyer: string
+    from: string
+    to: string
+    time: string
+    passengers: string[]
+    email: string
+    createdAt: Date
+  }
+
+    const formattedData: RecentOrdersProps[] = orders.map((order)=>({
+      orderId: order.id,
+      ammount: order.amount,
+      receipt: order.receipt,
+      buyer: users.find(user=>user.id===order.userId).name,
+      from: schedule.find(schedule=>schedule.id===order.scheduleId).from,
+      to: schedule.find(schedule=>schedule.id===order.scheduleId).to,
+      time: schedule.find(schedule=>schedule.id===order.scheduleId).departureTime,
+      passengers: tickets.find(ticket=>ticket.orderId===order.id).passengerEmail,
+      email: users.find(user=>user.id===order.userId).email,
+      createdAt: order.createdAt
+    }))
+
+    return formattedData
+  }
 }

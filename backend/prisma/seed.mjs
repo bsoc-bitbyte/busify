@@ -86,34 +86,22 @@ async function cleanDb() {
 
 async function seedDb() {
   await cleanDb();
-  await Promise.all(
-    demoData.contractors.map(async contractor => {
-      await prisma.contractor.create({
-        data: contractor,
+  
+      await prisma.contractor.createMany({
+        data: demoData.contractors,
       });
-    })
-  );
-  await Promise.all(
-    demoData.conductor.map(async conductor => {
-      await prisma.conductor.create({
-        data: conductor,
+  
+      await prisma.conductor.createMany({
+        data: demoData.conductor,
       });
-    })
-  );
-  await Promise.all(
-    demoData.bus.map(async bus => {
-      await prisma.bus.create({
-        data: bus,
+  
+      await prisma.bus.createMany({
+        data: demoData.bus,
       });
-    })
-  );
-  await Promise.all(
-    demoData.schedule.map(async schedule => {
-      await prisma.schedule.create({
-        data: schedule,
+  
+      await prisma.schedule.createMany({
+        data: demoData.schedule,
       });
-    })
-  );
   console.log('Seeding done');
   await prisma.$disconnect();
 }
