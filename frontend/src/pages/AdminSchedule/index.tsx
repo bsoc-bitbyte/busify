@@ -42,7 +42,6 @@ const AdminSchedule = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                // height: '55px',
               }}
               onClick={() => {
                 setCount(0);
@@ -63,7 +62,6 @@ const AdminSchedule = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                // height: '55px',
               }}
               onClick={() => {
                 setCount(1);
@@ -85,7 +83,7 @@ const AdminSchedule = () => {
             sx={{
               height: '5px',
               backgroundColor: '#fbbc05',
-              width: count === 1 ? '212px' : '132px',
+              maxWidth: count === 1 ? '212px' : '132px',
               transition: '0.3s ease-out',
               transform: count === 1 ? 'translateX(165px)' : 'translateX(0px)',
             }}
@@ -120,7 +118,6 @@ const AdminSchedule = () => {
             <Box
               display="flex"
               width="100%"
-              overflow="auto"
               sx={{
                 mt: '1rem',
               }}
@@ -128,14 +125,12 @@ const AdminSchedule = () => {
               <Box
                 sx={{
                   width: '100%',
-                  height: '50rem',
                   display: 'grid',
                   gridTemplateColumns: {
                     xs: '1fr',
                     sm: '1fr',
                     md: '1fr',
-                    lg: '1fr',
-                    xl: '1fr 1fr ',
+                    lg: '1fr 1fr',
                   },
                   gap: '40px',
                   pl: '1rem',
@@ -146,8 +141,7 @@ const AdminSchedule = () => {
                 <BusCards />
                 <Box
                   sx={{
-                    width: '435px',
-                    height: '279px',
+                    maxWidth: '435px',
                     borderRadius: '32px',
                     border: '4px dashed #E6E6E6',
                     background: '#F9F9F9',
@@ -170,7 +164,6 @@ const AdminSchedule = () => {
             <Box
               display="flex"
               width="100%"
-              overflow="auto"
               sx={{
                 mt: '1rem',
               }}
@@ -178,7 +171,6 @@ const AdminSchedule = () => {
               <Box
                 sx={{
                   width: '100%',
-                  height: '50rem',
                   display: 'grid',
                   gridTemplateColumns: {
                     xs: '1fr',
@@ -194,8 +186,7 @@ const AdminSchedule = () => {
                 <ConductorCards />
                 <Box
                   sx={{
-                    width: '260px',
-                    height: '320px',
+                    maxWidth: '260px',
                     borderRadius: '22px',
                     border: '4px dashed #E6E6E6',
                     background: '#F9F9F9',

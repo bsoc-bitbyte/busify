@@ -57,7 +57,6 @@ const BusCards = () => {
   `;
   const Card = styled(Paper)`
     max-width: 435px;
-    height: 279px;
     border-radius: 22px;
     background: #fff;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -67,7 +66,6 @@ const BusCards = () => {
   `;
   const HeadBar = styled(Box)`
     max-width: 395px;
-    // height: 80px;
     background-color: #fbbc05;
     border-radius: 15px;
     padding-left: 0px;
@@ -75,7 +73,6 @@ const BusCards = () => {
   `;
   const BusTag = styled(Box)`
     max-width: 117px;
-    height: 20px;
     border-bottom-right-radius: 8px;
     background: #fff;
   `;
@@ -110,7 +107,6 @@ const BusCards = () => {
         <Box
           sx={{
             maxWidth: '395px',
-            // height: '70px',
             display: 'flex',
             mt: '15px',
             justifyContent: 'space-between',
@@ -119,7 +115,6 @@ const BusCards = () => {
           <Box
             sx={{
               maxWidth: '150px',
-              // height: '70px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -135,7 +130,6 @@ const BusCards = () => {
           <Box
             sx={{
               maxWidth: '245px',
-              // height: '70px',
               display: 'flex',
               flexDirection: 'column',
             }}
