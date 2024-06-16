@@ -41,9 +41,9 @@ model Schedule {
 }
 
 model Ticket {
-    id             String @id
+    id             Int @id @default(autoincrement())
     orderId        String @unique
-    passengerEmail String
+    passengerEmail String[]
 }
 
 model Order {

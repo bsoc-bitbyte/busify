@@ -46,6 +46,21 @@ const BusDetails = () => {
 
   useEffect(() => {}, []);
 
+  const handleTicketCreated = async (orderId: String) => {
+    const ticketCreated = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/ticket/create`,
+      {
+        orderId: orderId,
+        passengerEmail: passengerDetail,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    return ticketCreated;
+  };
+
   async function displayRazorpay() {
     try {
       setRazorpayLoading(true);
@@ -81,6 +96,7 @@ const BusDetails = () => {
           alert(response.razorpay_payment_id);
           alert(response.razorpay_order_id);
           alert(response.razorpay_signature);
+          handleTicketCreated(response.razorpay_order_id);
         },
         prefill: {
           email: user?.email,
