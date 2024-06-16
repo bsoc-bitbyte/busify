@@ -14,6 +14,7 @@ import {Toaster} from 'react-hot-toast';
 import AdminDashBoard from './pages/AdminDashBoard';
 import ProfilePage from './pages/Profile';
 import AdminProtectedRoute from './components/AdminProtectedRoutes';
+import AdminSchedule from './pages/AdminSchedule';
 
 function App() {
   const location = useLocation();
@@ -41,6 +42,14 @@ function App() {
               element={
                 <AdminProtectedRoute>
                   <AdminDashBoard />
+                </AdminProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/schedule"
+              element={
+                <AdminProtectedRoute>
+                  <AdminSchedule />
                 </AdminProtectedRoute>
               }
             />

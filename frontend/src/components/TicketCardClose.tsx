@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardContent, Typography, Box, useMediaQuery} from '@mui/material';
-import {styled} from '@mui/system';
+import {styled} from '@mui/material';
 
 const Root = styled(Card)({
   borderRadius: '24px',
