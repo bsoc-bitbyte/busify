@@ -47,11 +47,6 @@ export default function RecentOrderCard({ details}:{details: RecentOrdersProps})
     }
   }
 
-  // Example usage:
-  const givenDate = new Date('2024-06-16T12:00:00Z');
-  console.log(timeDifference(givenDate)); // Output will depend on the current date and time
-
-
   return (
     <Card
       sx={{

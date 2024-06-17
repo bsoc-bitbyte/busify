@@ -21,7 +21,7 @@ export class OrdersController {
   async getRecentOrders(){
     try {
       const orders = await this.ordersService.getRecentOrders()
-    return orders
+      return orders
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.message, error.getStatus());

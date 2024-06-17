@@ -90,66 +90,51 @@ export class OrdersService {
         userId: true, 
         amount: true,
         receipt: true,
-        createdAt: true
-      }
-    })
-
-    const schedule = await this.prismaService.schedule.findMany({
-      where: {
-        OR: [...orders.map(order=>({id: order.scheduleId}))]
+        createdAt: true,
+        user: {
+          select: {
+            name: true,
+            email: true
+          },
+        },
+        schedule: {
+          select: {
+            from: true, 
+            to: true, 
+            departureTime: true,
+          }
+        },
+        ticket: {
+          select: {
+            passengerEmail: true
+          }
+        },
       },
-      select: {
-        id: true, 
-        from: true, 
-        to: true, 
-        departureTime: true,
-      }
     })
 
-    const users = await this.prismaService.users.findMany({
-      where: {
-        OR: [...orders.map(order=>({id: order.scheduleId}))]
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true
-      }
-    })
-
-    const tickets = await this.prismaService.ticket.findMany({
-      where: {
-        OR: [...orders.map(order=>({orderId: order.id}))]
-      },
-      select: {
-        orderId: true,
-        passengerEmail: true
-      }
-    })
-
-  type RecentOrdersProps = {
-    orderId: string
-    ammount: number
-    receipt: string
-    buyer: string
-    from: string
-    to: string
-    time: string
-    passengers: string[]
-    email: string
-    createdAt: Date
-  }
+    type RecentOrdersProps = {
+      orderId: string
+      ammount: number
+      receipt: string
+      buyer: string
+      from: string
+      to: string
+      time: string
+      passengers: string[]
+      email: string
+      createdAt: Date
+    }
 
     const formattedData: RecentOrdersProps[] = orders.map((order)=>({
       orderId: order.id,
       ammount: order.amount,
       receipt: order.receipt,
-      buyer: users.find(user=>user.id===order.userId).name,
-      from: schedule.find(schedule=>schedule.id===order.scheduleId).from,
-      to: schedule.find(schedule=>schedule.id===order.scheduleId).to,
-      time: schedule.find(schedule=>schedule.id===order.scheduleId).departureTime,
-      passengers: tickets.find(ticket=>ticket.orderId===order.id).passengerEmail,
-      email: users.find(user=>user.id===order.userId).email,
+      buyer: order.user.name,
+      from: order.schedule.from,
+      to: order.schedule.to,
+      time: order.schedule.departureTime,
+      passengers: order.ticket.passengerEmail,
+      email: order.user.email,
       createdAt: order.createdAt
     }))
 
