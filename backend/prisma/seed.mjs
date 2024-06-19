@@ -152,17 +152,19 @@ async function seedDb() {
         data: demoData.schedule,
       });
 
-      await prisma.ticket.createMany({
-        data: demoData.tickets
-      })
 
-      await prisma.users.createMany({
-        data: demoData.users
-      })
+  await prisma.users.createMany({
+    data: demoData.users
+  })
 
       await prisma.order.createMany({
         data: demoData.orders
       })
+
+      await prisma.ticket.createMany({
+        data: demoData.tickets
+      })
+
   console.log('Seeding done');
   await prisma.$disconnect();
 }

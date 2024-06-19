@@ -63,7 +63,7 @@ export class OrdersService {
           receipt: razorpay_order.receipt,
           scheduleId,
           attempts: razorpay_order.attempts,
-          createdAt: new Date(razorpay_order.created_at),
+          createdAt: new Date(Number(razorpay_order.created_at)*1000),
           status: razorpay_order.status,
           userId,
         },
@@ -110,6 +110,9 @@ export class OrdersService {
           }
         },
       },
+      orderBy: {
+        createdAt: "desc"
+      }
     })
 
     type RecentOrdersProps = {
