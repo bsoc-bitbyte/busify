@@ -29,7 +29,7 @@ export default function RecentOrderCard({ details}:{details: RecentOrdersProps})
 
   function timeDifference(date: Date) {
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime(); // Difference in milliseconds
+    const diffMs = now.getTime() - new Date(date).getTime(); // Difference in milliseconds
 
     const diffSeconds = Math.floor(diffMs / 1000);
     const diffMinutes = Math.floor(diffSeconds / 60);

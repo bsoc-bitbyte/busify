@@ -1,5 +1,5 @@
 import { Typography, styled, Box, useTheme } from '@mui/material';
-import  Clear  from "@mui/icons-material/clear"
+import  Clear  from "@mui/icons-material/clear";
 import Card from '@mui/material/Card';
 import Chip from '@mui/material/Chip/Chip';
 import busIcon from '../../../assets/bus-icon.svg';
@@ -171,8 +171,8 @@ export default function OrderDetailsCard({active, details, showModal }: RecentOr
                     </Typography>
                     {
                         details.passengers.map((passenger, index)=>(
-
                             <Typography
+                                key={index}
                                 component="div"
                                 fontSize={{ xs: '.5rem', sm: '.5rem', lg: '.8rem' }}
                                 fontWeight={500}

@@ -70,7 +70,7 @@ const Admin = () => {
           Recent Orders
         </Typography>
         {
-          orders.map(order => <RecentOrderCard details={order} />)
+          orders.map(order => <RecentOrderCard key={order.orderId} details={order} />)
         }
       </AdminLayout>
     </>
