@@ -52,7 +52,7 @@ model Ticket {
 model Order {
     id         String   @id
     userId     String
-    scheduleId String   @unique
+    scheduleId String   
     status     String   @default("pending") // how to make this enum
     amount     Int
     attempts   Int      @default(0)
