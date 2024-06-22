@@ -5,49 +5,49 @@ const prisma = new PrismaClient();
 const demoData = {
   contractors: [
     {
-      id: '1',
+      id: 'contractor1',
       name: 'Sanjay dubey',
       email: 'sanjay@gmail.com',
       phone: '1234567890',
       address: 'Bhopal',
     },
     {
-      id: '2',
+      id: 'contractor2',
       name: 'Rahul',
       email: 'rahul@gmail.com',
       phone: '1234567890',
       address: 'Jabalpur',
     },
   ],
-  conductor: [
+  conductors: [
     {
-      id: '1',
+      id: 'conductor1',
       name: 'Shubham',
       phone: '1234567890',
     },
     {
-      id: '2',
+      id: 'conductor2',
       name: 'Rajesh',
       phone: '0987654321',
     },
   ],
-  bus: [
+  buses: [
     {
       number: 'MP04-1234',
-      conductorId: '1',
-      contractorId: '1',
+      conductorId: 'conductor1',
+      contractorId: 'contractor1',
       capacity: 50,
     },
     {
       number: 'MP04-5678',
-      conductorId: '2',
-      contractorId: '2',
+      conductorId: 'conductor2',
+      contractorId: 'contractor2',
       capacity: 70,
     },
   ],
-  schedule: [
+  schedules: [
     {
-      id: '1',
+      id: 'schedule1',
       busNumber: 'MP04-1234',
       from: 'Rewa Residency',
       to: 'Sadar Bazar',
@@ -57,12 +57,13 @@ const demoData = {
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     },
     {
-      id: '2',
+      id: 'schedule2',
       busNumber: 'MP04-5678',
       from: 'Rewa Residency',
       to: 'Sadar Bazar',
       checkpoints: ['H4', 'Nescafe', 'Girls Hostel', 'Reliance Fresh'],
       departureTime: '7:30 PM',
+      ticketPrice: 20,
       days: [
         'Monday',
         'Tuesday',
@@ -72,7 +73,54 @@ const demoData = {
         'Saturday',
         'Sunday',
       ],
-      ticketPrice: 20,
+    },
+  ],
+  users: [
+    {
+      id: 'user1',
+      email: 'user1@example.com',
+      name: 'User One',
+      picture: 'https://example.com/user1.jpg',
+      role: 'user',
+    },
+    {
+      id: 'user2',
+      email: 'user2@example.com',
+      name: 'User Two',
+      picture: 'https://example.com/user2.jpg',
+      role: 'user',
+    },
+  ],
+  orders: [
+    {
+      id: 'order1',
+      userId: 'user1',
+      scheduleId: 'schedule1',
+      status: 'confirmed',
+      amount: 20,
+      attempts: 1,
+      receipt: 'receipt123',
+    },
+    {
+      id: 'order2',
+      userId: 'user2',
+      scheduleId: 'schedule2',
+      status: 'confirmed',
+      amount: 20,
+      attempts: 1,
+      receipt: 'receipt456',
+    },
+  ],
+  tickets: [
+    {
+      orderId: 'order1',
+      passengerEmail: ['23bcs256@iiitdmj.ac.in'],
+      createdAt: new Date(),
+    },
+    {
+      orderId: 'order2',
+      passengerEmail: ['23bcs256@iiitdmj.ac.in'],
+      createdAt: new Date(),
     },
   ],
   users: [
@@ -127,10 +175,13 @@ const demoData = {
 };
 
 async function cleanDb() {
+  await prisma.ticket.deleteMany({});
+  await prisma.order.deleteMany({});
   await prisma.schedule.deleteMany({});
   await prisma.bus.deleteMany({});
   await prisma.conductor.deleteMany({});
   await prisma.contractor.deleteMany({});
+  await prisma.users.deleteMany({});
 }
 
 async function seedDb() {

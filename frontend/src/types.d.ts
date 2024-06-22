@@ -46,3 +46,28 @@ type BusTicketData = {
 type LayoutProps = {
   children: React.ReactNode;
 };
+
+type SchedulesByPassengerEmailProps = {
+  email: string;
+};
+
+type SchedulesByPassengerEmailPropsClose = {
+  email: string;
+  filter: string;
+};
+
+interface Schedule {
+  id: string;
+  busNumber: string;
+  checkpoints: string[];
+  from: string;
+  to: string;
+  departureTime: string;
+  days: string[];
+  ticketPrice: number;
+}
+
+interface TicketFetchedData {
+  createdAt: Date;
+  schedule: Schedule;
+}

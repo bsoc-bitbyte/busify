@@ -5,6 +5,8 @@ import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {useState} from 'react';
 import {useAuthStore} from '../../store/authStore';
+import SchedulesByPassengerEmailClose from '../../components/TicketCardClose';
+import SchedulesByPassengerEmail from '../../components/TicketCard';
 
 const ContainerMain = styled(Box)`
   width: 100%;
@@ -103,7 +105,10 @@ const ProfilePage = () => {
   const theme = useTheme();
   const [currentTab, setCurrentTab] = useState<1 | 2>(1);
   const {user} = useAuthStore();
-
+  const [filter, setFilter] = useState<string>('all');
+  const handleFilterChange = (selectedFilter: string) => {
+    setFilter(selectedFilter);
+  };
   const ActiveTabIndicator = styled(Box)`
     position: absolute;
     bottom: -3px;
@@ -206,7 +211,9 @@ const ProfilePage = () => {
         <Box width="100%" height="100%">
           {currentTab === 1 ? (
             <Box>
-              <Box display="flex" gap="10px" width="100%" overflow="auto"></Box>
+              <Box display="flex" gap="10px" width="100%" overflow="auto">
+                <SchedulesByPassengerEmail email={user?.email || ''} />
+              </Box>
             </Box>
           ) : (
             <Box>
@@ -217,11 +224,24 @@ const ProfilePage = () => {
                 marginBottom="1rem"
               >
                 <Box display="flex" gap="5px" flexWrap="wrap">
-                  <FilterButton>Last 10 trips</FilterButton>
-                  <FilterButton>Last week</FilterButton>
-                  <FilterButton>Last month</FilterButton>
-                  <FilterButton>Last 3 month</FilterButton>
-                  <FilterButton>Last 6 month</FilterButton>
+                  <FilterButton onClick={() => handleFilterChange('Last week')}>
+                    Last week
+                  </FilterButton>
+                  <FilterButton
+                    onClick={() => handleFilterChange('Last month')}
+                  >
+                    Last month
+                  </FilterButton>
+                  <FilterButton
+                    onClick={() => handleFilterChange('Last 3 months')}
+                  >
+                    Last 3 months
+                  </FilterButton>
+                  <FilterButton
+                    onClick={() => handleFilterChange('Last 6 months')}
+                  >
+                    Last 6 months
+                  </FilterButton>
                 </Box>
                 <Box>
                   <FilterButton>
@@ -229,7 +249,12 @@ const ProfilePage = () => {
                   </FilterButton>
                 </Box>
               </FiltersBox>
-              <Box display="flex" gap="10px" width="100%" overflow="auto"></Box>
+              <Box display="flex" gap="10px" width="100%" overflow="auto">
+                <SchedulesByPassengerEmailClose
+                  email={user?.email || ''}
+                  filter={filter}
+                />
+              </Box>
             </Box>
           )}
         </Box>

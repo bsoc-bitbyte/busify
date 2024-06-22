@@ -1,6 +1,16 @@
-import React from 'react';
-import {Card, CardContent, Typography, Box, useMediaQuery} from '@mui/material';
+import React, {useEffect, useState} from 'react';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  useMediaQuery,
+  List,
+  ListItem,
+} from '@mui/material';
 import {styled} from '@mui/material';
+import {TicketFetchedData, SchedulesByPassengerEmailPropsClose} from '../types';
+import axios from 'axios';
 
 const Root = styled(Card)({
   borderRadius: '24px',
@@ -163,70 +173,121 @@ const BoldFooterText = styled(Typography)({
   fontSize: '0.5625rem',
 });
 
-interface TicketCardCloseProps {
-  busNumber: string;
-  departure: string;
-  destination: string;
-  time: string;
-  date: string;
-  ticketId: string;
-}
+const SchedulesByPassengerEmailClose: React.FC<
+  SchedulesByPassengerEmailPropsClose
+> = ({email, filter}) => {
+  const [filteredData, setFilteredData] = useState<TicketFetchedData[]>([]);
 
-const TicketCardClose: React.FC<TicketCardCloseProps> = ({
-  busNumber,
-  departure,
-  destination,
-  time,
-  date,
-  ticketId,
-}) => {
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/ticket/by-passenger-email`,
+          {params: {email}, withCredentials: true}
+        );
+        filterSchedulesByDate(response.data, filter);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchSchedules();
+    console.log(filter);
+  }, [email, filter]);
   const isMobile = useMediaQuery('(max-width:600px)');
   const numberOfSegments = isMobile ? 5 : 11;
+  const filterSchedulesByDate = (
+    tickets: TicketFetchedData[],
+    filter: string
+  ) => {
+    const now = new Date();
 
+    const filtered = tickets.filter(schedule => {
+      const createdAt = new Date(schedule.createdAt);
+
+      switch (filter) {
+        case 'all': {
+          return createdAt < now;
+        }
+        case 'Last week': {
+          const lastWeek = new Date();
+          lastWeek.setDate(now.getDate() - 7);
+          return createdAt >= lastWeek && createdAt < now;
+        }
+        case 'Last month': {
+          const lastMonth = new Date();
+          lastMonth.setMonth(now.getMonth() - 1);
+          return createdAt >= lastMonth && createdAt < now;
+        }
+        case 'Last 3 months': {
+          const last3Months = new Date();
+          last3Months.setMonth(now.getMonth() - 3);
+          return createdAt >= last3Months && createdAt < now;
+        }
+        case 'Last 6 months': {
+          const last6Months = new Date();
+          last6Months.setMonth(now.getMonth() - 6);
+          return createdAt >= last6Months && createdAt < now;
+        }
+        default:
+          return true;
+      }
+    });
+    setFilteredData(filtered);
+  };
   return (
-    <Root>
-      <Header>
-        <HeaderText>{ticketId}</HeaderText>
-      </Header>
-      <FadedCircle />
-      <DoneStamp>DONE</DoneStamp>
-      <Content>
-        <LocationInfo>
-          <Location>
-            <BoldText>{departure}</BoldText>
-            <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
-          </Location>
-          <Location style={{textAlign: 'right'}}>
-            <BoldText align="right">{destination}</BoldText>
-            <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
-          </Location>
-        </LocationInfo>
-        <DashedLine>
-          <Circle>
-            <InnerCircle />
-          </Circle>
-          {Array.from({length: numberOfSegments}, (_, index) => (
-            <DashedSegment key={index} />
-          ))}
-          <Circle>
-            <InnerCircle />
-          </Circle>
-        </DashedLine>
-      </Content>
-      <BusInfo>
-        <Box>
-          <BoldFooterText style={{color: '#FFFFFF'}}>Bus No.</BoldFooterText>
-          <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
-            {busNumber}
-          </BusNumber>
-        </Box>
-        <TimeDate>
-          <BoldFooterText>{date}</BoldFooterText>
-          <Time>{time}</Time>
-        </TimeDate>
-      </BusInfo>
-    </Root>
+    <List>
+      {filteredData.map((item, index) => (
+        <ListItem key={index}>
+          <Root>
+            <Header>
+              <HeaderText>{item.schedule.id}</HeaderText>
+            </Header>
+            <FadedCircle />
+            <DoneStamp>DONE</DoneStamp>
+            <Content>
+              <LocationInfo>
+                <Location>
+                  <BoldText>{item.schedule.from}</BoldText>
+                  <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
+                </Location>
+                <Location style={{textAlign: 'right'}}>
+                  <BoldText align="right">{item.schedule.to}</BoldText>
+                  <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
+                </Location>
+              </LocationInfo>
+              <DashedLine>
+                <Circle>
+                  <InnerCircle />
+                </Circle>
+                {Array.from({length: numberOfSegments}, (_, ind) => (
+                  <DashedSegment key={ind} />
+                ))}
+                <Circle>
+                  <InnerCircle />
+                </Circle>
+              </DashedLine>
+            </Content>
+            <BusInfo>
+              <Box>
+                <BoldFooterText style={{color: '#FFFFFF'}}>
+                  Bus No.
+                </BoldFooterText>
+                <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
+                  {item.schedule.busNumber}
+                </BusNumber>
+              </Box>
+              <TimeDate>
+                <BoldFooterText>
+                  {new Date(item.createdAt).toISOString().slice(0, 10)}
+                </BoldFooterText>
+                <Time>{item.schedule.departureTime}</Time>
+              </TimeDate>
+            </BusInfo>
+          </Root>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 
-export default TicketCardClose;
+export default SchedulesByPassengerEmailClose;

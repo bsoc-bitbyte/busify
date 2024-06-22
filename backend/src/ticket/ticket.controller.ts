@@ -1,6 +1,14 @@
 import {JwtAuthGuard} from 'src/Auth/utils/jwt.guard';
 import {TicketService} from './ticket.service';
-import {Controller, Post, Req, Res, UseGuards} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import {Request} from 'src/types';
 @Controller('ticket')
 export class TicketController {
@@ -16,5 +24,10 @@ export class TicketController {
     } catch (err) {
       throw new Error(err);
     }
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get('/by-passenger-email')
+  async getSchedulesByPassengerEmail(@Query('email') email: string) {
+    return this.TicketService.getSchedulesByPassengerEmail(email);
   }
 }
