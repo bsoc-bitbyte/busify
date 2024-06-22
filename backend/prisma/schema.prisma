@@ -38,24 +38,29 @@ model Schedule {
     departureTime String
     days          String[]
     ticketPrice   Int
+    orders        Order[]
 }
 
 model Ticket {
     id             Int @id @default(autoincrement())
     orderId        String @unique
     passengerEmail String[]
+    order          Order @relation(fields: [orderId], references: [id])
+    createdAt  DateTime @default(now())
 }
 
 model Order {
-    id         String   @id
+    id         String     @id
     userId     String
     scheduleId String
-    status     String   @default("pending") // how to make this enum
+    status     String     @default("pending") // how to make this enum
     amount     Int
-    attempts   Int      @default(0)
-    receipt    String   @unique
-    createdAt  DateTime @default(now())
-    user       Users    @relation(fields: [userId], references: [id])
+    attempts   Int        @default(0)
+    receipt    String     @unique
+    createdAt  DateTime   @default(now())
+    user       Users      @relation(fields: [userId], references: [id])
+    ticket     Ticket?
+    schedule   Schedule  @relation(fields: [scheduleId], references: [id])
 }
 
 model Conductor {
