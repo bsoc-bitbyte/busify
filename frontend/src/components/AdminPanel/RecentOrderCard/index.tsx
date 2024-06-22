@@ -5,8 +5,12 @@ import Chip from '@mui/material/Chip/Chip';
 import busIcon from '../../../assets/bus-icon.svg';
 import arrowIcon from '../../../assets/arrowIcon.svg';
 import scheduleIcon from '../../../assets/schedule-icon.svg';
+import { RecentOrdersProps } from '../../../pages/AdminDashBoard';
+import { useState } from 'react';
+import OrderDetailsCard from '../OrderDetailsCard';
 
-export default function RecentOrderCard() {
+
+export default function RecentOrderCard({ details}:{details: RecentOrdersProps}) {
   const Icon = styled('img')`
     @media (min-width: 768px) {
       width: 2rem;
@@ -17,6 +21,31 @@ export default function RecentOrderCard() {
       height: 1.5rem;
     }
   `;
+  const [isVisible, setVisible] = useState(false)
+
+  const showModal = ()=>{
+    setVisible(!isVisible)
+  }
+
+  function timeDifference(date: Date) {
+    const now = new Date();
+    const diffMs = now.getTime() - new Date(date).getTime(); // Difference in milliseconds
+
+    const diffSeconds = Math.floor(diffMs / 1000);
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffSeconds < 60) {
+      return `${diffSeconds} seconds ago`;
+    } else if (diffMinutes < 60) {
+      return `${diffMinutes} minutes ago`;
+    } else if (diffHours < 24) {
+      return `${diffHours} hours ago`;
+    } else {
+      return `${diffDays} days ago`;
+    }
+  }
 
   return (
     <Card
@@ -32,6 +61,7 @@ export default function RecentOrderCard() {
         width: {xs: '96%', sm: '100%'},
       }}
     >
+      <OrderDetailsCard active={isVisible} details={details} showModal={showModal} />
       <Box
         sx={{
           display: 'flex',
@@ -52,7 +82,7 @@ export default function RecentOrderCard() {
             backgroundColor: 'black',
           }}
           size="small"
-          label="order_M1m6RTTJ9mqpVY"
+          label={details.orderId}
         />
         <Box
           sx={{
@@ -73,7 +103,7 @@ export default function RecentOrderCard() {
             component="div"
             fontSize={{xs: '.8rem', sm: '.8rem', md: '1rem'}}
           >
-            Neyati
+            {details.buyer}
           </Typography>
         </Box>
 
@@ -84,7 +114,7 @@ export default function RecentOrderCard() {
           color="rgba(0, 0, 0, 0.4)"
           sx={{marginRight: '0px'}}
         >
-          2min ago
+          {timeDifference(details.createdAt)}
         </Typography>
       </Box>
       <Box
@@ -126,7 +156,7 @@ export default function RecentOrderCard() {
                       component="div"
                       fontSize={{xs: '.9rem', sm: '1rem', lg: '1.1rem'}}
                     >
-                      Rewa Residency
+                      {details.from}
                     </Typography>
                   </Box>
                   <Box
@@ -141,7 +171,7 @@ export default function RecentOrderCard() {
                       component="div"
                       fontSize={{xs: '.9rem', sm: '1rem', lg: '1.1rem'}}
                     >
-                      Sadar
+                      {details.to}
                     </Typography>
                   </Box>
                 </Box>
@@ -169,7 +199,7 @@ export default function RecentOrderCard() {
                     component="div"
                     fontSize={{xs: '.9rem', sm: '1rem', lg: '1.1rem'}}
                   >
-                    12 May, 3:00 Pm
+                    {details.time}
                   </Typography>
                 </Box>
               </Box>
@@ -189,15 +219,16 @@ export default function RecentOrderCard() {
           <Typography
             component="div"
             sx={{fontWeight: 'bold'}}
-            fontSize={{xs: '1.8rem', sm: '2rem', md: '2.2rem', lg: '2.3rem'}} //        fontSize={{xs:"1.8rem", md: "2.2rem", lg: "2.3rem" }}
+            fontSize={{xs: '1.8rem', sm: '2rem', md: '2.2rem', lg: '2.3rem'}}
           >
-            &#x20B9; 75
+            &#x20B9; {details.ammount}
           </Typography>
           <Chip
             label="View Details"
             size="small"
             variant="outlined"
             sx={{fontSize: {xs: '.65rem', md: '.7rem', lg: '.8rem'}}}
+            onClick={showModal}
           />
         </Box>
       </Box>

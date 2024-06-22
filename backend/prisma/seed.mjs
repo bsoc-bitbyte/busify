@@ -123,6 +123,55 @@ const demoData = {
       createdAt: new Date(),
     },
   ],
+  users: [
+    {
+      id: 'user1',
+      email: '23bcs200@iiitdmj.ac.in',
+      name: 'Aditya Verma',
+      picture: 'https://example.com/user1.jpg',
+      role: "admin",
+      createdAt: new Date(),
+    },
+    {
+      id: 'user2',
+      email: '23bcs201@iiitdmj.ac.in',
+      name: 'Ram Vyas',
+      picture: 'https://example.com/user1.jpg',
+      role: "user",
+      createdAt: new Date(),
+    },
+  ],
+  tickets: [
+    {
+      orderId: "order1",
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+    }, {
+      orderId: "order2",
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+    },
+  ],
+  orders: [
+    {
+      id: 'order1',
+      userId: 'user2',
+      scheduleId: '1',
+      status: "pending",
+      amount: 100,
+      attempts: 0,
+      receipt: 'receipt1',
+      createdAt: new Date(),
+    },
+    {
+      id: 'order2',
+      userId: 'user2',
+      scheduleId: '2',
+      status: "pending",
+      amount: 200,
+      attempts: 1,
+      receipt: 'receipt2',
+      createdAt: new Date(),
+    },
+  ],
 };
 
 async function cleanDb() {
@@ -137,55 +186,36 @@ async function cleanDb() {
 
 async function seedDb() {
   await cleanDb();
-  await Promise.all(
-    demoData.contractors.map(async contractor => {
-      await prisma.contractor.create({
-        data: contractor,
+  
+      await prisma.contractor.createMany({
+        data: demoData.contractors,
       });
-    })
-  );
-  await Promise.all(
-    demoData.conductors.map(async conductor => {
-      await prisma.conductor.create({
-        data: conductor,
+  
+      await prisma.conductor.createMany({
+        data: demoData.conductor,
       });
-    })
-  );
-  await Promise.all(
-    demoData.buses.map(async bus => {
-      await prisma.bus.create({
-        data: bus,
+  
+      await prisma.bus.createMany({
+        data: demoData.bus,
       });
-    })
-  );
-  await Promise.all(
-    demoData.schedules.map(async schedule => {
-      await prisma.schedule.create({
-        data: schedule,
+  
+      await prisma.schedule.createMany({
+        data: demoData.schedule,
       });
-    })
-  );
-  await Promise.all(
-    demoData.users.map(async user => {
-      await prisma.users.create({
-        data: user,
-      });
-    })
-  );
-  await Promise.all(
-    demoData.orders.map(async order => {
-      await prisma.order.create({
-        data: order,
-      });
-    })
-  );
-  await Promise.all(
-    demoData.tickets.map(async ticket => {
-      await prisma.ticket.create({
-        data: ticket,
-      });
-    })
-  );
+
+
+  await prisma.users.createMany({
+    data: demoData.users
+  })
+
+      await prisma.order.createMany({
+        data: demoData.orders
+      })
+
+      await prisma.ticket.createMany({
+        data: demoData.tickets
+      })
+
   console.log('Seeding done');
   await prisma.$disconnect();
 }
