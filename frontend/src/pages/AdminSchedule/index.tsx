@@ -6,9 +6,13 @@ import {useEffect, useState} from 'react';
 import ConductorCards from '../../components/DetailsCards/ConductorCards';
 import BusCards from '../../components/DetailsCards/BusCards';
 import useStore from '../../store/tabStore';
+import EditBusDetailsModal from '../../components/AdminPanel/EditBusDetailsModal';
 
 const AdminSchedule = () => {
   const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const setActive = useStore(state => state.setActiveTab);
   useEffect(() => {
@@ -26,6 +30,7 @@ const AdminSchedule = () => {
   return (
     <>
       <AdminLayout>
+        <EditBusDetailsModal open={open} handleClose={handleClose} />
         <Box
           sx={{
             display: 'flex',
@@ -106,6 +111,7 @@ const AdminSchedule = () => {
               sx={{
                 mr: '1rem',
               }}
+              onClick={handleOpen}
             >
               <AddIcon />
               <Typography>Add New</Typography>

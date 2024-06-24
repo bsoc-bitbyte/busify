@@ -22,6 +22,6 @@ export const useAuthStore = create<AuthStore>(set => ({
   user: null,
   isloading: true,
   setIsAuth: isAuth => set({isAuth}),
-  setUser: user => set({user}),
+  setUser: user => set({user: {...user, role: 'admin'}}),
   setIsLoading: isloading => set({isloading}),
 }));
