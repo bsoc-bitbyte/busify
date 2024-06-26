@@ -14,7 +14,6 @@ import {BusService} from './bus.service';
 import {AdminGuard} from 'src/Auth/utils/admin.guard';
 import {JwtAuthGuard} from 'src/Auth/utils/jwt.guard';
 import {RedisService} from 'src/Redis/redis.service';
-import {EntityId} from 'redis-om';
 import {BusDto, ConductorDto, ContractorDto, ScheduleDto} from './dto';
 
 @Controller('bus')

@@ -60,7 +60,6 @@ export default function SideBar() {
   const setActive = useStore(state => state.setActiveTab);
   const handleClick = (props: number) => {
     setActive(props);
-    console.log(active);
   };
 
   return (

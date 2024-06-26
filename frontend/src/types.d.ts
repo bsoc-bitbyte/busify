@@ -46,3 +46,16 @@ type BusTicketData = {
 type LayoutProps = {
   children: React.ReactNode;
 };
+
+type ScheduleType = {
+  id: string;
+  busNumber: string;
+  bus: Bus;
+  checkpoints: string[];
+  from: string;
+  to: string;
+  departureTime: string;
+  days: string[];
+  ticketPrice: number;
+  orders: Order[];
+};

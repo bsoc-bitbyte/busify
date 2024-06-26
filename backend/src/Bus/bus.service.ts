@@ -94,9 +94,45 @@ export class BusService {
   }
 
   async createSchedule(schedule: any) {
+    const bus = await this.prismaService.bus.findFirst({
+      where: {number: schedule.busNumber},
+    });
+    schedule.bus = bus;
+
+    if (bus === null) {
+      schedule.bus = await this.createBus({
+        number: schedule.busNumber,
+        contractorId: (await this.getContractors())[0].id,
+        conductorId: (await this.getConductors())[0].id,
+        capacity: 50,
+      });
+    }
+
+    if (schedule.id !== undefined) {
+      await this.prismaService.schedule.update({
+        where: {id: schedule.id},
+        data: {
+          id: schedule.id,
+          busNumber: schedule.busNumber,
+          from: schedule.from,
+          to: schedule.to,
+          departureTime: schedule.departureTime,
+          days: schedule.days,
+        },
+      });
+      return this.prismaService.schedule.findFirst({where: {id: schedule.id}});
+    }
+
     return this.prismaService.schedule.create({
       data: {
-        ...schedule,
+        id: uuidv4(),
+        busNumber: schedule.busNumber as never,
+        checkpoints: ['H4', 'Reva', 'GH'],
+        from: schedule.from,
+        to: schedule.to,
+        departureTime: schedule.departureTime,
+        days: schedule.days,
+        ticketPrice: 20,
       },
     });
   }

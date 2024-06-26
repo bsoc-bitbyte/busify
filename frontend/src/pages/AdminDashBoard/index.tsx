@@ -1,24 +1,24 @@
-import { Box, Typography, useTheme } from '@mui/material';
+import {Box, Typography, useTheme} from '@mui/material';
 import AdminLayout from '../../components/AdminPanel/AdminLayout';
 import RecentOrderCard from '../../components/AdminPanel/RecentOrderCard';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 export type RecentOrdersProps = {
-  orderId: string
-  ammount: number
-  receipt: string
-  buyer: string
-  from: string
-  to: string
-  time: string
-  passengers: string[]
-  email: string
-  createdAt: Date
-}
+  orderId: string;
+  ammount: number;
+  receipt: string;
+  buyer: string;
+  from: string;
+  to: string;
+  time: string;
+  passengers: string[];
+  email: string;
+  createdAt: Date;
+};
 
 const Admin = () => {
-  const [orders, setOrders] = useState<RecentOrdersProps[]>([])
+  const [orders, setOrders] = useState<RecentOrdersProps[]>([]);
   const theme = useTheme();
 
   useEffect(() => {
@@ -30,11 +30,11 @@ const Admin = () => {
             withCredentials: true,
           }
         );
-        if (res.status === 200) {
-          setOrders(res.data as RecentOrdersProps[])
+        if (res.status === 200 && res.data) {
+          setOrders(res.data as RecentOrdersProps[]);
         }
       } catch (error) {
-        setOrders([])
+        setOrders([]);
       }
     };
     getRecentOrders();
@@ -42,10 +42,23 @@ const Admin = () => {
   return (
     <>
       <AdminLayout>
-        <Box display="flex" padding=".7rem" borderRadius="16px" gap="1.5rem" sx={{ backgroundColor: "#FFF2CB", maxWidth: "250px", border: "3px solid #FBBC05" }} alignItems="center" justifyContent="space-around" marginBottom="1.5rem" >
+        <Box
+          display="flex"
+          padding=".7rem"
+          borderRadius="16px"
+          gap="1.5rem"
+          sx={{
+            backgroundColor: '#FFF2CB',
+            maxWidth: '250px',
+            border: '3px solid #FBBC05',
+          }}
+          alignItems="center"
+          justifyContent="space-around"
+          marginBottom="1.5rem"
+        >
           <Typography
             component="div"
-            fontSize={{ xs: '.5rem', sm: '1rem', md: '1.2rem' }}
+            fontSize={{xs: '.5rem', sm: '1rem', md: '1.2rem'}}
             fontWeight="bold"
             color={theme.palette.primary.main}
             textAlign="center"
@@ -54,24 +67,24 @@ const Admin = () => {
           </Typography>
           <Typography
             component="div"
-            fontSize={{ xs: '1.2rem', sm: '1.5rem', md: '2rem' }}
+            fontSize={{xs: '1.2rem', sm: '1.5rem', md: '2rem'}}
             fontWeight="bold"
             color={theme.palette.primary.main}
           >
-            {orders.length}
+            {orders?.length}
           </Typography>
         </Box>
         <Typography
           component="div"
-          fontSize={{ xs: '1rem', sm: '1.2rem', md: '1.5rem' }}
+          fontSize={{xs: '1rem', sm: '1.2rem', md: '1.5rem'}}
           fontWeight="bold"
           color={theme.palette.secondary.light}
         >
           Recent Orders
         </Typography>
-        {
-          orders.map(order => <RecentOrderCard key={order.orderId} details={order} />)
-        }
+        {orders?.map(order => (
+          <RecentOrderCard key={order.orderId} details={order} />
+        ))}
       </AdminLayout>
     </>
   );

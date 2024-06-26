@@ -1,6 +1,13 @@
 import {Box, Button, Paper, Typography, styled} from '@mui/material';
+import {ScheduleType} from '../../../types';
+import EditBusDetailsModal from '../../AdminPanel/EditBusDetailsModal';
+import {useState} from 'react';
 
-const BusCards = () => {
+const BusCards = ({schedule}: {schedule: ScheduleType}) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const FilterButton = styled(Button)`
     background: #f9f9f9;
     border: 1px solid #e6e6e6;
@@ -78,6 +85,11 @@ const BusCards = () => {
   `;
   return (
     <>
+      <EditBusDetailsModal
+        open={open}
+        handleClose={handleClose}
+        schedule={schedule}
+      />
       <Card>
         <HeadBar>
           <Box>
@@ -91,7 +103,7 @@ const BusCards = () => {
                 fontSize: {xs: '28px', sm: '32px'},
               }}
             >
-              MP - 20 - PA -
+              {schedule?.busNumber.split('-')[0]}
             </MediumText>
           </Box>
           <LargeText
@@ -101,7 +113,7 @@ const BusCards = () => {
               fontSize: {xs: '48px', sm: '52px'},
             }}
           >
-            0369
+            {schedule?.busNumber.split('-')[1]}
           </LargeText>
         </HeadBar>
         <Box
@@ -155,9 +167,11 @@ const BusCards = () => {
               fontSize: '12px',
               textDecorationLine: 'underline',
               letterSpacing: '0px',
+              cursor: 'pointer',
             }}
+            onClick={handleOpen}
           >
-            See More
+            Edit Schedule
           </LightText>
         </Box>
         <Box

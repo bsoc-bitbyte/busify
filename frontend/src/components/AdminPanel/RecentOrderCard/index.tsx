@@ -5,12 +5,15 @@ import Chip from '@mui/material/Chip/Chip';
 import busIcon from '../../../assets/bus-icon.svg';
 import arrowIcon from '../../../assets/arrowIcon.svg';
 import scheduleIcon from '../../../assets/schedule-icon.svg';
-import { RecentOrdersProps } from '../../../pages/AdminDashBoard';
-import { useState } from 'react';
+import {RecentOrdersProps} from '../../../pages/AdminDashBoard';
+import {useState} from 'react';
 import OrderDetailsCard from '../OrderDetailsCard';
 
-
-export default function RecentOrderCard({ details}:{details: RecentOrdersProps}) {
+export default function RecentOrderCard({
+  details,
+}: {
+  details: RecentOrdersProps;
+}) {
   const Icon = styled('img')`
     @media (min-width: 768px) {
       width: 2rem;
@@ -21,11 +24,11 @@ export default function RecentOrderCard({ details}:{details: RecentOrdersProps})
       height: 1.5rem;
     }
   `;
-  const [isVisible, setVisible] = useState(false)
+  const [isVisible, setVisible] = useState(false);
 
-  const showModal = ()=>{
-    setVisible(!isVisible)
-  }
+  const showModal = () => {
+    setVisible(!isVisible);
+  };
 
   function timeDifference(date: Date) {
     const now = new Date();
@@ -61,7 +64,11 @@ export default function RecentOrderCard({ details}:{details: RecentOrdersProps})
         width: {xs: '96%', sm: '100%'},
       }}
     >
-      <OrderDetailsCard active={isVisible} details={details} showModal={showModal} />
+      <OrderDetailsCard
+        active={isVisible}
+        details={details}
+        showModal={showModal}
+      />
       <Box
         sx={{
           display: 'flex',
