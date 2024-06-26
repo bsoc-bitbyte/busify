@@ -7,12 +7,35 @@ import ConductorCards from '../../components/DetailsCards/ConductorCards';
 import BusCards from '../../components/DetailsCards/BusCards';
 import useStore from '../../store/tabStore';
 import EditBusDetailsModal from '../../components/AdminPanel/EditBusDetailsModal';
+import {ScheduleType} from '../../types';
+import axios from 'axios';
 
 const AdminSchedule = () => {
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [schedule, setSchedule] = useState<ScheduleType[]>([]);
+
+  useEffect(() => {
+    const getRecentSchedule = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/bus/schedule`,
+          {
+            withCredentials: true,
+          }
+        );
+        if (res.status === 200) {
+          setSchedule(res.data.schedule as ScheduleType[]);
+        }
+      } catch (error) {
+        setSchedule([]);
+      }
+    };
+    getRecentSchedule();
+  }, []);
 
   const setActive = useStore(state => state.setActiveTab);
   useEffect(() => {
@@ -142,9 +165,9 @@ const AdminSchedule = () => {
                   pl: '1rem',
                 }}
               >
-                <BusCards />
-                <BusCards />
-                <BusCards />
+                {schedule.map(s => (
+                  <BusCards key={s.id} schedule={s} />
+                ))}
                 <Box
                   sx={{
                     maxWidth: '435px',
