@@ -1,6 +1,14 @@
-import React from 'react';
-import {Card, CardContent, Typography, Box, useMediaQuery} from '@mui/material';
+import React, {useState} from 'react';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  useMediaQuery,
+  Chip,
+} from '@mui/material';
 import {styled} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Root = styled(Card)({
   borderRadius: '24px',
@@ -120,6 +128,12 @@ const BoldFooterText = styled(Typography)({
   fontSize: '0.5625rem',
 });
 
+const CrossIcon = styled(CloseIcon)`
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 2px;
+`;
+
 interface TicketCardProps {
   busNumber: string;
   departure: string;
@@ -127,6 +141,7 @@ interface TicketCardProps {
   time: string;
   date: string;
   ticketId: string;
+  encryptedData: string;
 }
 
 const TicketCard: React.FC<TicketCardProps> = ({
@@ -136,47 +151,72 @@ const TicketCard: React.FC<TicketCardProps> = ({
   time,
   date,
   ticketId,
+  encryptedData,
 }) => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const numberOfSegments = isMobile ? 5 : 11;
+  const [isQrVisible, setQrVisible] = useState(false);
 
   return (
-    <Root>
-      <Header>
-        <HeaderText>{ticketId}</HeaderText>
-      </Header>
-      <Content>
-        <LocationInfo>
-          <Location>
-            <BoldText>{departure}</BoldText>
-            <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
-          </Location>
-          <Location style={{textAlign: 'right'}}>
-            <BoldText align="right">{destination}</BoldText>
-            <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
-          </Location>
-        </LocationInfo>
-        <DashedLine>
-          <Circle />
-          {Array.from({length: numberOfSegments}, (_, index) => (
-            <DashedSegment key={index} />
-          ))}
-          <Circle />
-        </DashedLine>
-      </Content>
-      <BusInfo>
-        <Box>
-          <BoldFooterText style={{color: '#fff'}}>Bus No.</BoldFooterText>
-          <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
-            {busNumber}
-          </BusNumber>
+    <>
+      <Box
+        width={'100%'}
+        height={'100%'}
+        position={'fixed'}
+        top={0}
+        left={0}
+        display={isQrVisible ? 'flex' : 'none'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        zIndex={100}
+        style={{
+          backdropFilter: 'blur(10px)',
+        }}
+        onClick={() => {
+          setQrVisible(false);
+        }}
+      >
+        <Box width={200} height={200} bgcolor={'grey'}>
+          {encryptedData}
         </Box>
-        <TimeDate>
-          <BoldFooterText style={{color: '#fff'}}>{date}</BoldFooterText>
-          <Time>{time}</Time>
-        </TimeDate>
-      </BusInfo>
-    </Root>
+      </Box>
+      <Root onClick={() => setQrVisible(true)}>
+        <Header>
+          <HeaderText>{ticketId}</HeaderText>
+        </Header>
+        <Content>
+          <LocationInfo>
+            <Location>
+              <BoldText>{departure}</BoldText>
+              <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
+            </Location>
+            <Location style={{textAlign: 'right'}}>
+              <BoldText align="right">{destination}</BoldText>
+              <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
+            </Location>
+          </LocationInfo>
+          <DashedLine>
+            <Circle />
+            {Array.from({length: numberOfSegments}, (_, index) => (
+              <DashedSegment key={index} />
+            ))}
+            <Circle />
+          </DashedLine>
+        </Content>
+        <BusInfo>
+          <Box>
+            <BoldFooterText style={{color: '#fff'}}>Bus No.</BoldFooterText>
+            <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
+              {busNumber}
+            </BusNumber>
+          </Box>
+          <TimeDate>
+            <BoldFooterText style={{color: '#fff'}}>{date}</BoldFooterText>
+            <Time>{time}</Time>
+          </TimeDate>
+        </BusInfo>
+      </Root>
+    </>
   );
 };
 
