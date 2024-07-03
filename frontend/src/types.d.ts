@@ -30,6 +30,7 @@ type BusDetailsType = {
   time?: string;
   from?: string;
   to?: string;
+  scheduleId?: string;
 };
 
 type BusTicketData = {

@@ -5,49 +5,49 @@ const prisma = new PrismaClient();
 const demoData = {
   contractors: [
     {
-      id: 'contractor1',
+      id: '1',
       name: 'Sanjay dubey',
       email: 'sanjay@gmail.com',
       phone: '1234567890',
       address: 'Bhopal',
     },
     {
-      id: 'contractor2',
+      id: '2',
       name: 'Rahul',
       email: 'rahul@gmail.com',
       phone: '1234567890',
       address: 'Jabalpur',
     },
   ],
-  conductors: [
+  conductor: [
     {
-      id: 'conductor1',
+      id: '1',
       name: 'Shubham',
       phone: '1234567890',
     },
     {
-      id: 'conductor2',
+      id: '2',
       name: 'Rajesh',
       phone: '0987654321',
     },
   ],
-  buses: [
+  bus: [
     {
       number: 'MP04-1234',
-      conductorId: 'conductor1',
-      contractorId: 'contractor1',
+      conductorId: '1',
+      contractorId: '1',
       capacity: 50,
     },
     {
       number: 'MP04-5678',
-      conductorId: 'conductor2',
-      contractorId: 'contractor2',
+      conductorId: '2',
+      contractorId: '2',
       capacity: 70,
     },
   ],
-  schedules: [
+  schedule: [
     {
-      id: 'schedule1',
+      id: '1',
       busNumber: 'MP04-1234',
       from: 'Rewa Residency',
       to: 'Sadar Bazar',
@@ -57,13 +57,12 @@ const demoData = {
       days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     },
     {
-      id: 'schedule2',
+      id: '2',
       busNumber: 'MP04-5678',
       from: 'Rewa Residency',
       to: 'Sadar Bazar',
       checkpoints: ['H4', 'Nescafe', 'Girls Hostel', 'Reliance Fresh'],
       departureTime: '7:30 PM',
-      ticketPrice: 20,
       days: [
         'Monday',
         'Tuesday',
@@ -73,54 +72,7 @@ const demoData = {
         'Saturday',
         'Sunday',
       ],
-    },
-  ],
-  users: [
-    {
-      id: 'user1',
-      email: 'user1@example.com',
-      name: 'User One',
-      picture: 'https://example.com/user1.jpg',
-      role: 'user',
-    },
-    {
-      id: 'user2',
-      email: 'user2@example.com',
-      name: 'User Two',
-      picture: 'https://example.com/user2.jpg',
-      role: 'user',
-    },
-  ],
-  orders: [
-    {
-      id: 'order1',
-      userId: 'user1',
-      scheduleId: 'schedule1',
-      status: 'confirmed',
-      amount: 20,
-      attempts: 1,
-      receipt: 'receipt123',
-    },
-    {
-      id: 'order2',
-      userId: 'user2',
-      scheduleId: 'schedule2',
-      status: 'confirmed',
-      amount: 20,
-      attempts: 1,
-      receipt: 'receipt456',
-    },
-  ],
-  tickets: [
-    {
-      orderId: 'order1',
-      passengerEmail: ['23bcs256@iiitdmj.ac.in'],
-      createdAt: new Date(),
-    },
-    {
-      orderId: 'order2',
-      passengerEmail: ['23bcs256@iiitdmj.ac.in'],
-      createdAt: new Date(),
+      ticketPrice: 20,
     },
   ],
   users: [
@@ -129,7 +81,7 @@ const demoData = {
       email: '23bcs200@iiitdmj.ac.in',
       name: 'Aditya Verma',
       picture: 'https://example.com/user1.jpg',
-      role: "admin",
+      role: 'admin',
       createdAt: new Date(),
     },
     {
@@ -137,17 +89,18 @@ const demoData = {
       email: '23bcs201@iiitdmj.ac.in',
       name: 'Ram Vyas',
       picture: 'https://example.com/user1.jpg',
-      role: "user",
+      role: 'user',
       createdAt: new Date(),
     },
   ],
   tickets: [
     {
-      orderId: "order1",
-      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
-    }, {
-      orderId: "order2",
-      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      orderId: 'order1',
+      passengerEmail: ['23bcs253@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+    },
+    {
+      orderId: 'order2',
+      passengerEmail: ['23bcs253@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
     },
   ],
   orders: [
@@ -155,7 +108,7 @@ const demoData = {
       id: 'order1',
       userId: 'user2',
       scheduleId: '1',
-      status: "pending",
+      status: 'pending',
       amount: 100,
       attempts: 0,
       receipt: 'receipt1',
@@ -165,7 +118,7 @@ const demoData = {
       id: 'order2',
       userId: 'user2',
       scheduleId: '2',
-      status: "pending",
+      status: 'pending',
       amount: 200,
       attempts: 1,
       receipt: 'receipt2',
@@ -175,46 +128,42 @@ const demoData = {
 };
 
 async function cleanDb() {
-  await prisma.ticket.deleteMany({});
-  await prisma.order.deleteMany({});
   await prisma.schedule.deleteMany({});
   await prisma.bus.deleteMany({});
   await prisma.conductor.deleteMany({});
   await prisma.contractor.deleteMany({});
-  await prisma.users.deleteMany({});
 }
 
 async function seedDb() {
   await cleanDb();
-  
-      await prisma.contractor.createMany({
-        data: demoData.contractors,
-      });
-  
-      await prisma.conductor.createMany({
-        data: demoData.conductor,
-      });
-  
-      await prisma.bus.createMany({
-        data: demoData.bus,
-      });
-  
-      await prisma.schedule.createMany({
-        data: demoData.schedule,
-      });
 
+  await prisma.contractor.createMany({
+    data: demoData.contractors,
+  });
+
+  await prisma.conductor.createMany({
+    data: demoData.conductor,
+  });
+
+  await prisma.bus.createMany({
+    data: demoData.bus,
+  });
+
+  await prisma.schedule.createMany({
+    data: demoData.schedule,
+  });
 
   await prisma.users.createMany({
-    data: demoData.users
-  })
+    data: demoData.users,
+  });
 
-      await prisma.order.createMany({
-        data: demoData.orders
-      })
+  await prisma.order.createMany({
+    data: demoData.orders,
+  });
 
-      await prisma.ticket.createMany({
-        data: demoData.tickets
-      })
+  await prisma.ticket.createMany({
+    data: demoData.tickets,
+  });
 
   console.log('Seeding done');
   await prisma.$disconnect();

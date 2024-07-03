@@ -153,9 +153,12 @@ const SchedulesByPassengerEmail: React.FC<SchedulesByPassengerEmailProps> = ({
   const numberOfSegments = isMobile ? 5 : 11;
   const filterTickets = (tickets: TicketFetchedData[]) => {
     const now = new Date();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+
     const filtered = tickets.filter(ticket => {
       const ticketDate = new Date(ticket.createdAt);
-      return ticketDate >= now;
+      return ticketDate >= yesterday;
     });
     setFilteredData(filtered);
   };

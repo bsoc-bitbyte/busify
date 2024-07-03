@@ -16,24 +16,35 @@ export class TicketService {
       }
 
       const schedule = order.schedule;
+      const departureTime = schedule.departureTime;
 
       const today = new Date();
+      const timeParts = departureTime.match(/(\d+):(\d+)\s*(AM|PM)/i);
+      if (!timeParts) {
+        throw new Error('Invalid departure time format');
+      }
 
-      const [hours, minutes, seconds] = schedule.departureTime
-        .split(':')
-        .map(Number);
+      let hours = parseInt(timeParts[1], 10);
+      const minutes = parseInt(timeParts[2], 10);
+      const period = timeParts[3].toUpperCase();
 
-      const createdAt = new Date(today.setHours(hours, minutes, seconds, 0));
+      if (period === 'PM' && hours < 12) {
+        hours += 12;
+      } else if (period === 'AM' && hours === 12) {
+        hours = 0;
+      }
+
+      const createdAt = new Date(today);
+      createdAt.setHours(hours, minutes, 0, 0);
 
       const ticketCreated = await this.prismaService.ticket.create({
         data: {
           orderId: orderId,
-          passengerEmail: passengerEmail.map(passenger => {
-            return passenger.emailID;
-          }),
+          passengerEmail: passengerEmail.map(passenger => passenger.emailID),
           createdAt: createdAt,
         },
       });
+
       return ticketCreated;
     } catch (err) {
       throw new Error(err.message);

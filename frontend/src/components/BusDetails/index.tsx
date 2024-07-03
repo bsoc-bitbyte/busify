@@ -89,7 +89,7 @@ const AddPassengerButton = styled(Button)`
   }
 `;
 
-const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
+const BusDetails = ({time, from, to, disabled, scheduleId}: BusDetailsType) => {
   const addPassenger = useOrderStore(state => state.addPassenger);
   const {passengerDetail, removePassenger} = useOrderStore();
   const theme = useTheme();
@@ -150,6 +150,7 @@ const BusDetails = ({time, from, to, disabled}: BusDetailsType) => {
       source: from,
       destination: to,
       time: time,
+      scheduleId: scheduleId,
     })),
       openDrawer();
   };

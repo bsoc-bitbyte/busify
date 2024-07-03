@@ -200,33 +200,35 @@ const SchedulesByPassengerEmailClose: React.FC<
     filter: string
   ) => {
     const now = new Date();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
 
     const filtered = tickets.filter(schedule => {
       const createdAt = new Date(schedule.createdAt);
 
       switch (filter) {
         case 'all': {
-          return createdAt < now;
+          return createdAt < yesterday;
         }
         case 'Last week': {
           const lastWeek = new Date();
-          lastWeek.setDate(now.getDate() - 7);
-          return createdAt >= lastWeek && createdAt < now;
+          lastWeek.setDate(yesterday.getDate() - 7);
+          return createdAt >= lastWeek && createdAt < yesterday;
         }
         case 'Last month': {
           const lastMonth = new Date();
-          lastMonth.setMonth(now.getMonth() - 1);
-          return createdAt >= lastMonth && createdAt < now;
+          lastMonth.setMonth(yesterday.getMonth() - 1);
+          return createdAt >= lastMonth && createdAt < yesterday;
         }
         case 'Last 3 months': {
           const last3Months = new Date();
-          last3Months.setMonth(now.getMonth() - 3);
-          return createdAt >= last3Months && createdAt < now;
+          last3Months.setMonth(yesterday.getMonth() - 3);
+          return createdAt >= last3Months && createdAt < yesterday;
         }
         case 'Last 6 months': {
           const last6Months = new Date();
-          last6Months.setMonth(now.getMonth() - 6);
-          return createdAt >= last6Months && createdAt < now;
+          last6Months.setMonth(yesterday.getMonth() - 6);
+          return createdAt >= last6Months && createdAt < yesterday;
         }
         default:
           return true;
