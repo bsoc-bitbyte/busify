@@ -96,11 +96,11 @@ const demoData = {
   tickets: [
     {
       orderId: 'order1',
-      passengerEmail: ['23bcs253@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
     },
     {
       orderId: 'order2',
-      passengerEmail: ['23bcs253@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
     },
   ],
   orders: [
@@ -128,10 +128,13 @@ const demoData = {
 };
 
 async function cleanDb() {
-  await prisma.schedule.deleteMany({});
-  await prisma.bus.deleteMany({});
-  await prisma.conductor.deleteMany({});
-  await prisma.contractor.deleteMany({});
+   await prisma.ticket.deleteMany({});
+   await prisma.order.deleteMany({});
+   await prisma.schedule.deleteMany({});
+   await prisma.bus.deleteMany({});
+   await prisma.users.deleteMany({});
+   await prisma.conductor.deleteMany({});
+   await prisma.contractor.deleteMany({});
 }
 
 async function seedDb() {
