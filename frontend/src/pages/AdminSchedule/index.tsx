@@ -168,25 +168,27 @@ const AdminSchedule = () => {
                 {schedule.map(s => (
                   <BusCards key={s.id} schedule={s} />
                 ))}
-                <Box
-                  sx={{
-                    maxWidth: '435px',
-                    borderRadius: '32px',
-                    border: '4px dashed #E6E6E6',
-                    background: '#F9F9F9',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <QueueIcon
+                <Button sx={{display: 'contents'}} onClick={handleOpen}>
+                  <Box
                     sx={{
-                      width: '80px',
-                      height: '80px',
-                      color: '#e6e6e6',
+                      maxWidth: '435px',
+                      borderRadius: '32px',
+                      border: '4px dashed #E6E6E6',
+                      background: '#F9F9F9',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
-                  />
-                </Box>
+                  >
+                    <QueueIcon
+                      sx={{
+                        width: '80px',
+                        height: '80px',
+                        color: '#e6e6e6',
+                      }}
+                    />
+                  </Box>
+                </Button>
               </Box>
             </Box>
           ) : (

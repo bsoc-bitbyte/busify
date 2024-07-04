@@ -63,24 +63,38 @@ const NormalButton = styled(Button)`
   height: 32px;
 `;
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 export default function EditBusDetailsModal({
   open,
   handleClose,
   schedule = undefined,
 }: EditBusDetailsModalProps) {
+  const availableBusNumbers = ['MP04-1234', 'MP04-5678'];
+
   const [busNumber, setBusNumber] = useState<Array<string>>(
-    schedule?.busNumber.split('-') || ['x', 'x']
+    schedule?.busNumber.split('-') || availableBusNumbers[0].split('-')
   );
+
   const checkpoints = [
-    'Girls Hostel',
-    'Panini',
-    'H3/H4',
-    'Nescafe',
-    'Main gate',
-    'Railway Station',
-    'Reliance Signature',
-    'Sadar',
-    'Russel Chowk',
+    ['Girls Hostel', 'PDPM IIITDMJ'],
+    ['Panini', 'PDPM IIITDMJ'],
+    ['H3/H4', 'PDPM IIITDMJ'],
+    ['Nescafe', 'PDPM IIITDMJ'],
+    ['Main gate', 'PDPM IIITDMJ'],
+    ['Railway Station', 'City'],
+    ['Reliance Signature', 'City'],
+    ['Sadar', 'City'],
+    ['Russel Chowk', 'City'],
   ];
   const [busCheckpoints, setBusCheckpoints] = useState<Array<string>>(
     schedule?.checkpoints || [
@@ -93,7 +107,7 @@ export default function EditBusDetailsModal({
   );
   const [formData, setFormData] = useState<ScheduleFormDetails>({
     id: schedule?.id || null,
-    busNumber: schedule?.busNumber || 'x-x',
+    busNumber: schedule?.busNumber || availableBusNumbers[0],
     from: schedule?.from || '',
     to: schedule?.to || '',
     departureTime: schedule?.departureTime || '',
@@ -111,8 +125,6 @@ export default function EditBusDetailsModal({
   useEffect(() => {
     setFormData({...formData, checkpoints: busCheckpoints});
   }, [busCheckpoints]);
-
-  // useEffect(() => {console.log(formData)}, [formData]);
 
   useEffect(() => {
     handleChange('busNumber', busNumber.join('-'));
@@ -133,6 +145,7 @@ export default function EditBusDetailsModal({
       notify('Something went wrong', 'error');
     }
   };
+
   return (
     <Modal
       open={open}
@@ -178,7 +191,11 @@ export default function EditBusDetailsModal({
           />
         </Stack>
         <Stack alignItems={'center'} width={'100%'} gap={'1rem'}>
-          <Box
+          <Select
+            value={busNumber}
+            onChange={e => {
+              setBusNumber(e.target.value as Array<string>);
+            }}
             sx={{
               display: 'flex',
               padding: '20px 0 20px 0',
@@ -189,34 +206,43 @@ export default function EditBusDetailsModal({
               borderRadius: '17px',
               width: {sm: '400px', xs: '300px'},
             }}
+            renderValue={selected => (
+              <Stack>
+                <span
+                  style={{
+                    fontSize: '18px',
+                    lineHeight: '18px',
+                    fontWeight: '600',
+                    textAlign: 'center',
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'white',
+                  }}
+                >
+                  {selected[0]}
+                </span>
+                <span
+                  style={{
+                    fontSize: '64px',
+                    lineHeight: '64px',
+                    fontWeight: '800',
+                    textAlign: 'center',
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'white',
+                  }}
+                >
+                  {selected[1]}
+                </span>
+              </Stack>
+            )}
           >
-            <input
-              style={{
-                fontSize: '18px',
-                lineHeight: '18px',
-                fontWeight: '600',
-                textAlign: 'center',
-                background: 'transparent',
-                border: 'none',
-                color: 'white',
-              }}
-              value={busNumber[0]}
-              onChange={e => setBusNumber([e.target.value, busNumber[1]])}
-            ></input>
-            <input
-              style={{
-                fontSize: '64px',
-                lineHeight: '64px',
-                fontWeight: '800',
-                textAlign: 'center',
-                background: 'transparent',
-                border: 'none',
-                color: 'white',
-              }}
-              value={busNumber[1]}
-              onChange={e => setBusNumber([busNumber[0], e.target.value])}
-            ></input>
-          </Box>
+            {availableBusNumbers.map(bus => (
+              <MenuItem key={bus} value={bus.split('-')}>
+                {bus}
+              </MenuItem>
+            ))}
+          </Select>
           <Stack
             alignItems={'start'}
             width={{sm: '400px', xs: '300px'}}
@@ -285,6 +311,7 @@ export default function EditBusDetailsModal({
                   onChange={e => {
                     setBusCheckpoints(e.target.value as Array<string>);
                   }}
+                  renderValue={selected => selected.join(', ')}
                   sx={{
                     flex: '1',
                     flexGrow: 1,
@@ -295,10 +322,19 @@ export default function EditBusDetailsModal({
                     outline: '1px solid #C6C6C6E5',
                     backgroundColor: '#F9F9F9',
                   }}
+                  MenuProps={MenuProps}
                 >
                   {checkpoints.map(name => (
-                    <MenuItem key={name} value={name}>
-                      {name}
+                    <MenuItem key={name[0]} value={name[0]}>
+                      <Stack direction={'row'} gap={'0.5rem'}>
+                        <img src="/marker.svg" />
+                        <Stack>
+                          <Typography>{name[0]}</Typography>
+                          <Typography fontSize={12} color={'gray'}>
+                            {name[1]}
+                          </Typography>
+                        </Stack>
+                      </Stack>
                     </MenuItem>
                   ))}
                 </Select>
@@ -336,9 +372,9 @@ export default function EditBusDetailsModal({
                   />
                 </Stack>
                 <TextField
-                  label="Enter From location"
-                  value={formData.from}
-                  onChange={e => handleChange('from', e.target.value)}
+                  label="Enter To location"
+                  value={formData.to}
+                  onChange={e => handleChange('to', e.target.value)}
                   sx={{
                     flex: '1',
                     flexGrow: 1,
