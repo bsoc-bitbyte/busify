@@ -148,7 +148,13 @@ export default function BusTicket({
           >
             {seatsLeft} Seats Left
           </Typography>
-          <BusDetails from={from} to={to} time={time} disabled={disabled} />
+          <BusDetails
+            from={from}
+            to={to}
+            time={time}
+            disabled={disabled}
+            scheduleId={scheduleId}
+          />
         </Box>
       </Box>
     </Box>
