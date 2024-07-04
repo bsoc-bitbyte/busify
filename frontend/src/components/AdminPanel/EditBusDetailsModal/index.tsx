@@ -1,11 +1,18 @@
+import {Circle, CircleOutlined, Room} from '@mui/icons-material';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import {Button, Stack, TextField, styled} from '@mui/material';
+import {
+  Button,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  styled,
+} from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import swapicon from '../../../assets/swapicon.svg';
 import {ScheduleType} from '../../../types';
 import {notify} from '../../../utils/notify';
 
@@ -21,6 +28,7 @@ interface ScheduleFormDetails {
   from: string;
   to: string;
   departureTime: string;
+  checkpoints: Array<string>;
   days: Array<string>;
 }
 
@@ -29,7 +37,6 @@ const SelectedButton = styled(Button)`
   border: 1px solid #fbbc05;
   border-radius: 12px;
   color: #fbbc05;
-  margin-right: 10px;
   min-width: 48px;
   height: 32px;
 `;
@@ -53,7 +60,6 @@ const NormalButton = styled(Button)`
   border-radius: 12px;
   color: #999999;
   min-width: 48px;
-  margin-right: 10px;
   height: 32px;
 `;
 
@@ -65,12 +71,33 @@ export default function EditBusDetailsModal({
   const [busNumber, setBusNumber] = useState<Array<string>>(
     schedule?.busNumber.split('-') || ['x', 'x']
   );
+  const checkpoints = [
+    'Girls Hostel',
+    'Panini',
+    'H3/H4',
+    'Nescafe',
+    'Main gate',
+    'Railway Station',
+    'Reliance Signature',
+    'Sadar',
+    'Russel Chowk',
+  ];
+  const [busCheckpoints, setBusCheckpoints] = useState<Array<string>>(
+    schedule?.checkpoints || [
+      'Girls Hostel',
+      'Panini',
+      'H3/H4',
+      'Nescafe',
+      'Main gate',
+    ]
+  );
   const [formData, setFormData] = useState<ScheduleFormDetails>({
     id: schedule?.id || null,
     busNumber: schedule?.busNumber || 'x-x',
     from: schedule?.from || '',
     to: schedule?.to || '',
     departureTime: schedule?.departureTime || '',
+    checkpoints: schedule?.checkpoints || busCheckpoints,
     days: schedule?.days || [],
   });
 
@@ -82,8 +109,14 @@ export default function EditBusDetailsModal({
   };
 
   useEffect(() => {
+    setFormData({...formData, checkpoints: busCheckpoints});
+  }, [busCheckpoints]);
+
+  // useEffect(() => {console.log(formData)}, [formData]);
+
+  useEffect(() => {
     handleChange('busNumber', busNumber.join('-'));
-  }, [busNumber, handleChange]);
+  }, [busNumber]);
 
   const Submit = async () => {
     const res = await axios.post(
@@ -93,7 +126,7 @@ export default function EditBusDetailsModal({
         withCredentials: true,
       }
     );
-    if (res.status === 200) {
+    if (res.status === 201) {
       handleClose();
       notify('Bus Details Updated', 'success');
     } else {
@@ -194,70 +227,136 @@ export default function EditBusDetailsModal({
                 fontWeight={600}
                 fontSize={'12px'}
                 letterSpacing={'2px'}
+                marginLeft={'5%'}
               >
                 FROM
               </Typography>
-              <TextField
-                label="Enter From location"
-                value={formData.from}
-                onChange={e => handleChange('from', e.target.value)}
-                sx={{
-                  width: '80%',
-                  color: '#C6C6C6E5',
-                  '& .MuiInputBase-root': {
-                    borderRadius: '12px',
-                    outline: '1px solid #C6C6C6E5',
-                    backgroundColor: '#F9F9F9',
-                    height: '47px',
-                  },
-                  '& .MuiFormLabel-root': {
+              <Stack
+                direction={'row'}
+                alignItems={'center'}
+                gap={'0.5rem'}
+                height={'47px'}
+              >
+                <Stack sx={{translate: '0px 40%'}} gap={'2px'}>
+                  <Circle color="primary" sx={{width: '8px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                </Stack>
+                <TextField
+                  label="Enter From location"
+                  value={formData.from}
+                  onChange={e => handleChange('from', e.target.value)}
+                  sx={{
+                    flex: '1',
+                    flexGrow: 1,
                     color: '#C6C6C6E5',
-                    height: '47px',
-                    translate: '0 -4px',
-                  },
-                }}
-              />
+                    '& .MuiInputBase-root': {
+                      borderRadius: '12px',
+                      outline: '1px solid #C6C6C6E5',
+                      backgroundColor: '#F9F9F9',
+                      height: '47px',
+                    },
+                    '& .MuiFormLabel-root': {
+                      color: '#C6C6C6E5',
+                      height: '47px',
+                      translate: '0 -4px',
+                    },
+                  }}
+                />
+              </Stack>
               <Typography
                 fontWeight={600}
                 fontSize={'12px'}
                 letterSpacing={'2px'}
+                marginLeft={'5%'}
               >
-                TO
+                VIA
               </Typography>
-              <Button
-                style={{
-                  position: 'absolute',
-                  right: '0px',
-                  top: 'calc(50% - 24px)',
-                  color: '#C6C6C6E5',
-                }}
-              >
-                <img
-                  src={swapicon}
-                  alt="swapicon"
-                  style={{width: '48px', height: '48px'}}
-                />
-              </Button>
-              <TextField
-                label="Enter To location"
-                value={formData.to}
-                onChange={e => handleChange('to', e.target.value)}
-                sx={{
-                  width: '80%',
-                  color: '#C6C6C6E5',
-                  '& .MuiInputBase-root': {
+              <Stack direction={'row'} alignItems={'center'} gap={'0.5rem'}>
+                <CircleOutlined color="primary" sx={{width: '8px'}} />
+                <Select
+                  multiple
+                  value={busCheckpoints || []}
+                  onChange={e => {
+                    setBusCheckpoints(e.target.value as Array<string>);
+                  }}
+                  sx={{
+                    flex: '1',
+                    flexGrow: 1,
+                    width: '90%',
+                    height: '47px',
+                    color: '#C6C6C6E5',
                     borderRadius: '12px',
                     outline: '1px solid #C6C6C6E5',
                     backgroundColor: '#F9F9F9',
-                    height: '47px',
-                  },
-                  '& .MuiFormLabel-root': {
+                  }}
+                >
+                  {checkpoints.map(name => (
+                    <MenuItem key={name} value={name}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Stack>
+              <Typography
+                fontWeight={600}
+                fontSize={'12px'}
+                letterSpacing={'2px'}
+                marginLeft={'5%'}
+              >
+                TO
+              </Typography>
+              <Stack
+                direction={'row'}
+                alignItems={'center'}
+                gap={'0.5rem'}
+                height={'47px'}
+              >
+                <Stack sx={{translate: '0px -40%'}} gap={'2px'}>
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Circle color="primary" sx={{width: '8px', height: '5px'}} />
+                  <Room
+                    color="primary"
+                    sx={{
+                      width: '8px',
+                      height: '14px',
+                      scale: '1.5',
+                      marginTop: '8px',
+                    }}
+                  />
+                </Stack>
+                <TextField
+                  label="Enter From location"
+                  value={formData.from}
+                  onChange={e => handleChange('from', e.target.value)}
+                  sx={{
+                    flex: '1',
+                    flexGrow: 1,
                     color: '#C6C6C6E5',
-                    height: '47px',
-                    translate: '0 -4px',
-                  },
-                }}
-              />
+                    '& .MuiInputBase-root': {
+                      borderRadius: '12px',
+                      outline: '1px solid #C6C6C6E5',
+                      backgroundColor: '#F9F9F9',
+                      height: '47px',
+                    },
+                    '& .MuiFormLabel-root': {
+                      color: '#C6C6C6E5',
+                      height: '47px',
+                      translate: '0 -4px',
+                    },
+                  }}
+                />
+              </Stack>
             </Stack>
             <Typography
               fontWeight={600}
@@ -294,6 +393,7 @@ export default function EditBusDetailsModal({
                 'Monday',
                 'Tuesday',
                 'Wednesday',
+                'Thursday',
                 'Friday',
                 'Saturday',
               ].map(t =>

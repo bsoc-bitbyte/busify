@@ -131,7 +131,7 @@ export class BusController {
       }
     }
   }
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('schedule')
   async createNewSchedule(@Body() schedule: ScheduleDto) {
     return this.busService.createSchedule(schedule);

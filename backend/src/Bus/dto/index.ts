@@ -11,7 +11,7 @@ export class ScheduleDto {
   @IsNotEmpty()
   from: string;
   to: string;
-  // checkpoints: string[];
+  checkpoints: string[];
   departureTime: string;
   // ticketPrice: number;
   days: string[];

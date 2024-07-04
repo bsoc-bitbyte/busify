@@ -98,7 +98,6 @@ export class BusService {
       where: {number: schedule.busNumber},
     });
     schedule.bus = bus;
-
     if (bus === null) {
       schedule.bus = await this.createBus({
         number: schedule.busNumber,
@@ -108,7 +107,7 @@ export class BusService {
       });
     }
 
-    if (schedule.id !== undefined) {
+    if (schedule.id !== null) {
       await this.prismaService.schedule.update({
         where: {id: schedule.id},
         data: {
@@ -117,6 +116,7 @@ export class BusService {
           from: schedule.from,
           to: schedule.to,
           departureTime: schedule.departureTime,
+          checkpoints: schedule.checkpoints,
           days: schedule.days,
         },
       });
@@ -127,11 +127,11 @@ export class BusService {
       data: {
         id: uuidv4(),
         busNumber: schedule.busNumber as never,
-        checkpoints: ['H4', 'Reva', 'GH'],
         from: schedule.from,
         to: schedule.to,
         departureTime: schedule.departureTime,
         days: schedule.days,
+        checkpoints: schedule.checkpoints,
         ticketPrice: 20,
       },
     });
