@@ -30,6 +30,7 @@ type BusDetailsType = {
   time?: string;
   from?: string;
   to?: string;
+  scheduleId?: string;
 };
 
 type BusTicketData = {
@@ -47,6 +48,15 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+type SchedulesByPassengerEmailProps = {
+  email: string;
+};
+
+type SchedulesByPassengerEmailPropsClose = {
+  email: string;
+  filter: string;
+};
+
 type ScheduleType = {
   id: string;
   busNumber: string;
@@ -59,3 +69,8 @@ type ScheduleType = {
   ticketPrice: number;
   orders: Order[];
 };
+
+interface TicketFetchedData {
+  createdAt: Date;
+  schedule: Schedule;
+}
