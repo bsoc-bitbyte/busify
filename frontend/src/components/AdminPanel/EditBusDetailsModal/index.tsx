@@ -131,6 +131,22 @@ export default function EditBusDetailsModal({
   }, [busNumber]);
 
   const Submit = async () => {
+    if (!formData.busNumber.match(/^([a-zA-z]){2}(\d){2}-(\d){4}$/)) {
+      notify('Invalid Bus Number', 'error');
+      return;
+    } else if (formData.from === '') {
+      notify('From location is required', 'error');
+      return;
+    } else if (formData.to === '') {
+      notify('To location is required', 'error');
+      return;
+    } else if (formData.departureTime === '') {
+      notify('Departure time is required', 'error');
+      return;
+    } else if (formData.days.length === 0) {
+      notify('Atleast one day is required', 'error');
+      return;
+    }
     const res = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/bus/schedule`,
       formData,
