@@ -11,6 +11,8 @@ import {
 import {styled} from '@mui/material';
 import {TicketFetchedData, SchedulesByPassengerEmailPropsClose} from '../types';
 import axios from 'axios';
+import EmptyModal from './Custom Empty Modal';
+import NotFound from '../assets/NotFound.svg';
 
 const Root = styled(Card)({
   borderRadius: '24px',
@@ -237,58 +239,70 @@ const SchedulesByPassengerEmailClose: React.FC<
     setFilteredData(filtered);
   };
   return (
-    <List>
-      {filteredData.map((item, index) => (
-        <ListItem key={index}>
-          <Root>
-            <Header>
-              <HeaderText>{item.schedule.id}</HeaderText>
-            </Header>
-            <FadedCircle />
-            <DoneStamp>DONE</DoneStamp>
-            <Content>
-              <LocationInfo>
-                <Location>
-                  <BoldText>{item.schedule.from}</BoldText>
-                  <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
-                </Location>
-                <Location style={{textAlign: 'right'}}>
-                  <BoldText align="right">{item.schedule.to}</BoldText>
-                  <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
-                </Location>
-              </LocationInfo>
-              <DashedLine>
-                <Circle>
-                  <InnerCircle />
-                </Circle>
-                {Array.from({length: numberOfSegments}, (_, ind) => (
-                  <DashedSegment key={ind} />
-                ))}
-                <Circle>
-                  <InnerCircle />
-                </Circle>
-              </DashedLine>
-            </Content>
-            <BusInfo>
-              <Box>
-                <BoldFooterText style={{color: '#FFFFFF'}}>
-                  Bus No.
-                </BoldFooterText>
-                <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
-                  {item.schedule.busNumber}
-                </BusNumber>
-              </Box>
-              <TimeDate>
-                <BoldFooterText>
-                  {new Date(item.createdAt).toISOString().slice(0, 10)}
-                </BoldFooterText>
-                <Time>{item.schedule.departureTime}</Time>
-              </TimeDate>
-            </BusInfo>
-          </Root>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      {filteredData.length === 0 ? (
+        <EmptyModal
+          img={NotFound}
+          title="No completed tickets found!"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        />
+      ) : (
+        <List>
+          {filteredData.map((item, index) => (
+            <ListItem key={index}>
+              <Root>
+                <Header>
+                  <HeaderText>{item.schedule.id}</HeaderText>
+                </Header>
+                <FadedCircle />
+                <DoneStamp>DONE</DoneStamp>
+                <Content>
+                  <LocationInfo>
+                    <Location>
+                      <BoldText>{item.schedule.from}</BoldText>
+                      <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
+                    </Location>
+                    <Location style={{textAlign: 'right'}}>
+                      <BoldText align="right">{item.schedule.to}</BoldText>
+                      <BoldTextBottom align="right">
+                        Jabalpur City
+                      </BoldTextBottom>
+                    </Location>
+                  </LocationInfo>
+                  <DashedLine>
+                    <Circle>
+                      <InnerCircle />
+                    </Circle>
+                    {Array.from({length: numberOfSegments}, (_, ind) => (
+                      <DashedSegment key={ind} />
+                    ))}
+                    <Circle>
+                      <InnerCircle />
+                    </Circle>
+                  </DashedLine>
+                </Content>
+                <BusInfo>
+                  <Box>
+                    <BoldFooterText style={{color: '#FFFFFF'}}>
+                      Bus No.
+                    </BoldFooterText>
+                    <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
+                      {item.schedule.busNumber}
+                    </BusNumber>
+                  </Box>
+                  <TimeDate>
+                    <BoldFooterText>
+                      {new Date(item.createdAt).toISOString().slice(0, 10)}
+                    </BoldFooterText>
+                    <Time>{item.schedule.departureTime}</Time>
+                  </TimeDate>
+                </BusInfo>
+              </Root>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </>
   );
 };
 
