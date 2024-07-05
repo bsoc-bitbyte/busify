@@ -93,11 +93,50 @@ const demoData = {
       createdAt: new Date(),
     },
   ],
+  tickets: [
+    {
+      orderId: 'order1',
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      encryptedData:
+        'U2FsdGVkX1/jxgl2hfE5FF/O53I1fTXuK1EYCBQsKRoWI2f+MDgy5KQFCq1Dhw4hWPRjNd83/PtRjFXqfeCtsR8jY7E3uSmmLPEd8/AD87k54KW9ShhPVsKxq8xjZVIx',
+    },
+    {
+      orderId: 'order2',
+      passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      encryptedData:
+        'U2FsdGVkX1/jxgl2hfE5FF/O53I1fTXuK1EYCBQsKRoWI2f+MDgy5KQFCq1Dhw4hWPRjNd83/PtRjFXqfeCtsR8jY7E3uSmmLPEd8/AD87k54KW9ShhPVsKxq8xjZVIx',
+    },
+  ],
+  orders: [
+    {
+      id: 'order1',
+      userId: 'user2',
+      scheduleId: '1',
+      status: 'pending',
+      amount: 100,
+      attempts: 0,
+      receipt: 'receipt1',
+      createdAt: new Date(),
+    },
+    {
+      id: 'order2',
+      userId: 'user2',
+      scheduleId: '2',
+      status: 'pending',
+      amount: 200,
+      attempts: 1,
+      receipt: 'receipt2',
+      createdAt: new Date(),
+    },
+  ],
 };
 
 async function cleanDb() {
+  await prisma.ticket.deleteMany({});
+  await prisma.order.deleteMany({});
   await prisma.schedule.deleteMany({});
   await prisma.bus.deleteMany({});
+  await prisma.users.deleteMany({});
   await prisma.conductor.deleteMany({});
   await prisma.contractor.deleteMany({});
 }
@@ -125,13 +164,13 @@ async function seedDb() {
     data: demoData.users,
   });
 
-  // await prisma.order.createMany({
-  //   data: demoData.orders,
-  // });
+  await prisma.order.createMany({
+    data: demoData.orders,
+  });
 
-  // await prisma.ticket.createMany({
-  //   data: demoData.tickets,
-  // });
+  await prisma.ticket.createMany({
+    data: demoData.tickets,
+  });
 
   console.log('Seeding done');
   await prisma.$disconnect();
