@@ -1,5 +1,5 @@
- #!/bin/sh
- #!/bin/sh
+#!/bin/sh
+#!/bin/sh
 
 commit_message_file=$1
 commit_message=$(cat $commit_message_file)
