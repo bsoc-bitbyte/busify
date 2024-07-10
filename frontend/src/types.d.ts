@@ -71,4 +71,5 @@ interface Schedule {
 interface TicketFetchedData {
   createdAt: Date;
   schedule: Schedule;
+  encryptedData: string;
 }

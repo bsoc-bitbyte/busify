@@ -134,6 +134,7 @@ const SchedulesByPassengerEmail: React.FC<SchedulesByPassengerEmailProps> = ({
   email,
 }) => {
   const [filteredData, setFilteredData] = useState<TicketFetchedData[]>([]);
+  const [qr, setQr] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSchedules = async () => {
@@ -164,8 +165,40 @@ const SchedulesByPassengerEmail: React.FC<SchedulesByPassengerEmailProps> = ({
   };
   return (
     <List>
+      {qr && (
+        <Box
+          height={'100vh'}
+          width={'100vw'}
+          position={'fixed'}
+          top={0}
+          left={0}
+          zIndex={20}
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          style={{
+            backdropFilter: 'blur(10px)',
+          }}
+          onClick={() => setQr(null)}
+        >
+          <Box
+            style={{backgroundColor: 'white'}}
+            height={'200px'}
+            width={'200px'}
+            border={'2px solid #333'}
+            overflow={'hidden'}
+          >
+            {JSON.stringify(qr)}
+          </Box>
+        </Box>
+      )}
       {filteredData.map((item, index) => (
-        <ListItem key={index}>
+        <ListItem
+          key={index}
+          onClick={() => {
+            setQr(item.encryptedData);
+          }}
+        >
           <Root>
             <Header>
               <HeaderText>{item.schedule.id}</HeaderText>

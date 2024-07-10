@@ -97,10 +97,14 @@ const demoData = {
     {
       orderId: 'order1',
       passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      encryptedData:
+        'U2FsdGVkX1/jxgl2hfE5FF/O53I1fTXuK1EYCBQsKRoWI2f+MDgy5KQFCq1Dhw4hWPRjNd83/PtRjFXqfeCtsR8jY7E3uSmmLPEd8/AD87k54KW9ShhPVsKxq8xjZVIx',
     },
     {
       orderId: 'order2',
       passengerEmail: ['20bce40@iiitdmj.ac.in', '21bme33@iiitdmj.ac.in'],
+      encryptedData:
+        'U2FsdGVkX1/jxgl2hfE5FF/O53I1fTXuK1EYCBQsKRoWI2f+MDgy5KQFCq1Dhw4hWPRjNd83/PtRjFXqfeCtsR8jY7E3uSmmLPEd8/AD87k54KW9ShhPVsKxq8xjZVIx',
     },
   ],
   orders: [
@@ -128,13 +132,13 @@ const demoData = {
 };
 
 async function cleanDb() {
-   await prisma.ticket.deleteMany({});
-   await prisma.order.deleteMany({});
-   await prisma.schedule.deleteMany({});
-   await prisma.bus.deleteMany({});
-   await prisma.users.deleteMany({});
-   await prisma.conductor.deleteMany({});
-   await prisma.contractor.deleteMany({});
+  await prisma.ticket.deleteMany({});
+  await prisma.order.deleteMany({});
+  await prisma.schedule.deleteMany({});
+  await prisma.bus.deleteMany({});
+  await prisma.users.deleteMany({});
+  await prisma.conductor.deleteMany({});
+  await prisma.contractor.deleteMany({});
 }
 
 async function seedDb() {
