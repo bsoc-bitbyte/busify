@@ -15,6 +15,7 @@ import AdminDashBoard from './pages/AdminDashBoard';
 import ProfilePage from './pages/Profile';
 import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
+import PricingPage from './pages/PricingPage/PricingPage';
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/google" element={<GoogleAuthLogin />} />
             <Route path="/bus-schedule" element={<BusSchedule />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route
               path="/checkout"
               element={
