@@ -1,4 +1,11 @@
-import {Controller, Get, HttpException, Post, Req, UseGuards} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpException,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import {OrdersService} from './orders.service';
 // eslint-disable-next-line node/no-extraneous-import
 import {JwtAuthGuard} from 'src/Auth/utils/jwt.guard';
@@ -18,10 +25,10 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/recent')
-  async getRecentOrders(){
+  async getRecentOrders() {
     try {
-      const orders = await this.ordersService.getRecentOrders()
-      return orders
+      const orders = await this.ordersService.getRecentOrders();
+      return orders;
     } catch (error) {
       if (error instanceof HttpException) {
         throw new HttpException(error.message, error.getStatus());

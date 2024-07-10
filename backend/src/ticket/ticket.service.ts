@@ -1,4 +1,4 @@
-import {HttpException, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {PrismaService} from 'src/Prisma/prisma.service';
 import * as CryptoJS from 'crypto-js';
 
