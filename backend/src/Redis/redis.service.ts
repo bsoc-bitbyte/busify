@@ -1,7 +1,5 @@
 import {Injectable, Logger} from '@nestjs/common';
-import {Repository} from 'redis-om';
 import {createClient} from 'redis';
-import {orderSchema} from './schema';
 
 @Injectable()
 export class RedisService {

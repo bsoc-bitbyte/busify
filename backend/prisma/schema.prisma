@@ -46,7 +46,8 @@ model Ticket {
     orderId        String @unique
     passengerEmail String[]
     order          Order @relation(fields: [orderId], references: [id])
-    createdAt  DateTime @default(now())
+    createdAt      DateTime @default(now())
+    encryptedData  String
 }
 
 model Order {

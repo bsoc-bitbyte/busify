@@ -1,5 +1,6 @@
-import {HttpException, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {PrismaService} from 'src/Prisma/prisma.service';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class TicketService {
@@ -14,7 +15,10 @@ export class TicketService {
       if (!order || !order.schedule) {
         throw new Error('Order or schedule not found');
       }
-
+      const encryptedData = this.generateToken(
+        orderId,
+        passengerEmail.map(data => data.emailID)
+      );
       const schedule = order.schedule;
       const departureTime = schedule.departureTime;
 
@@ -42,6 +46,7 @@ export class TicketService {
           orderId: orderId,
           passengerEmail: passengerEmail.map(passenger => passenger.emailID),
           createdAt: createdAt,
+          encryptedData: encryptedData,
         },
       });
 
@@ -74,5 +79,12 @@ export class TicketService {
       createdAt: ticket.createdAt,
       schedule: ticket.order.schedule,
     }));
+  }
+  generateToken(orderId: string, emails: string[]) {
+    const message: string = JSON.stringify({orderId, emails});
+    return this.encrypt(message, process.env.PRIVATE_KEY);
+  }
+  encrypt(message: string, secretKey: string): string {
+    return CryptoJS.AES.encrypt(message, secretKey).toString();
   }
 }

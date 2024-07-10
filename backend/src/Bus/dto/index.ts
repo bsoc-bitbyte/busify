@@ -1,6 +1,8 @@
 import {IsInt, IsNotEmpty, IsString} from 'class-validator';
 
 export class ScheduleDto {
+  id: string;
+
   @IsString()
   @IsNotEmpty()
   busNumber: string;
@@ -11,7 +13,7 @@ export class ScheduleDto {
   to: string;
   checkpoints: string[];
   departureTime: string;
-  ticketPrice: number;
+  // ticketPrice: number;
   days: string[];
 }
 export class BusDto {

@@ -62,18 +62,21 @@ type SchedulesByPassengerEmailPropsClose = {
   filter: string;
 };
 
-interface Schedule {
+type ScheduleType = {
   id: string;
   busNumber: string;
+  bus: Bus;
   checkpoints: string[];
   from: string;
   to: string;
   departureTime: string;
   days: string[];
   ticketPrice: number;
-}
+  orders: Order[];
+};
 
 interface TicketFetchedData {
   createdAt: Date;
   schedule: Schedule;
+  encryptedData: string;
 }

@@ -32,7 +32,7 @@ const Admin = () => {
             withCredentials: true,
           }
         );
-        if (res.status === 200) {
+        if (res.status === 200 && res.data) {
           setOrders(res.data as RecentOrdersProps[]);
         }
       } catch (error) {
@@ -73,7 +73,7 @@ const Admin = () => {
             fontWeight="bold"
             color={theme.palette.primary.main}
           >
-            {orders.length}
+            {orders?.length}
           </Typography>
         </Box>
         {orders.length !== 0 ? (
@@ -102,7 +102,7 @@ const Admin = () => {
             />
           </>
         )}
-        {orders.map(order => (
+        {orders?.map(order => (
           <RecentOrderCard key={order.orderId} details={order} />
         ))}
       </AdminLayout>

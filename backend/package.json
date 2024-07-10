@@ -35,6 +35,8 @@
     "axios": "^1.4.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "crypto-js": "^4.2.0",
+    "elliptic": "^6.5.5",
     "prisma": "^4.14.1",
     "razorpay": "^2.9.2",
     "redis": "^4.6.7",

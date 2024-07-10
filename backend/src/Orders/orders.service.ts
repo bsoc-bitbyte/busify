@@ -63,7 +63,7 @@ export class OrdersService {
           receipt: razorpay_order.receipt,
           scheduleId,
           attempts: razorpay_order.attempts,
-          createdAt: new Date(Number(razorpay_order.created_at)*1000),
+          createdAt: new Date(Number(razorpay_order.created_at) * 1000),
           status: razorpay_order.status,
           userId,
         },
@@ -76,59 +76,60 @@ export class OrdersService {
 
   async paymentConfirmation() {}
 
-  async getRecentOrders(){
-    const today = new Date()
-    today.setHours(0,0,0,0)
+  async getRecentOrders() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const orders = await this.prismaService.order.findMany({
       where: {
         createdAt: {
-          gte: today
+          gte: today,
         },
-      },select:{
+      },
+      select: {
         id: true,
-        scheduleId:true,
-        userId: true, 
+        scheduleId: true,
+        userId: true,
         amount: true,
         receipt: true,
         createdAt: true,
         user: {
           select: {
             name: true,
-            email: true
+            email: true,
           },
         },
         schedule: {
           select: {
-            from: true, 
-            to: true, 
+            from: true,
+            to: true,
             departureTime: true,
-          }
+          },
         },
         ticket: {
           select: {
-            passengerEmail: true
-          }
+            passengerEmail: true,
+          },
         },
       },
       orderBy: {
-        createdAt: "desc"
-      }
-    })
+        createdAt: 'desc',
+      },
+    });
 
     type RecentOrdersProps = {
-      orderId: string
-      ammount: number
-      receipt: string
-      buyer: string
-      from: string
-      to: string
-      time: string
-      passengers: string[]
-      email: string
-      createdAt: Date
-    }
+      orderId: string;
+      ammount: number;
+      receipt: string;
+      buyer: string;
+      from: string;
+      to: string;
+      time: string;
+      passengers: string[];
+      email: string;
+      createdAt: Date;
+    };
 
-    const formattedData: RecentOrdersProps[] = orders.map((order)=>({
+    const formattedData: RecentOrdersProps[] = orders.map(order => ({
       orderId: order.id,
       ammount: order.amount,
       receipt: order.receipt,
@@ -138,9 +139,9 @@ export class OrdersService {
       time: order.schedule.departureTime,
       passengers: order.ticket.passengerEmail,
       email: order.user.email,
-      createdAt: order.createdAt
-    }))
+      createdAt: order.createdAt,
+    }));
 
-    return formattedData
+    return formattedData;
   }
 }
