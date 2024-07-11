@@ -98,7 +98,7 @@ const Admin = () => {
             <EmptyModal
               img={NotFound}
               title="No recent orders found!"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+              description="Hey! You cannot see any recent orders as there are no recent orders you have done yet. Book tickets to see the expected."
             />
           </>
         )}

@@ -12,15 +12,15 @@ const EmptyModal: React.FC<CustomEmptyProps> = props => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
           alignItems: 'center',
-          flexDirection: {xs: 'column', lg: 'row'},
+          flexDirection: {xs: 'column'},
           paddingTop: '20px',
           paddingRight: '30px',
         }}
       >
         <Box>
-          <img src={props.img} alt="NotFound" height={284} width={390} />
+          <img src={props.img} alt="NotFound" height={314} width={420} />
         </Box>
         <Box
           sx={{
@@ -28,7 +28,7 @@ const EmptyModal: React.FC<CustomEmptyProps> = props => {
             marginBottom: '15px',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: {xs: 'center', lg: 'start'},
+            alignItems: {xs: 'center'},
           }}
         >
           <Typography
@@ -42,9 +42,8 @@ const EmptyModal: React.FC<CustomEmptyProps> = props => {
           <Typography
             variant="h6"
             sx={{
-              fontWeight: 'bold',
               marginTop: '10px',
-              textAlign: {xs: 'center', lg: 'start'},
+              textAlign: {xs: 'center'},
             }}
           >
             {props.description}

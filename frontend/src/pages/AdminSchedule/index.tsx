@@ -1,12 +1,13 @@
 import {Box, Button, Typography, styled} from '@mui/material';
 import AdminLayout from '../../components/AdminPanel/AdminLayout';
 import AddIcon from '@mui/icons-material/Add';
-import QueueIcon from '@mui/icons-material/Queue';
 import {useEffect, useState} from 'react';
 import ConductorCards from '../../components/DetailsCards/ConductorCards';
 import BusCards from '../../components/DetailsCards/BusCards';
 import useStore from '../../store/tabStore';
 import EditBusDetailsModal from '../../components/AdminPanel/EditBusDetailsModal';
+import EmptyModal from '../../components/Custom Empty Modal';
+import NotFound from '../../assets/NotFound.svg';
 import {ScheduleType} from '../../types';
 import axios from 'axios';
 
@@ -144,32 +145,42 @@ const AdminSchedule = () => {
             </FilterButton>
           </Box>
           {count === 0 ? (
-            <Box
-              display="flex"
-              width="100%"
-              sx={{
-                mt: '1rem',
-              }}
-            >
-              <Box
-                sx={{
-                  width: '100%',
-                  display: 'grid',
-                  gridTemplateColumns: {
-                    xs: '1fr',
-                    sm: '1fr',
-                    md: '1fr',
-                    lg: '1fr 1fr',
-                  },
-                  gap: '40px',
-                  pl: '1rem',
-                }}
-              >
-                {schedule.map(s => (
-                  <BusCards key={s.id} schedule={s} />
-                ))}
-              </Box>
-            </Box>
+            <>
+              {schedule.length === 0 ? (
+                <EmptyModal
+                  img={NotFound}
+                  title="No Bus Details found!"
+                  description="Hey! You cannot see any bus details as there are no buses added. Please add new details to see the expected."
+                />
+              ) : (
+                <Box
+                  display="flex"
+                  width="100%"
+                  sx={{
+                    mt: '1rem',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: '100%',
+                      display: 'grid',
+                      gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: '1fr',
+                        md: '1fr',
+                        lg: '1fr 1fr',
+                      },
+                      gap: '40px',
+                      pl: '1rem',
+                    }}
+                  >
+                    {schedule.map(s => (
+                      <BusCards key={s.id} schedule={s} />
+                    ))}
+                  </Box>
+                </Box>
+              )}
+            </>
           ) : (
             <Box
               display="flex"

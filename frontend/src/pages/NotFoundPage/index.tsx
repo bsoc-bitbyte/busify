@@ -6,7 +6,7 @@ const NotFoundPage = () => {
     <EmptyModal
       img={NoPageFound}
       title="Page Not found!"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      description="Sorry we could'nt find the page you are looking for. The Page might have been removed had its name changed or is temporarily unavailable."
     />
   );
 };
