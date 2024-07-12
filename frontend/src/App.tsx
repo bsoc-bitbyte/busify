@@ -1,4 +1,4 @@
-import {ThemeProvider, CssBaseline, Box} from '@mui/material';
+mport {ThemeProvider, CssBaseline, Box} from '@mui/material';
 import theme from './theme';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
@@ -15,6 +15,7 @@ import AdminDashBoard from './pages/AdminDashBoard';
 import ProfilePage from './pages/Profile';
 import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
+import AboutUs from './pages/AboutUs/AboutUs';
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/google" element={<GoogleAuthLogin />} />
             <Route path="/bus-schedule" element={<BusSchedule />} />
+            <Route path="/aboutus" element={<AboutUs />} />
             <Route
               path="/checkout"
               element={
