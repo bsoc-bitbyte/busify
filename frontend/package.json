@@ -20,7 +20,6 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource/inter": "^5.0.19",
     "@mui/icons-material": "^5.11.16",
-    "@mui/joy": "^5.0.0-beta.47",
     "@mui/material": "^5.13.2",
     "axios": "^1.4.0",
     "prop-types": "^15.8.1",
