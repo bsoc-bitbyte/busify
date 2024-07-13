@@ -17,7 +17,7 @@ import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
 import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage/PricingPage';
-import PricingPage from './pages/AboutUs/AboutUs';
+import AboutUs from './pages/AboutUs/AboutUs';
 
 
 function App() {
