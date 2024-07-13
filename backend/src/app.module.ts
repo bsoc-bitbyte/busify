@@ -7,7 +7,7 @@ import {RedisCustomModule} from './Redis/redis.module';
 import {RazorpayModule} from './Razorpay/razorpay.module';
 import {OrdersModule} from './Orders/orders.module';
 import {TicketModule} from './ticket/ticket.module';
-import { TicketScannerModule } from './ticketScanner/ticket-scanner.module';
+import {TicketScannerModule} from './ticketScanner/ticket-scanner.module';
 
 @Module({
   imports: [

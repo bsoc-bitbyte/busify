@@ -12,6 +12,9 @@ import {styled} from '@mui/material';
 import {SchedulesByPassengerEmailProps, TicketFetchedData} from '../types';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import EmptyModal from './Custom Empty Modal';
+import NotFound from '../assets/NotFound.svg';
+
 const Root = styled(Card)({
   borderRadius: '24px',
   backgroundColor: '#fff',
@@ -164,82 +167,96 @@ const SchedulesByPassengerEmail: React.FC<SchedulesByPassengerEmailProps> = ({
     setFilteredData(filtered);
   };
   return (
-    <List>
-      {qr && (
-        <Box
-          height={'100vh'}
-          width={'100vw'}
-          position={'fixed'}
-          top={0}
-          left={0}
-          zIndex={20}
-          display={'flex'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          style={{
-            backdropFilter: 'blur(10px)',
-          }}
-          onClick={() => setQr(null)}
-        >
-          <Box
-            style={{backgroundColor: 'white'}}
-            height={'200px'}
-            width={'200px'}
-            border={'2px solid #333'}
-            overflow={'hidden'}
-          >
-            {JSON.stringify(qr)}
-          </Box>
-        </Box>
-      )}
-      {filteredData.map((item, index) => (
-        <ListItem
-          key={index}
-          onClick={() => {
-            setQr(item.encryptedData);
-          }}
-        >
-          <Root>
-            <Header>
-              <HeaderText>{item.schedule.id}</HeaderText>
-            </Header>
-            <Content>
-              <LocationInfo>
-                <Location>
-                  <BoldText>{item.schedule.from}</BoldText>
-                  <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
-                </Location>
-                <Location style={{textAlign: 'right'}}>
-                  <BoldText align="right">{item.schedule.to}</BoldText>
-                  <BoldTextBottom align="right">Jabalpur City</BoldTextBottom>
-                </Location>
-              </LocationInfo>
-              <DashedLine>
-                <Circle />
-                {Array.from({length: numberOfSegments}, (_, ind) => (
-                  <DashedSegment key={ind} />
-                ))}
-                <Circle />
-              </DashedLine>
-            </Content>
-            <BusInfo>
-              <Box>
-                <BoldFooterText style={{color: '#fff'}}>Bus No.</BoldFooterText>
-                <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
-                  {item.schedule.busNumber}
-                </BusNumber>
+    <>
+      {filteredData.length === 0 ? (
+        <EmptyModal
+          img={NotFound}
+          title="No upcoming tickets found!"
+          description="Hey there! You have no upcoming tickets as there are no orders placed. Book tickets to see the expected."
+        />
+      ) : (
+        <List>
+          {qr && (
+            <Box
+              height={'100vh'}
+              width={'100vw'}
+              position={'fixed'}
+              top={0}
+              left={0}
+              zIndex={20}
+              display={'flex'}
+              justifyContent={'center'}
+              alignItems={'center'}
+              style={{
+                backdropFilter: 'blur(10px)',
+              }}
+              onClick={() => setQr(null)}
+            >
+              <Box
+                style={{backgroundColor: 'white'}}
+                height={'200px'}
+                width={'200px'}
+                border={'2px solid #333'}
+                overflow={'hidden'}
+              >
+                {JSON.stringify(qr)}
               </Box>
-              <TimeDate>
-                <BoldFooterText style={{color: '#fff'}}>
-                  {new Date(item.createdAt).toISOString().slice(0, 10)}
-                </BoldFooterText>
-                <Time>{item.schedule.departureTime}</Time>
-              </TimeDate>
-            </BusInfo>
-          </Root>
-        </ListItem>
-      ))}
-    </List>
+            </Box>
+          )}
+          {filteredData.map((item, index) => (
+            <ListItem
+              key={index}
+              onClick={() => {
+                setQr(item.encryptedData);
+              }}
+            >
+              <Root>
+                <Header>
+                  <HeaderText>{item.schedule.id}</HeaderText>
+                </Header>
+                <Content>
+                  <LocationInfo>
+                    <Location>
+                      <BoldText>{item.schedule.from}</BoldText>
+                      <BoldTextBottom>PDPM IIITDM Jabalpur</BoldTextBottom>
+                    </Location>
+                    <Location style={{textAlign: 'right'}}>
+                      <BoldText align="right">{item.schedule.to}</BoldText>
+                      <BoldTextBottom align="right">
+                        Jabalpur City
+                      </BoldTextBottom>
+                    </Location>
+                  </LocationInfo>
+                  <DashedLine>
+                    <Circle />
+                    {Array.from({length: numberOfSegments}, (_, ind) => (
+                      <DashedSegment key={ind} />
+                    ))}
+                    <Circle />
+                  </DashedLine>
+                </Content>
+                <BusInfo>
+                  <Box>
+                    <BoldFooterText style={{color: '#fff'}}>
+                      Bus No.
+                    </BoldFooterText>
+                    <BusNumber className={`${BusNumber} ${BoldFooterText}`}>
+                      {item.schedule.busNumber}
+                    </BusNumber>
+                  </Box>
+                  <TimeDate>
+                    <BoldFooterText style={{color: '#fff'}}>
+                      {new Date(item.createdAt).toISOString().slice(0, 10)}
+                    </BoldFooterText>
+                    <Time>{item.schedule.departureTime}</Time>
+                  </TimeDate>
+                </BusInfo>
+              </Root>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </>
   );
 };
 

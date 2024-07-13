@@ -1,6 +1,11 @@
 // Define types for the frontend here
 import {TooltipProps} from '@mui/material/Tooltip';
 
+export interface CustomEmptyProps {
+  title?: string;
+  description?: string;
+  img?: string;
+}
 export interface CustomButtonProps extends Omit<TooltipProps, 'children'> {
   label: string;
   title?: string;

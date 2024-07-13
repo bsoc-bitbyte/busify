@@ -3,6 +3,8 @@ import AdminLayout from '../../components/AdminPanel/AdminLayout';
 import RecentOrderCard from '../../components/AdminPanel/RecentOrderCard';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import EmptyModal from '../../components/Custom Empty Modal';
+import NotFound from '../../assets/NotFound.svg';
 
 export type RecentOrdersProps = {
   orderId: string;
@@ -74,14 +76,32 @@ const Admin = () => {
             {orders?.length}
           </Typography>
         </Box>
-        <Typography
-          component="div"
-          fontSize={{xs: '1rem', sm: '1.2rem', md: '1.5rem'}}
-          fontWeight="bold"
-          color={theme.palette.secondary.light}
-        >
-          Recent Orders
-        </Typography>
+        {orders.length !== 0 ? (
+          <Typography
+            component="div"
+            fontSize={{xs: '1rem', sm: '1.2rem', md: '1.5rem'}}
+            fontWeight="bold"
+            color={theme.palette.secondary.light}
+          >
+            Recent Orders
+          </Typography>
+        ) : (
+          <>
+            <Typography
+              component="div"
+              fontSize={{xs: '1rem', sm: '1.2rem', md: '1.5rem'}}
+              fontWeight="bold"
+              color={theme.palette.secondary.light}
+            >
+              Recent Orders
+            </Typography>
+            <EmptyModal
+              img={NotFound}
+              title="No recent orders found!"
+              description="Hey! You cannot see any recent orders as there are no recent orders you have done yet. Book tickets to see the expected."
+            />
+          </>
+        )}
         {orders?.map(order => (
           <RecentOrderCard key={order.orderId} details={order} />
         ))}

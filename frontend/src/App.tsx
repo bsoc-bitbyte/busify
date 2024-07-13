@@ -15,6 +15,7 @@ import AdminDashBoard from './pages/AdminDashBoard';
 import ProfilePage from './pages/Profile';
 import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
+import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage/PricingPage';
 
 function App() {
@@ -68,6 +69,14 @@ function App() {
               element={
                 <UserProtectedRoute>
                   <ProfilePage />
+                </UserProtectedRoute>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <UserProtectedRoute>
+                  <NotFoundPage />
                 </UserProtectedRoute>
               }
             />

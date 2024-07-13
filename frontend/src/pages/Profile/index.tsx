@@ -211,7 +211,13 @@ const ProfilePage = () => {
         <Box width="100%" height="100%">
           {currentTab === 1 ? (
             <Box>
-              <Box display="flex" gap="10px" width="100%" overflow="auto">
+              <Box
+                display="flex"
+                justifyContent="center"
+                gap="10px"
+                width="100%"
+                overflow="auto"
+              >
                 <SchedulesByPassengerEmail email={user?.email || ''} />
               </Box>
             </Box>
@@ -249,7 +255,13 @@ const ProfilePage = () => {
                   </FilterButton>
                 </Box>
               </FiltersBox>
-              <Box display="flex" gap="10px" width="100%" overflow="auto">
+              <Box
+                display="flex"
+                justifyContent="center"
+                gap="10px"
+                width="100%"
+                overflow="auto"
+              >
                 <SchedulesByPassengerEmailClose
                   email={user?.email || ''}
                   filter={filter}
