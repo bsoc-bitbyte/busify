@@ -19,26 +19,9 @@ const theme = createTheme({
 });
 
 const styles = {
-  root: {
-    backgroundColor: '#ffffff',
-    paddingBottom: '4rem',
-    marginTop: '3rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  section: {
-    padding: '4rem 0',
-    borderBottom: '1px solid #e0e0e0',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
+  
   image: {
-    width: '23rem',
-    height: '13rem',
+    width: '32rem',
     borderRadius: '8px',
     marginBottom: '2rem',
   },
@@ -51,7 +34,6 @@ const AboutUs = () => {
         <Container maxWidth="lg">
           <Box
             py="4rem"
-            borderBottom="1px solid #e0e0e0"
             display="flex"
             flexDirection={{xs: 'column-reverse', md: 'row'}}
             alignItems="center"
@@ -81,7 +63,6 @@ const AboutUs = () => {
 
           <Box
             py="4rem"
-            borderBottom="1px solid #e0e0e0"
             display="flex"
             flexDirection={{xs: 'column-reverse', md: 'row-reverse'}}
             alignItems="center"
@@ -109,7 +90,7 @@ const AboutUs = () => {
             </Box>
             <Box flex="1" textAlign="center" mb={{xs: '2rem', md: 0}}>
               <img
-                src="https://tannergrey.com/wp-content/uploads/2020/04/about-us.png"
+                src="https://thumbs.dreamstime.com/b/wooden-blocks-form-text-our-story-beautiful-canvas-background-business-concept-188749353.jpg"
                 alt="Our Story"
                 style={styles.image}
               />
@@ -118,7 +99,6 @@ const AboutUs = () => {
 
           <Box
             py="4rem"
-            borderBottom="1px solid #e0e0e0"
             display="flex"
             flexDirection={{xs: 'column-reverse', md: 'row'}}
             alignItems="center"
@@ -136,7 +116,7 @@ const AboutUs = () => {
             </Box>
             <Box flex="1" textAlign="center">
               <img
-                src="https://tannergrey.com/wp-content/uploads/2020/04/about-us.png"
+                src="https://mission-statement.com/wp-content/uploads/2021/11/Company-Mission-Statement-1.jpg"
                 alt="Our Mission"
                 style={styles.image}
               />
