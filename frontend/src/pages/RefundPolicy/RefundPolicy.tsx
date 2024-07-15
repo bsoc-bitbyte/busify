@@ -1,5 +1,8 @@
 import React from 'react';
 import {Container, Typography, Box, Link} from '@mui/material';
+import TermsAndPolicy_1 from '../../assets/termsAndPolicy_1.avif';
+import TermsAndPolicy_2 from '../../assets/termsAndPolicy_2.avif';
+import TermsAndPolicy_3 from '../../assets/termsAndPolicy_3.jpg';
 
 const styles = {
   container: {
@@ -17,7 +20,7 @@ const styles = {
   image: {
     maxWidth: '20rem',
     height: 'auto',
-    marginBottom: '24px',
+    marginBottom: '2rem',
   },
 };
 
@@ -26,7 +29,7 @@ const RefundPolicy = () => {
     <Box bgcolor="#ffffff" mt="3rem">
       <Container maxWidth="lg">
         <Box
-          py="4rem"
+          pt="4rem"
           display="flex"
           flexDirection={{xs: 'column-reverse', md: 'row'}}
           alignItems="center"
@@ -65,11 +68,7 @@ const RefundPolicy = () => {
             textAlign="center"
             sx={{marginBottom: {xs: '3rem', md: 0}}}
           >
-            <img
-              src="https://img.freepik.com/free-vector/flat-safer-internet-day-illustration_23-2151164065.jpg?w=740&t=st=1720945635~exp=1720946235~hmac=2df1b986e74e8b218fb60a4aa0eeaaf61509bb46c0edc6b6e524c5f9ea4872e4"
-              alt="About Us"
-              style={styles.image}
-            />
+            <img src={TermsAndPolicy_1} alt="About Us" style={styles.image} />
           </Box>
         </Box>
 
@@ -104,11 +103,7 @@ const RefundPolicy = () => {
             </Typography>
           </Box>
           <Box flex="1" textAlign="center" mb={{xs: '2rem', md: 0}}>
-            <img
-              src="https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?w=740&t=st=1720945674~exp=1720946274~hmac=e338386b5f01cefe2d6bcd626adf401001338351ccef5a2bc2fb91d1eb47f799"
-              alt="Our Story"
-              style={styles.image}
-            />
+            <img src={TermsAndPolicy_2} alt="Our Story" style={styles.image} />
           </Box>
         </Box>
 
@@ -135,7 +130,7 @@ const RefundPolicy = () => {
           </Box>
           <Box flex="1" textAlign="center">
             <img
-              src="https://img.freepik.com/free-vector/hand-drawn-flat-design-ssl-illustration_23-2149233377.jpg?t=st=1720950723~exp=1720954323~hmac=9a80998298f8cee7794efd6a16b5ed0d7811e0f7e053128da3a88eacbb18d5f9&w=740"
+              src={TermsAndPolicy_3}
               alt="Our Mission"
               style={styles.image}
             />
