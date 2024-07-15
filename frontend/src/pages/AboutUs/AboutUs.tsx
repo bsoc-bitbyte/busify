@@ -1,33 +1,30 @@
+import React from 'react';
 import {
   Container,
   Typography,
   ThemeProvider,
-  createTheme,
   Box,
 } from '@mui/material';
+import {useTheme} from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Arial, sans-serif',
-    h2: {
-      color: '#000000',
-    },
-    body1: {
-      color: '#213343',
-    },
-  },
-});
+import aboutUsImage from '../../assets/about-us.png';
+import ourMissionImage from '../../assets/our-mission.jpg';
+import ourStoryImage from '../../assets/our-story.jpg';
 
-const styles = {
-  
-  image: {
-    width: '32rem',
-    borderRadius: '8px',
-    marginBottom: '2rem',
-  },
-};
 
 const AboutUs = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const styles = {
+    image: {
+      width: isSmallScreen ? '24rem' : '32rem',
+      borderRadius: '8px',
+      marginBottom: '2rem',
+    },
+  };
+  
   return (
     <ThemeProvider theme={theme}>
       <Box bgcolor="#ffffff" pb="4rem" mt="3rem">
@@ -53,11 +50,7 @@ const AboutUs = () => {
               </Typography>
             </Box>
             <Box flex="1" textAlign="center">
-              <img
-                src="https://tannergrey.com/wp-content/uploads/2020/04/about-us.png"
-                alt="About Us"
-                style={styles.image}
-              />
+              <img src={aboutUsImage} alt="About Us" style={styles.image} />
             </Box>
           </Box>
 
@@ -89,11 +82,7 @@ const AboutUs = () => {
               </Typography>
             </Box>
             <Box flex="1" textAlign="center" mb={{xs: '2rem', md: 0}}>
-              <img
-                src="https://thumbs.dreamstime.com/b/wooden-blocks-form-text-our-story-beautiful-canvas-background-business-concept-188749353.jpg"
-                alt="Our Story"
-                style={styles.image}
-              />
+              <img src={ourStoryImage} alt="Our Story" style={styles.image} />
             </Box>
           </Box>
 
@@ -116,7 +105,7 @@ const AboutUs = () => {
             </Box>
             <Box flex="1" textAlign="center">
               <img
-                src="https://mission-statement.com/wp-content/uploads/2021/11/Company-Mission-Statement-1.jpg"
+                src={ourMissionImage}
                 alt="Our Mission"
                 style={styles.image}
               />
