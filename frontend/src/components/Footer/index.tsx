@@ -92,7 +92,9 @@ export default function Footer() {
                 <LinkContainer to="/refund-policy" sx={{padding: 0}}>
                   Refund Policy
                 </LinkContainer>
-                <ListItem sx={{padding: 0}}>Contact Us</ListItem>
+                <LinkContainer to="/contactus" sx={{padding: 0}}>
+                  Contact Us
+                </LinkContainer>
               </List>
             </Grid>
           </Grid>

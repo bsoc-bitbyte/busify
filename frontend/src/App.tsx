@@ -22,7 +22,6 @@ import TermsAndConditions from './pages/TermsAndconditions/TermsAndConditions';
 import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
 import ContactUs from './pages/ContactUs/contactUs.tsx';
 
-
 function App() {
   const location = useLocation();
   return (
