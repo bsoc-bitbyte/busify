@@ -17,6 +17,7 @@ import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
 import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage/PricingPage';
+import ContactUs from './pages/ContactUs/contactUs.tsx';
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
             <Route path="/google" element={<GoogleAuthLogin />} />
             <Route path="/bus-schedule" element={<BusSchedule />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/contactus" element={<ContactUs />} />
             <Route
               path="/checkout"
               element={
