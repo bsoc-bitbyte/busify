@@ -65,7 +65,9 @@ export default function Footer() {
                 Useful Links
               </Typography>
               <List sx={{padding: 0}}>
-                <ListItem sx={{padding: 0}}>About Us</ListItem>
+                <LinkContainer to="/about" sx={{padding: 0}}>
+                  AboutUs
+                </LinkContainer>
                 <LinkContainer to="/privacy-policy" sx={{padding: 0}}>
                   Privacy Policy
                 </LinkContainer>

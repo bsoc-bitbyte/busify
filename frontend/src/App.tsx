@@ -21,6 +21,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndconditions/TermsAndConditions';
 import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
 import ContactUs from './pages/ContactUs/contactUs.tsx';
+import AboutUs from './pages/AboutUs/AboutUs';
 
 function App() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function App() {
             <Route path="/bus-schedule" element={<BusSchedule />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route
               path="/terms-and-conditions"
               element={<TermsAndConditions />}
