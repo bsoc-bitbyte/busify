@@ -17,6 +17,9 @@ import AdminProtectedRoute from './components/AdminProtectedRoutes';
 import AdminSchedule from './pages/AdminSchedule';
 import NotFoundPage from './pages/NotFoundPage';
 import PricingPage from './pages/PricingPage/PricingPage';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndconditions/TermsAndConditions';
+import RefundPolicy from './pages/RefundPolicy/RefundPolicy';
 import ContactUs from './pages/ContactUs/contactUs.tsx';
 
 function App() {
@@ -33,6 +36,12 @@ function App() {
             <Route path="/google" element={<GoogleAuthLogin />} />
             <Route path="/bus-schedule" element={<BusSchedule />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route
+              path="/terms-and-conditions"
+              element={<TermsAndConditions />}
+            />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route
               path="/checkout"

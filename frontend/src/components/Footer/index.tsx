@@ -66,8 +66,12 @@ export default function Footer() {
               </Typography>
               <List sx={{padding: 0}}>
                 <ListItem sx={{padding: 0}}>About Us</ListItem>
-                <ListItem sx={{padding: 0}}>Privacy Policy</ListItem>
-                <ListItem sx={{padding: 0}}>Terms & Condition</ListItem>
+                <LinkContainer to="/privacy-policy" sx={{padding: 0}}>
+                  Privacy Policy
+                </LinkContainer>
+                <LinkContainer to="/terms-and-conditions" sx={{padding: 0}}>
+                  Terms & Conditions
+                </LinkContainer>
               </List>
             </Grid>
             <Grid item xs={4} sx={{paddingLeft: 0}}>
@@ -85,8 +89,12 @@ export default function Footer() {
                 Support
               </Typography>
               <List sx={{padding: 0}}>
-                <ListItem sx={{padding: 0}}>Refund Policy</ListItem>
-                <ListItem sx={{padding: 0}}>Contact Us</ListItem>
+                <LinkContainer to="/refund-policy" sx={{padding: 0}}>
+                  Refund Policy
+                </LinkContainer>
+                <LinkContainer to="/contactus" sx={{padding: 0}}>
+                  Contact Us
+                </LinkContainer>
               </List>
             </Grid>
           </Grid>
