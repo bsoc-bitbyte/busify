@@ -63,16 +63,13 @@ export default function SideBar() {
   };
 
   return (
-    <Box id="drawer" display={{xs: 'none', sm: 'flex'}}>
+    <Box id="drawer" display={{xs: 'default', sm: 'flex'}} width={{xs: '100%'}}>
       <Drawer
         anchor="left"
         variant="permanent"
         sx={{
-          width: '10rem',
-          flexShrink: 1,
-
           '& .MuiDrawer-paper': {
-            width: '13rem',
+            width: {xs: '100%', md: '13rem'},
             boxSizing: 'border-box',
             border: 'none',
             display: 'flex',
